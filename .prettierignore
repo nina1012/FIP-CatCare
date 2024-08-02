@@ -1,0 +1,19 @@
+*.hbs
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+
+# others
+# /code-stages
+/scripts

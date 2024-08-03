@@ -1,30 +1,25 @@
-# React + TypeScript + Vite
+# FIP CatCare App 🐈 💉💊
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Description
 
-Currently, two official plugins are available:
+**FIP CatCare app** is a web app for tracking and managing medication schedules, daily health logs, and test results for cats undergoing treatment for FIP. For owners of FIP positive cats, in hope for fast recovery 🍀
+This app helps users manage their cats' schedules, add notes and set reminders and upload test results (bloodwork, etc.).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## App requirements
 
-## Expanding the ESLint configuration
+- Functional requirements:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  1. public part (that will educate cats' owners what FIP is and how to treat and cure it), also can have a gallery of already cured cats 😻 - available for anonymous and authenticated users
+  2. user dashboard - only authenticated users
+  3. add cat/cats
+  4. based on the type of FIP, cat's weight and concentration of the medication - calculate current dosage of the medication
+  5. log dosage given each day (for 84 or more days)
+  6. add daily notes and symptoms
+  7. reminder for vet control and bloodwork (vet control should happen every 4 weeks during the treatment and every 4 weeks after the treatment)
+  8. upload test results (in format of image)
+  9. view history (previous logs)
+  10. manage multiple cats (1 owner can have many cats)
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Non-functional requirements:
+  1. responsive design (mobile first)
+  2. reliable notifications

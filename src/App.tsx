@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>FIP CatCare</h1>
+      <h1 className="text-primary">FIP CatCare</h1>
     </>
   );
 }

@@ -2,7 +2,7 @@ function App() {
   return (
     <div className="h-screen w-full">
       <h1
-        className="bg-primary font-sans text-3xl font-extrabold text-white drop-shadow-2xl
+        className="bg-primary font-sans text-2xl font-extrabold text-white drop-shadow-2xl
 "
       >
         FIP CatCare

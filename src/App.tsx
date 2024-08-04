@@ -1,8 +1,13 @@
 function App() {
   return (
-    <>
-      <h1 className="text-primary">FIP CatCare</h1>
-    </>
+    <div className="h-screen w-full">
+      <h1
+        className="bg-primary font-sans text-3xl font-extrabold text-white drop-shadow-2xl
+"
+      >
+        FIP CatCare
+      </h1>
+    </div>
   );
 }
 

@@ -6,6 +6,8 @@ export const content = [
   './app/**/*.{ts,tsx}',
   './src/**/*.{ts,tsx}',
 ];
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export const prefix = '';
 export const theme = {
   container: {
@@ -17,6 +19,11 @@ export const theme = {
   },
   extend: {
     colors: {
+      'sec-green': 'hsl(174, 100%, 29%)',
+      'sec-mustard': 'hsl(45, 74%, 52%)',
+      'sec-blue': 'hsl(195, 70%, 40%)',
+      'sec-pink': 'hsl(328, 58%, 94%)',
+      'sec-lightgray': 'hsl( 0, 3%, 87%)',
       border: 'hsl(var(--border))',
       input: 'hsl(var(--input))',
       ring: 'hsl(var(--ring))',
@@ -56,6 +63,15 @@ export const theme = {
       md: 'calc(var(--radius) - 2px)',
       sm: 'calc(var(--radius) - 4px)',
     },
+    fontFamily: {
+      sans: [
+        ['Quicksand', ...defaultTheme.fontFamily.sans],
+        {
+          fontVariationSettings: '"wdth" 100',
+        },
+      ],
+    },
+
     keyframes: {
       'accordion-down': {
         from: { height: '0' },

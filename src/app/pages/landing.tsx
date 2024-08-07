@@ -5,7 +5,7 @@ export const LandingRoute = () => {
       <p>This route is available to everyone</p>
       <p>
         This page will contain info about what FIP is and how to successfully
-        treat it.{' '}
+        treat it.
       </p>
     </div>
   );

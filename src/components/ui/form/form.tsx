@@ -198,6 +198,7 @@ const Form = <
         className={cn('space-y-4', className)}
         onSubmit={form.handleSubmit(onSubmit)}
         id={id}
+        autoComplete="on"
       >
         {children(form)}
       </form>

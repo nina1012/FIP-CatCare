@@ -7,17 +7,25 @@ import { Form } from '@/components/ui/form/form';
 import { Input } from '@/components/ui/form/input';
 import { registerInputSchema } from '@/lib/auth';
 
+import { useRegister } from '../api/register';
+
 export type RegisterFormProps = {
   onSuccess: () => void;
 };
 
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
+  const { registering } = useRegister({
+    onSuccess: () => {
+      onSuccess();
+      console.log('onSuccess callback called', onSuccess);
+    },
+  });
   return (
     <div>
       <Form
         onSubmit={(values) => {
-          console.log(values);
-          onSuccess();
+          console.log(values, 'register gets called');
+          registering(values);
         }}
         schema={registerInputSchema}
         options={{

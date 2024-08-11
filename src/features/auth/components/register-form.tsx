@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/common/button';
 import { Form } from '@/components/ui/form/form';
 import { Input } from '@/components/ui/form/input';
+import { useToast } from '@/components/ui/toast/use-toast';
 import { registerInputSchema } from '@/lib/auth';
 
 import { useRegister } from '../api/register';
@@ -14,12 +15,18 @@ export type RegisterFormProps = {
 };
 
 export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
+  const { toast } = useToast();
+
   const { registering } = useRegister({
     onSuccess: () => {
+      toast({
+        title: 'Successful registration',
+        description: 'You have successfully registered to FIP CatCare app 🐈',
+      });
       onSuccess();
-      console.log('onSuccess callback called', onSuccess);
     },
   });
+
   return (
     <div>
       <Form
@@ -76,12 +83,25 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 registration={register('confirm')}
               />
 
-              <Input
-                type="checkbox"
-                label="Consent and agreement"
-                registration={register('consent')}
-                className="h-4"
-              />
+              <div className="my-4 flex items-start gap-2 space-x-2 pl-4 *:w-auto">
+                <Input
+                  type="checkbox"
+                  registration={register('consent')}
+                  className="h-4 *:w-auto"
+                  id="consent"
+                />
+                <div className="grid gap-1.5 leading-none">
+                  <label
+                    htmlFor="consent"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Consent and agreement
+                  </label>
+                  <p className="text-sm text-muted-foreground">
+                    You agree to our Terms of Service and Privacy Policy.
+                  </p>
+                </div>
+              </div>
               <div>
                 <Button type="submit" className="w-full">
                   Register

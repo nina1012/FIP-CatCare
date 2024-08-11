@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const LandingRoute = () => {
   return (
     <div>
@@ -7,6 +9,10 @@ export const LandingRoute = () => {
         This page will contain info about what FIP is and how to successfully
         treat it.
       </p>
+      <div className="flex gap-4 text-primary underline">
+        <Link to="/auth/register">Register</Link>
+        <Link to="/auth/login">Login</Link>
+      </div>
     </div>
   );
 };

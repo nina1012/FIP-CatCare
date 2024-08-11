@@ -3,20 +3,41 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/common/button';
 import { Form } from '@/components/ui/form/form';
 import { Input } from '@/components/ui/form/input';
+import { useToast } from '@/components/ui/toast/use-toast';
 import { loginInputSchema } from '@/lib/auth';
+
+import { useLogin } from '../api/login';
 
 export type LoginFormProps = {
   onSuccess: () => void;
 };
 
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
+  const { toast } = useToast();
+
+  const { login } = useLogin({
+    onSuccess: () => {
+      toast({
+        title: 'Successful registration',
+        description: 'You have successfully registered to FIP CatCare app 🐈',
+      });
+      onSuccess();
+    },
+    onError: (error) => {
+      toast({
+        title: 'Unsuccessful registration',
+        description: error,
+        variant: 'destructive',
+      });
+    },
+  });
   return (
     <div>
       <Form
         data-testid="form"
         onSubmit={(values) => {
           console.log('Form submitted with values:', values);
-          onSuccess();
+          login(values);
         }}
         schema={loginInputSchema}
         options={{

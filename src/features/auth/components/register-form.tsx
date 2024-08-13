@@ -45,7 +45,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
               <div className="flex flex-col ">
                 <Label
                   htmlFor="avatar"
-                  className="group relative my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center  rounded-[50%] border-2 bg-background bg-contain text-primary focus-within:bg-primary focus-within:text-white hover:bg-primary"
+                  className="group relative my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center  rounded-[50%] border-2 bg-background bg-[url(/avatar-placeholder.png)] bg-contain text-primary focus-within:bg-primary focus-within:text-white hover:bg-primary"
                 >
                   <Plus className="absolute right-0 top-0 rounded-full border border-primary bg-background focus-within:text-primary group-hover:text-primary" />
                   <Input
@@ -83,7 +83,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 registration={register('confirm')}
               />
 
-              <div className="my-4 flex items-start gap-2 space-x-2 pl-4 *:w-auto">
+              <div className="!mt-8 flex items-start gap-2 space-x-2 pl-2 *:w-auto">
                 <Input
                   type="checkbox"
                   registration={register('consent')}
@@ -102,7 +102,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                   </p>
                 </div>
               </div>
-              <div>
+              <div className="!mt-8">
                 <Button type="submit" className="w-full">
                   Register
                 </Button>

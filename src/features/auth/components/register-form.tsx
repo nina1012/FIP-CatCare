@@ -39,21 +39,36 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
           shouldUnregister: true,
         }}
       >
-        {({ register, formState }) => {
+        {({ register, formState, watch }) => {
+          // setting preview avatar if user has selected their avatar image
+          const selectedFile = watch('avatar');
+          const isFileSelected = selectedFile && selectedFile.length > 0;
+
           return (
             <>
               <div className="flex flex-col ">
                 <Label
                   htmlFor="avatar"
-                  className="group relative my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center  rounded-[50%] border-2 bg-background bg-[url(/avatar-placeholder.png)] bg-contain text-primary focus-within:bg-primary focus-within:text-white hover:bg-primary"
+                  className="group relative my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%]  border-2"
                 >
-                  <Plus className="absolute right-0 top-0 rounded-full border border-primary bg-background focus-within:text-primary group-hover:text-primary" />
+                  <Plus className="absolute right-0 top-0 z-10 rounded-full border border-primary bg-background text-primary transition-all focus-within:text-white group-hover:bg-primary group-hover:text-white" />
                   <Input
                     type="file"
                     registration={register('avatar')}
                     className="hidden"
                     id="avatar"
                   />
+                  <div className="">
+                    <img
+                      src={
+                        isFileSelected
+                          ? URL.createObjectURL(selectedFile[0])
+                          : '/avatar-placeholder.png'
+                      }
+                      alt="Preview"
+                      className="absolute inset-0 z-0 size-full rounded-full  object-cover object-center"
+                    />
+                  </div>
                 </Label>
                 <Input
                   type="text"

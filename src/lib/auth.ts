@@ -41,10 +41,6 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     }
   }, [isAuthenticated, isLoadingUser, fetchStatus, navigate, user]);
 
-  if (isLoadingUser) {
-    return 'loading...';
-  }
-
   if (userError) {
     throw userError;
   }

@@ -38,7 +38,7 @@ export const createRouter = () =>
       ),
       children: [
         {
-          path: '/dashboard',
+          path: 'dashboard',
           lazy: async () => {
             const { DashboardRoute } = await import('./app/dashboard');
             return { Component: DashboardRoute };

@@ -4,6 +4,7 @@ import { LucideRefreshCcw } from 'lucide-react';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import { Spinner } from '@/components/ui/common/spinner';
 import { Toaster } from '@/components/ui/toast/toaster';
 import { queryClient } from '@/lib/react-query';
 
@@ -15,7 +16,7 @@ const ErrorFallback = () => {
     >
       <h2 className="text-lg font-semibold">Ooops, something went wrong 😕 </h2>
       <button
-        className="mt-2"
+        className="mt-2 flex"
         onClick={() => window.location.assign(window.location.origin)}
       >
         <LucideRefreshCcw className="pr-2" />
@@ -31,7 +32,7 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <Suspense fallback={<div>spinner goes here...</div>}>
+    <Suspense fallback={<Spinner />}>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <QueryClientProvider client={queryClient}>
           {import.meta.env.DEV && <ReactQueryDevtools />}

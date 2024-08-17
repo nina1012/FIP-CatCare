@@ -3,6 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { DashboardLayout } from '@/components/layouts/dashboard-layout';
+import { Spinner } from '@/components/ui/common/spinner';
 
 export const AppRoot = () => {
   const location = useLocation();
@@ -11,7 +12,7 @@ export const AppRoot = () => {
       <Suspense
         fallback={
           <div className="flex size-full items-center justify-center">
-            <div>spinner goes here...</div>
+            <Spinner />
           </div>
         }
       >

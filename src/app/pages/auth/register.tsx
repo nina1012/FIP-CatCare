@@ -12,7 +12,7 @@ export const RegisterRoute = () => {
     <AuthLayout title="Register">
       <RegisterForm
         onSuccess={() =>
-          navigate(`${redirectTo ? `${redirectTo}` : '/'}`, {
+          navigate(`${redirectTo ? `${redirectTo}` : '/app/dashboard'}`, {
             replace: true,
           })
         }

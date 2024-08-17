@@ -1,5 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { ProtectedRoute } from '@/lib/auth';
+
+import { AppRoot } from './app/root';
+
 export const createRouter = () =>
   createBrowserRouter([
     {
@@ -24,5 +28,22 @@ export const createRouter = () =>
         const { RegisterRoute } = await import('./auth/register');
         return { Component: RegisterRoute };
       },
+    },
+    {
+      path: '/app',
+      element: (
+        <ProtectedRoute>
+          <AppRoot />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: '/dashboard',
+          lazy: async () => {
+            const { DashboardRoute } = await import('./app/dashboard');
+            return { Component: DashboardRoute };
+          },
+        },
+      ],
     },
   ]);

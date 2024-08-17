@@ -2,6 +2,9 @@ import { AuthError, AuthResponse } from '@supabase/supabase-js';
 import { useMutation } from '@tanstack/react-query';
 
 import { queryClient } from '@/lib/react-query';
+import { supabase } from '@/lib/supabase';
+
+import { mockLoginFn } from './mocks/login.mock';
 
 type UseLoginOptions = {
   onSuccess?: (data: AuthResponse['data']) => void;
@@ -16,22 +19,23 @@ export const loginFn = async ({
   password: string;
 }): Promise<AuthResponse['data']> => {
   console.log('loginFn gets called');
-  return {
-    user: {
-      id: '123',
-      email,
-      password,
-    } as any,
-    session: {
-      access_token: 'mock_access_token',
-      refresh_token: 'mock_refresh_token',
-    } as any,
-  };
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  });
+  console.log('loginFN gets called in production');
+
+  if (error) {
+    throw error;
+  }
+  return data;
 };
 
 export const useLogin = ({ onSuccess, onError }: UseLoginOptions = {}) => {
+  const mutationFn = import.meta.env.DEV ? loginFn : mockLoginFn; // TODO, before building, change to PROD
+
   const { mutate: login, isPending } = useMutation({
-    mutationFn: loginFn,
+    mutationFn,
     mutationKey: ['auth-user'],
     onSuccess: (data) => {
       queryClient.setQueryData(['auth-user'], { ...data });

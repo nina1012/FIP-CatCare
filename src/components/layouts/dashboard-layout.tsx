@@ -4,7 +4,7 @@ export const DashboardLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="relative min-h-screen w-full bg-primary py-16">
+    <div className="relative min-h-screen w-full bg-background py-16">
       {children}
     </div>
   );

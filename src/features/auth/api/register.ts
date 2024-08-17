@@ -2,6 +2,9 @@ import { AuthResponse, AuthError } from '@supabase/supabase-js';
 import { useMutation } from '@tanstack/react-query';
 
 import { queryClient } from '@/lib/react-query';
+import { supabase } from '@/lib/supabase';
+
+import { mockRegisterFn } from './mocks/register.mock';
 
 type UseRegisterOptions = {
   onSuccess?: (user: AuthResponse['data']) => void;
@@ -18,26 +21,34 @@ export const registerFn = async ({
   fullName: string;
 }): Promise<AuthResponse['data']> => {
   console.log('registerFn gets called');
-  return {
-    user: {
-      id: '123',
-      email,
-      password,
-      fullName,
-    } as any,
-    session: {
-      access_token: 'mock_access_token',
-      refresh_token: 'mock_refresh_token',
-    } as any,
-  };
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+  const { data: users, error: insertionError } = await supabase
+    .from('users')
+    .insert({ fullName });
+  console.log(users);
+
+  if (insertionError) {
+    throw insertionError;
+  }
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 };
 
 export const useRegister = ({
   onSuccess,
   onError,
 }: UseRegisterOptions = {}) => {
+  const mutationFn = import.meta.env.DEV ? registerFn : mockRegisterFn; // TODO, before building, change to PROD
+
   const { mutate: registering, isPending } = useMutation({
-    mutationFn: registerFn,
+    mutationFn,
     mutationKey: ['auth-user'],
     onSuccess: (data) => {
       queryClient.setQueryData(['auth-user'], {

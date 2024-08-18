@@ -27,7 +27,7 @@ export const registerFn = async ({
   });
   const { data: users, error: insertionError } = await supabase
     .from('users')
-    .insert({ fullName });
+    .insert({ full_name: fullName, email });
   console.log(users);
 
   if (insertionError) {
@@ -54,7 +54,6 @@ export const useRegister = ({
       queryClient.setQueryData(['auth-user'], {
         ...data,
       });
-      console.log(data);
       return onSuccess?.(data);
     },
     onError: (error) => onError?.(error?.message),

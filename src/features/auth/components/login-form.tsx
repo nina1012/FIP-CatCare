@@ -18,14 +18,14 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { login } = useLogin({
     onSuccess: () => {
       toast({
-        title: 'Successful registration',
-        description: 'You have successfully registered to FIP CatCare app 🐈',
+        title: 'Successful login',
+        description: 'Welcome back to FIP CatCare app 🐈',
       });
       onSuccess();
     },
     onError: (error) => {
       toast({
-        title: 'Unsuccessful registration',
+        title: 'Unsuccessful login',
         description: error,
         variant: 'destructive',
       });

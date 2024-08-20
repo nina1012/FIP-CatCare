@@ -23,7 +23,7 @@ export const DashboardRoute = () => {
     <div className="container">
       <div className="flex items-center gap-4">
         <h1 className="text-2xl font-bold">Dashboard</h1>
-        <Badge className="!text-xs">cat owner</Badge>
+        <Badge className="pointer-events-none !text-xs">cat owner</Badge>
       </div>
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>

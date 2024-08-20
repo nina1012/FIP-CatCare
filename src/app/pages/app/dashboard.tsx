@@ -1,57 +1,34 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/common/avatar';
+import { PawPrintIcon } from 'lucide-react';
+
+import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
-import { useToast } from '@/components/ui/toast/use-toast';
 import { useUser } from '@/features/auth/api/get-auth-user';
-import { useLogout } from '@/features/auth/api/logout';
 import { useCats } from '@/features/cat/api/get-cats';
-import { useUserData } from '@/features/user/api/get-user-data';
 
 export const DashboardRoute = () => {
   const { user, isLoadingUser } = useUser();
-  const { userData } = useUserData(user?.id as string);
-  const { cats } = useCats(user?.id as string);
-  const { toast } = useToast();
-  const { logout } = useLogout({
-    onSuccess: () => {
-      toast({
-        title: 'Logging out',
-        description: 'Bye 🐾',
-      });
-    },
-    onError: (error) => {
-      toast({
-        title: error.message,
-        variant: 'destructive',
-      });
-    },
-  });
+  const { cats, isLoadingCats } = useCats(user?.id as string);
 
-  if (isLoadingUser) {
+  if (isLoadingUser || isLoadingCats) {
     return (
       <div className="container">
-        <Spinner />
+        <div className="flex h-96 items-center justify-center">
+          <Spinner size="lg" />
+        </div>
       </div>
     );
   }
   return (
     <div className="container">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Hello {userData?.full_name}</h1>
-        <Avatar className="size-12">
-          <AvatarImage src={userData?.avatar_url as string} />
-          <AvatarFallback>{userData?.full_name}</AvatarFallback>
-        </Avatar>
+      <div className="flex items-center gap-4">
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <Badge className="!text-xs">cat owner</Badge>
       </div>
-      <Button onClick={() => logout()}>Logout</Button>
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>
         {cats?.map((cat) => (
-          <div key={cat.cat_id} className="flex w-full p-4 shadow-md">
+          <div key={cat.cat_id} className="my-8 flex w-full p-4 shadow-md">
             <img
               src={cat.image_url as string}
               className="size-28 overflow-hidden rounded-full"
@@ -60,6 +37,9 @@ export const DashboardRoute = () => {
             <h5>{cat.name}</h5>
           </div>
         ))}
+        <Button className="flex gap-2">
+          <PawPrintIcon /> New Cat Registration
+        </Button>
       </div>
     </div>
   );

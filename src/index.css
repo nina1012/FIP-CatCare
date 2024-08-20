@@ -64,6 +64,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground relative;
+  }
+}
+
+@layer utilities {
+  .nav-link {
+    @apply hover:text-primary underline-offset-8 hover:underline transition-all;
   }
 }

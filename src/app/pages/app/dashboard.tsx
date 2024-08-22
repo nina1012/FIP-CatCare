@@ -1,4 +1,5 @@
 import { PawPrintIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
@@ -28,18 +29,27 @@ export const DashboardRoute = () => {
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>
         {cats?.map((cat) => (
-          <div key={cat.cat_id} className="my-8 flex w-full p-4 shadow-md">
+          <Link
+            to={`/app/cat/${cat.cat_id}`}
+            key={cat.cat_id}
+            className="my-8 flex w-full flex-col p-4 shadow-md"
+          >
+            <div className="self-end">
+              <Link to={`/app/cat/${cat.cat_id}/edit`}>edit</Link>
+            </div>
             <img
               src={cat.image_url as string}
               className="size-28 overflow-hidden rounded-full"
               alt={cat.name}
             />
             <h5>{cat.name}</h5>
-          </div>
+          </Link>
         ))}
-        <Button className="flex gap-2">
-          <PawPrintIcon /> New Cat Registration
-        </Button>
+        <Link to="../cat/new" className="flex gap-2">
+          <Button>
+            <PawPrintIcon /> New Cat Registration
+          </Button>
+        </Link>
       </div>
     </div>
   );

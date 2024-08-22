@@ -44,6 +44,27 @@ export const createRouter = () =>
             return { Component: DashboardRoute };
           },
         },
+        {
+          path: 'cat/:catID', // Cat details page
+          lazy: async () => {
+            const { CatDetailsRoute } = await import('./app/cat/[catID]');
+            return { Component: CatDetailsRoute };
+          },
+        },
+        {
+          path: 'cat/:catID/edit', // Cat details edit page
+          lazy: async () => {
+            const { EditCatRoute } = await import('./app/cat/[catID]/edit');
+            return { Component: EditCatRoute };
+          },
+        },
+        {
+          path: 'cat/new', // Add new cat page
+          lazy: async () => {
+            const { NewCatRoute } = await import('./app/cat/new');
+            return { Component: NewCatRoute };
+          },
+        },
       ],
     },
   ]);

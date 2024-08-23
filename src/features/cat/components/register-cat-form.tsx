@@ -3,23 +3,60 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
 import { Form, Input, Label } from '@/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/form/select';
+import { useToast } from '@/components/ui/toast/use-toast';
+import { useUser } from '@/features/auth/api/get-auth-user';
+
+import { useRegisterCat } from '../api/register-new-cat';
+import { Cat } from '../types';
 
 const registrationCatSchema = z.object({
   name: z.string().min(1, 'Required'),
   breed: z.string().optional().default('domestic'),
-  age: z.string().min(1, "Please, provide cat's age"),
+  age: z.string().min(1, 'Required'),
   color: z.string().min(1, "Please, provide cat's color"),
   image_url: z.instanceof(FileList).optional(),
+  weight: z.string().min(1, 'Required'),
 });
 
 export const RegisterCatForm = () => {
+  const { user } = useUser();
+  const { toast } = useToast();
+
+  const { registerCat } = useRegisterCat({
+    onSuccess: () => {
+      toast({
+        title: 'Successful login',
+        description: 'Welcome back to FIP CatCare app 🐈',
+      });
+    },
+    onError: (error: string) => {
+      toast({
+        title: 'Unsuccessful login',
+        description: error,
+        variant: 'destructive',
+      });
+    },
+  });
+
+  if (!user) return null;
+
   return (
     <div>
       <h4 className="my-4 flex items-center gap-1 text-lg font-medium">
-        Basic info <Info size={16} className="text-[#009688]" />
+        Basic info <Info size={16} />
       </h4>
       <Form
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values: Omit<Cat, 'cat_id' | 'user_id' | 'created_at'>) => {
+          console.log(values);
+          registerCat(values);
+        }}
         schema={registrationCatSchema}
         className="max-w-md"
       >
@@ -27,6 +64,7 @@ export const RegisterCatForm = () => {
           // setting preview avatar if user has selected their avatar image
           const selectedFile = watch('image_url');
           const isFileSelected = selectedFile && selectedFile.length > 0;
+
           return (
             <>
               <Label
@@ -40,7 +78,7 @@ export const RegisterCatForm = () => {
                   className="hidden"
                   id="image_url"
                 />
-                <div className="">
+                <div className="border-2">
                   <img
                     src={
                       isFileSelected
@@ -76,6 +114,23 @@ export const RegisterCatForm = () => {
                 error={formState.errors['color']}
                 registration={register('color')}
               />
+              <Input
+                type="text"
+                placeholder="Cat's weight (in kg)"
+                error={formState.errors['weight']}
+                registration={register('weight')}
+              />
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="FIP Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="wet">wet</SelectItem>
+                  <SelectItem value="dry">dry</SelectItem>
+                  <SelectItem value="ocular">ocular</SelectItem>
+                  <SelectItem value="neurological">neurological</SelectItem>
+                </SelectContent>
+              </Select>
               <div>
                 <Button type="submit" className="w-full">
                   Register

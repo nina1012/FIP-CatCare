@@ -56,6 +56,14 @@ export const Nav = () => {
             Dosage calculator
           </Link>
         </li>
+        <li>
+          <Button
+            className="flex w-full justify-start"
+            onClick={() => logout()}
+          >
+            Logout
+          </Button>
+        </li>
       </ul>
       <div className="block md:hidden md:opacity-0">
         <Menubar className="size-12 rounded-full">

@@ -38,7 +38,7 @@ export const DashboardRoute = () => {
               <Link to={`/app/cat/${cat.cat_id}/edit`}>edit</Link>
             </div>
             <img
-              src={cat.image_url as string}
+              // src={cat.image_url as string}
               className="size-28 overflow-hidden rounded-full"
               alt={cat.name}
             />
@@ -47,7 +47,7 @@ export const DashboardRoute = () => {
         ))}
         <Link to="../cat/new" className="flex gap-2">
           <Button>
-            <PawPrintIcon /> New Cat Registration
+            <PawPrintIcon className="mr-2" /> New Cat Registration
           </Button>
         </Link>
       </div>

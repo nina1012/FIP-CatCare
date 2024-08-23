@@ -25,20 +25,25 @@ const registrationCatSchema = z.object({
   weight: z.string().min(1, 'Required'),
 });
 
-export const RegisterCatForm = () => {
+type RegisterCatFormProps = {
+  onSuccess: () => void;
+};
+
+export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
   const { user } = useUser();
   const { toast } = useToast();
 
   const { registerCat } = useRegisterCat({
     onSuccess: () => {
       toast({
-        title: 'Successful login',
-        description: 'Welcome back to FIP CatCare app 🐈',
+        title: "Successful cat's registration",
+        description: 'You have successfully added new cat 🐈',
       });
+      onSuccess();
     },
     onError: (error: string) => {
       toast({
-        title: 'Unsuccessful login',
+        title: "Unsuccessful cat's registration",
         description: error,
         variant: 'destructive',
       });
@@ -54,7 +59,6 @@ export const RegisterCatForm = () => {
       </h4>
       <Form
         onSubmit={(values: Omit<Cat, 'cat_id' | 'user_id' | 'created_at'>) => {
-          console.log(values);
           registerCat(values);
         }}
         schema={registrationCatSchema}

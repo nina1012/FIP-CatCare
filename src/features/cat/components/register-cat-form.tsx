@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/form/select';
 import { useToast } from '@/components/ui/toast/use-toast';
 import { useUser } from '@/features/auth/api/get-auth-user';
+import { isFileList } from '@/utils/isFileList';
 
 import { useRegisterCat } from '../api/register-new-cat';
 import { Cat } from '../types';
@@ -85,8 +86,8 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
                 <div className="border-2">
                   <img
                     src={
-                      isFileSelected
-                        ? URL.createObjectURL(selectedFile[0])
+                      isFileSelected && isFileList(selectedFile[0])
+                        ? selectedFile[0] + ''
                         : '/cat-placeholder.jpg'
                     }
                     alt="Preview"

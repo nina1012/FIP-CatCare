@@ -21,7 +21,7 @@ const registrationCatSchema = z.object({
   breed: z.string().optional().default('domestic'),
   age: z.string().min(1, 'Required'),
   color: z.string().min(1, "Please, provide cat's color"),
-  image_url: z.instanceof(FileList).optional(),
+  cat_image_url: z.instanceof(FileList).optional(),
   weight: z.string().min(1, 'Required'),
 });
 
@@ -66,21 +66,21 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
       >
         {({ register, formState, watch }) => {
           // setting preview avatar if user has selected their avatar image
-          const selectedFile = watch('image_url');
+          const selectedFile = watch('cat_image_url');
           const isFileSelected = selectedFile && selectedFile.length > 0;
 
           return (
             <>
               <Label
-                htmlFor="image_url"
+                htmlFor="cat_image_url"
                 className="group relative mx-auto my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%]  border-2"
               >
                 <Plus className="absolute right-0 top-0 z-10 rounded-full border border-primary bg-background text-primary transition-all focus-within:text-white group-hover:bg-primary group-hover:text-white" />
                 <Input
                   type="file"
-                  registration={register('image_url')}
+                  registration={register('cat_image_url')}
                   className="hidden"
-                  id="image_url"
+                  id="cat_image_url"
                 />
                 <div className="border-2">
                   <img

@@ -4,7 +4,7 @@ export type Cat = {
   breed: string;
   age: string | number;
   color: string;
-  image_url?: FileList;
+  cat_image_url?: FileList;
   user_id: string;
   weight: number;
   created_at: string;

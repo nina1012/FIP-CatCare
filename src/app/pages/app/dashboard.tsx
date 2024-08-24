@@ -38,7 +38,7 @@ export const DashboardRoute = () => {
               <Link to={`/app/cat/${cat.cat_id}/edit`}>edit</Link>
             </div>
             <img
-              // src={cat.image_url as string}
+              // src={cat.cat_image_url as string}
               className="size-28 overflow-hidden rounded-full"
               alt={cat.name}
             />

@@ -56,7 +56,7 @@ export const registerCatFn = async ({
     _age: parseInt(age + '', 10),
     _weight: parseInt(weight + '', 10),
     _color: color,
-    _cat_image_url: imageURL,
+    _cat_image_url: imageURL || '',
   });
 
   if (error) throw new Error(error.message);

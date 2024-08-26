@@ -6,7 +6,7 @@ import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
 import { Badge } from '@/components/ui/common/badge';
 import { Spinner } from '@/components/ui/common/spinner';
 import { useCatData } from '@/features/cat/api/get-cat-data';
-import { EditCatDialog } from '@/features/cat/components/edit-cat-dialog';
+import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 
 export const CatDetailsRoute = () => {
   const { catID } = useParams();
@@ -62,7 +62,7 @@ export const CatDetailsRoute = () => {
         className="my-4 grid grid-rows-[192px,192px,192px]
       gap-4 md:grid-cols-[minmax(0,275.5px),minmax(0,275.5px),minmax(0,275.5px)] md:grid-rows-[192px]"
       >
-        <EditCatDialog cat={catData} />
+        <UpdateCatDialog cat={catData} />
       </div>
     </div>
   );

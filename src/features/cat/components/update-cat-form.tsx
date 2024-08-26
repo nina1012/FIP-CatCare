@@ -12,20 +12,37 @@ import {
 } from '@/components/ui/form/select';
 import { isFileList } from '@/utils/isFileList';
 
+import { useUpdateCatData } from '../api/update-cat-data';
 import { Cat } from '../types';
 
 import { formCatSchema } from './register-cat-form';
 
-export type EdiCatFormProps = {
+export type UpdateCatFormProps = {
   cat: Cat;
 };
 
-export const EditCatForm = ({ cat }: EdiCatFormProps) => {
+export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
+  const { updateCat } = useUpdateCatData(cat.cat_id);
+
   return (
     <div>
       <Form
         onSubmit={(values) => {
-          console.log(values, 'call edit cat fn');
+          let imageUrl;
+          // if user didn't update info, keep the old cat_image_url
+          if (values.cat_image_url && values.cat_image_url.length === 0) {
+            imageUrl = cat?.cat_image_url;
+          }
+          updateCat({
+            cat_image_url: values.cat_image_url
+              ? values.cat_image_url
+              : imageUrl,
+            name: values.name,
+            breed: values.breed,
+            age: values.age,
+            color: values.color,
+            weight: +values.weight,
+          });
         }}
         schema={formCatSchema}
       >

@@ -1,4 +1,4 @@
-import { Cat as CatIcon, Clock, Shield, User } from 'lucide-react';
+import { Cat as CatIcon, Clock, Shield, User, Weight } from 'lucide-react';
 
 import { Cat } from '@/features/cat/types';
 
@@ -55,6 +55,19 @@ export const DialogTriggerCard = ({ cat }: { cat: Cat }) => {
             </Tooltip>
           </TooltipProvider>
           {cat.breed}
+        </div>
+        <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Weight />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-primary">Weight</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          {cat.weight.toFixed(3)} kg
         </div>
         <div className="flex items-center gap-2">
           <TooltipProvider>

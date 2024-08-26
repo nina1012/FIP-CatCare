@@ -8,13 +8,13 @@ import { DialogTriggerCard } from '@/components/ui/dialog/dialog-trigger-card';
 
 import { Cat } from '../types';
 
-import { EditCatForm } from './edit-cat-form';
+import { UpdateCatForm } from './update-cat-form';
 
-type EditCatDialogProps = {
+type UpdateCatDialogProps = {
   cat?: Cat | null;
 };
 
-export const EditCatDialog = ({ cat }: EditCatDialogProps) => {
+export const UpdateCatDialog = ({ cat }: UpdateCatDialogProps) => {
   if (!cat) return null;
 
   return (
@@ -23,7 +23,7 @@ export const EditCatDialog = ({ cat }: EditCatDialogProps) => {
       <DialogContent>
         <DialogHeader>
           <DialogDescription>
-            <EditCatForm cat={cat} />
+            <UpdateCatForm cat={cat} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

@@ -60,8 +60,10 @@ export const CatDetailsRoute = () => {
       {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
       <div
         className="my-4 grid grid-rows-[192px,192px,192px]
-      gap-4 md:grid-cols-[minmax(0,275.5px),minmax(0,275.5px),minmax(0,275.5px)] "
+      gap-4 md:grid-cols-[minmax(0,275.5px),minmax(0,275.5px),minmax(0,275.5px)] md:grid-rows-[192px]"
       >
+        <EditCatDialog cat={catData} />
+        <EditCatDialog cat={catData} />
         <EditCatDialog cat={catData} />
       </div>
     </div>

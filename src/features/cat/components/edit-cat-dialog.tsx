@@ -4,8 +4,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/common/dialog';
+} from '@/components/ui/dialog/dialog';
+import { DialogTriggerCard } from '@/components/ui/dialog/dialog-trigger-card';
 
 import { Cat } from '../types';
 
@@ -17,21 +17,20 @@ type EditCatDialogProps = {
 
 export const EditCatDialog = ({ cat }: EditCatDialogProps) => {
   if (!cat) return null;
+
   return (
-    <div>
-      <Dialog>
-        <DialogTrigger>
-          <div className="h-full border-2">Edit cat&apos;s basic info</div>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit {cat.name}</DialogTitle>
-            <DialogDescription>
-              <RegisterCatForm onSuccess={() => console.log('test')} />
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </div>
+    // <div className="min-h-full min-w-full border-2">
+    <Dialog>
+      <DialogTriggerCard cat={cat} />
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit {cat.name}</DialogTitle>
+          <DialogDescription>
+            <RegisterCatForm onSuccess={() => console.log('test')} />
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+    // </div>
   );
 };

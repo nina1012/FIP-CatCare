@@ -8,7 +8,7 @@ export const getUserData = async (catID: string): Promise<Cat | null> => {
   if (!catID) return null;
   const { data: cats, error } = await supabase
     .from('cats')
-    .select('cat_id, cat_image_url, name')
+    .select('*')
     .eq('cat_id', catID);
 
   if (error) throw new Error(error.message);

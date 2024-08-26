@@ -59,6 +59,16 @@
   }
 }
 
+/* colors {
+  green: #009688,
+  blue: #1f8caf,
+  yellow: #dfb028,
+  pink: #f8e5ef,
+  gray: #dfdddd,
+  darkgray: #7b7a7a,
+
+} */
+
 @layer base {
   * {
     @apply border-border;

@@ -3,13 +3,12 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog/dialog';
 import { DialogTriggerCard } from '@/components/ui/dialog/dialog-trigger-card';
 
 import { Cat } from '../types';
 
-import { RegisterCatForm } from './register-cat-form';
+import { EditCatForm } from './edit-cat-form';
 
 type EditCatDialogProps = {
   cat?: Cat | null;
@@ -19,18 +18,15 @@ export const EditCatDialog = ({ cat }: EditCatDialogProps) => {
   if (!cat) return null;
 
   return (
-    // <div className="min-h-full min-w-full border-2">
     <Dialog>
       <DialogTriggerCard cat={cat} />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit {cat.name}</DialogTitle>
           <DialogDescription>
-            <RegisterCatForm onSuccess={() => console.log('test')} />
+            <EditCatForm cat={cat} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
-    // </div>
   );
 };

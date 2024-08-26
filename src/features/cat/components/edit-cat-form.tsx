@@ -1,7 +1,7 @@
-import { Info, Plus } from 'lucide-react';
-import { z } from 'zod';
+import { Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/common/button';
+import { DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input, Label } from '@/components/ui/form';
 import {
   Select,
@@ -10,68 +10,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/form/select';
-import { useToast } from '@/components/ui/toast/use-toast';
-import { useUser } from '@/features/auth/api/get-auth-user';
 import { isFileList } from '@/utils/isFileList';
 
-import { useRegisterCat } from '../api/register-new-cat';
 import { Cat } from '../types';
 
-export const formCatSchema = z.object({
-  name: z.string().min(1, 'Required'),
-  breed: z.string().optional().default('domestic'),
-  age: z.string().min(1, 'Required'),
-  color: z.string().min(1, "Please, provide cat's color"),
-  cat_image_url: z.instanceof(FileList).optional(),
-  weight: z.string().min(1, 'Required'),
-});
+import { formCatSchema } from './register-cat-form';
 
-type RegisterCatFormProps = {
-  onSuccess: () => void;
+export type EdiCatFormProps = {
+  cat: Cat;
 };
 
-export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
-  const { user } = useUser();
-  const { toast } = useToast();
-
-  const { registerCat } = useRegisterCat({
-    onSuccess: () => {
-      toast({
-        title: "Successful cat's registration",
-        description: 'You have successfully added new cat 🐈',
-      });
-      onSuccess();
-    },
-    onError: (error: string) => {
-      toast({
-        title: "Unsuccessful cat's registration",
-        description: error,
-        variant: 'destructive',
-      });
-    },
-  });
-
-  if (!user) return null;
-
+export const EditCatForm = ({ cat }: EdiCatFormProps) => {
   return (
     <div>
-      <h4 className="my-4 flex items-center gap-1 text-lg font-medium">
-        Basic info <Info size={16} />
-      </h4>
       <Form
-        onSubmit={(values: Omit<Cat, 'cat_id' | 'user_id' | 'created_at'>) => {
-          registerCat(values);
+        onSubmit={(values) => {
+          console.log(values, 'call edit cat fn');
         }}
         schema={formCatSchema}
-        className="max-w-md"
       >
         {({ register, formState, watch }) => {
-          // setting preview avatar if user has selected their avatar image
           const selectedFile = watch('cat_image_url');
           const isFileSelected = selectedFile && selectedFile.length > 0;
-
           return (
             <>
+              <DialogTitle>Edit {cat.name}</DialogTitle>
               <Label
                 htmlFor="cat_image_url"
                 className="group relative mx-auto my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%]  border-2"
@@ -88,7 +51,7 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
                     src={
                       isFileSelected && isFileList(selectedFile[0])
                         ? selectedFile[0] + ''
-                        : '/cat-placeholder.jpg'
+                        : (cat.cat_image_url as string)
                     }
                     alt="Preview"
                     className="absolute inset-0 z-0 size-full rounded-full object-cover object-center"
@@ -100,30 +63,35 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
                 placeholder="Cat's name"
                 error={formState.errors['name']}
                 registration={register('name')}
+                defaultValue={cat.name}
               />
               <Input
                 type="text"
                 placeholder="Cat's breed"
                 error={formState.errors['breed']}
                 registration={register('breed')}
+                defaultValue={cat.breed}
               />
               <Input
                 type="string"
                 placeholder="Cat's age"
                 error={formState.errors['age']}
                 registration={register('age')}
+                defaultValue={cat.age}
               />
               <Input
                 type="text"
                 placeholder="Cat's color"
                 error={formState.errors['color']}
                 registration={register('color')}
+                defaultValue={cat.color}
               />
               <Input
                 type="text"
                 placeholder="Cat's weight (in kg)"
                 error={formState.errors['weight']}
                 registration={register('weight')}
+                defaultValue={cat.weight}
               />
               <Select>
                 <SelectTrigger>
@@ -138,7 +106,7 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
               </Select>
               <div>
                 <Button type="submit" className="w-full">
-                  Register
+                  Edit {cat.name}
                 </Button>
               </div>
             </>

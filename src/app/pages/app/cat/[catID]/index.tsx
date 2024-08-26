@@ -63,8 +63,6 @@ export const CatDetailsRoute = () => {
       gap-4 md:grid-cols-[minmax(0,275.5px),minmax(0,275.5px),minmax(0,275.5px)] md:grid-rows-[192px]"
       >
         <EditCatDialog cat={catData} />
-        <EditCatDialog cat={catData} />
-        <EditCatDialog cat={catData} />
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import { isFileList } from '@/utils/isFileList';
 
 import { useUpdateCatData } from '../api/update-cat-data';
 import { Cat } from '../types';
+import { BREEDS } from '../types/breeds';
 
 import { formCatSchema } from './register-cat-form';
 
@@ -88,13 +89,18 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                 registration={register('name')}
                 defaultValue={cat.name}
               />
-              <Input
-                type="text"
-                placeholder="Cat's breed"
-                error={formState.errors['breed']}
-                registration={register('breed')}
-                defaultValue={cat.breed}
-              />
+              <CustomSelect registration={register('breed')}>
+                <SelectTrigger>
+                  <SelectValue placeholder={cat.breed} />
+                </SelectTrigger>
+                <SelectContent>
+                  {BREEDS.map((breed) => (
+                    <SelectItem key={breed} value={breed}>
+                      {breed}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </CustomSelect>
               <Input
                 type="string"
                 placeholder="Cat's age"
@@ -118,7 +124,7 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
               />
               <CustomSelect registration={register('sex')}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Sex" />
+                  <SelectValue placeholder={cat.sex} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="male">Male</SelectItem>

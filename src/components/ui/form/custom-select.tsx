@@ -13,6 +13,7 @@ const CustomSelect = React.forwardRef<HTMLDivElement, CustomSelectProps>(
       <Select
         {...props}
         onValueChange={(value) => {
+          console.log(value, registration);
           if (registration?.onChange) {
             registration.onChange({
               target: { value, name: registration.name },

@@ -8,7 +8,7 @@ import { DialogTriggerCard } from '@/components/ui/dialog/dialog-trigger-card';
 
 import { Cat } from '../types';
 
-import { UpdateCatForm } from './update-cat-form';
+import UpdateCatForm from './update-cat-form';
 
 type UpdateCatDialogProps = {
   cat?: Cat | null;

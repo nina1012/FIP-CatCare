@@ -1,4 +1,5 @@
 import { Plus } from 'lucide-react';
+import { memo } from 'react';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
@@ -17,6 +18,7 @@ import { useUpdateCatData } from '../api/update-cat-data';
 import { Cat } from '../types';
 import { BREEDS } from '../types/breeds';
 
+import { BreedList } from './breed-list';
 import { formCatSchema } from './register-cat-form';
 
 export type UpdateCatFormProps = {
@@ -27,7 +29,7 @@ const updateCatSchema = formCatSchema.extend({
   sex: z.enum(['male', 'female', 'neutered male', 'spayed female']).optional(),
 });
 
-export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
+const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
   const { updateCat } = useUpdateCatData(cat.cat_id);
 
   return (
@@ -94,13 +96,10 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                   <SelectValue placeholder={cat.breed} />
                 </SelectTrigger>
                 <SelectContent>
-                  {BREEDS.map((breed) => (
-                    <SelectItem key={breed} value={breed}>
-                      {breed}
-                    </SelectItem>
-                  ))}
+                  <BreedList breeds={BREEDS} />
                 </SelectContent>
               </CustomSelect>
+
               <Input
                 type="string"
                 placeholder="Cat's age"
@@ -145,3 +144,5 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
     </div>
   );
 };
+
+export default memo(UpdateCatForm);

@@ -8,4 +8,5 @@ export type Cat = {
   user_id: string;
   weight: number;
   created_at: string;
+  sex?: 'male' | 'female' | 'neutered male' | 'spayed female';
 };

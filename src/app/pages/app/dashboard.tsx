@@ -28,25 +28,28 @@ export const DashboardRoute = () => {
       </div>
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>
-        {cats?.map(({ cat_id, cat_image_url, name }) => {
-          return (
-            <Link
-              to={`/app/cat/${cat_id}`}
-              key={cat_id}
-              className="my-8 flex w-full flex-col p-4 shadow-md"
-            >
-              <div className="self-end">
-                <Link to={`/app/cat/${cat_id}/edit`}>edit</Link>
-              </div>
-              <img
-                src={cat_image_url as string}
-                className="size-28 overflow-hidden rounded-full"
-                alt={name}
-              />
-              <h5>{name}</h5>
-            </Link>
-          );
-        })}
+        <div className="my-4 grid grid-rows-[minmax(200px,1fr),minmax(200px,1fr)] gap-8 md:grid-cols-[minmax(0,300px),minmax(0,300px),minmax(0,300px)] md:grid-rows-[minmax(200px,1fr)]">
+          {' '}
+          {cats?.map(({ cat_id, cat_image_url, name }) => {
+            return (
+              <Link
+                to={`/app/cat/${cat_id}`}
+                key={cat_id}
+                className="my-8 flex w-full items-center gap-6 rounded-md bg-[#dfdddd]/10 p-4 font-semibold shadow-md"
+              >
+                <img
+                  src={cat_image_url as string}
+                  className="size-20 overflow-hidden rounded-full border-2 object-cover object-center"
+                  alt={name}
+                />
+                <div className="flex flex-col gap-2">
+                  <h5>{name}</h5>
+                  <Button>view info</Button>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
         <Link to="../cat/new" className="flex gap-2">
           <Button>
             <PawPrintIcon className="mr-2" /> New Cat Registration

@@ -49,7 +49,7 @@ export const updateCatFn = async ({
     ...updatedData,
     cat_image_url: cat_image_url,
   };
-
+  console.log(newData);
   const { data, error } = await supabase
     .from('cats')
     .update({ ...newData })

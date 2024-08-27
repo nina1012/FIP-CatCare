@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '../tooltip';
+} from '../common/tooltip';
 
 import { DialogTrigger } from './dialog';
 
@@ -15,7 +15,7 @@ export const DialogTriggerCard = ({ cat }: { cat: Cat }) => {
   console.log(cat);
   return (
     <DialogTrigger className="h-full rounded-md bg-[#f8e5ef]/70 p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 hover:ring-primary">
-      <div className="grid h-full">
+      <div className="grid h-full gap-2">
         <h4 className="text-left font-bold">Basic cat&apos;s info</h4>
         <div className="flex items-center gap-2">
           <TooltipProvider>

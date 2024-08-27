@@ -1,10 +1,11 @@
 import { Plus } from 'lucide-react';
+import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
 import { DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input, Label } from '@/components/ui/form';
+import CustomSelect from '@/components/ui/form/custom-select';
 import {
-  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
@@ -20,6 +21,10 @@ import { formCatSchema } from './register-cat-form';
 export type UpdateCatFormProps = {
   cat: Cat;
 };
+
+const updateCatSchema = formCatSchema.extend({
+  sex: z.enum(['male', 'female', 'neutered male', 'spayed female']).optional(),
+});
 
 export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
   const { updateCat } = useUpdateCatData(cat.cat_id);
@@ -42,9 +47,10 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
             age: values.age,
             color: values.color,
             weight: +values.weight,
+            sex: values.sex,
           });
         }}
-        schema={formCatSchema}
+        schema={updateCatSchema}
       >
         {({ register, formState, watch }) => {
           const selectedFile = watch('cat_image_url');
@@ -110,17 +116,17 @@ export const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                 registration={register('weight')}
                 defaultValue={cat.weight}
               />
-              <Select>
+              <CustomSelect registration={register('sex')}>
                 <SelectTrigger>
-                  <SelectValue placeholder="FIP Type" />
+                  <SelectValue placeholder="Sex" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="wet">wet</SelectItem>
-                  <SelectItem value="dry">dry</SelectItem>
-                  <SelectItem value="ocular">ocular</SelectItem>
-                  <SelectItem value="neurological">neurological</SelectItem>
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="neutered male">Neutered Male</SelectItem>
+                  <SelectItem value="spayed female">Spayed Female</SelectItem>
                 </SelectContent>
-              </Select>
+              </CustomSelect>
               <div>
                 <Button type="submit" className="w-full">
                   Edit {cat.name}

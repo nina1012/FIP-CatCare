@@ -58,7 +58,7 @@ export const CatDetailsRoute = () => {
         <Badge>Pending Treatment</Badge>
       </div>
       {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
-      <div className="my-4 flex w-full flex-col gap-8 md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
+      <div className="my-4 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
         <UpdateCatDialog cat={catData} />
         <UpdateCatDialog cat={catData} />

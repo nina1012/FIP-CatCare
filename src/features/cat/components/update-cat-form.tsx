@@ -80,7 +80,8 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                     src={
                       isFileSelected && isFileList(selectedFile[0])
                         ? selectedFile[0] + ''
-                        : (cat.cat_image_url as string)
+                        : ((cat.cat_image_url ||
+                            '/public/cat-placeholder.jpg') as string)
                     }
                     alt="Preview"
                     className="absolute inset-0 z-0 size-full rounded-full object-cover object-center"

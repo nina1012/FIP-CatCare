@@ -28,18 +28,20 @@ export const DashboardRoute = () => {
       </div>
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>
-        <div className="my-4 grid grid-rows-[minmax(200px,1fr),minmax(200px,1fr)] gap-8 md:grid-cols-[minmax(0,300px),minmax(0,300px),minmax(0,300px)] md:grid-rows-[minmax(200px,1fr)]">
+        <div className="my-4 flex max-w-lg flex-wrap gap-6 md:max-w-4xl">
           {' '}
           {cats?.map(({ cat_id, cat_image_url, name }) => {
             return (
               <Link
                 to={`/app/cat/${cat_id}`}
                 key={cat_id}
-                className="my-8 flex w-full items-center gap-6 rounded-md bg-[#dfdddd]/10 p-4 font-semibold shadow-md"
+                className="my-8 flex w-full items-center gap-6 rounded-md bg-[#dfdddd]/10 p-4 font-semibold shadow-md md:w-[45%] lg:w-[30%]"
               >
                 <img
-                  src={cat_image_url as string}
-                  className="size-20 overflow-hidden rounded-full border-2 object-cover object-center"
+                  src={
+                    (cat_image_url || '/public/cat-placeholder.jpg') as string
+                  }
+                  className="size-28 overflow-hidden rounded-full border-2 object-cover object-center"
                   alt={name}
                 />
                 <div className="flex flex-col gap-2">

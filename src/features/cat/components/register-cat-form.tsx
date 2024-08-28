@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
 import { Form, Input, Label } from '@/components/ui/form';
+import CustomSelect from '@/components/ui/form/custom-select';
 import {
   Select,
   SelectContent,
@@ -16,6 +17,8 @@ import { isFileList } from '@/utils/isFileList';
 
 import { useRegisterCat } from '../api/register-new-cat';
 import { Cat } from '../types';
+
+import { BreedList } from './breed-list';
 
 export const formCatSchema = z.object({
   name: z.string().min(1, 'Required'),
@@ -65,10 +68,11 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
         schema={formCatSchema}
         className="max-w-md"
       >
-        {({ register, formState, watch }) => {
+        {({ register, formState, watch, setValue }) => {
           // setting preview avatar if user has selected their avatar image
           const selectedFile = watch('cat_image_url');
           const isFileSelected = selectedFile && selectedFile.length > 0;
+          const selectedBreed = watch('breed');
 
           return (
             <>
@@ -101,12 +105,19 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
                 error={formState.errors['name']}
                 registration={register('name')}
               />
-              <Input
-                type="text"
-                placeholder="Cat's breed"
-                error={formState.errors['breed']}
-                registration={register('breed')}
-              />
+              <CustomSelect registration={register('breed')}>
+                <SelectTrigger>
+                  <SelectValue placeholder={selectedBreed || 'Select breed'} />
+                </SelectTrigger>
+                <SelectContent>
+                  {/* TODO, this needs to be fixed soon */}
+                  <BreedList
+                    onSelect={(breed: string) => {
+                      setValue('breed', breed);
+                    }}
+                  />
+                </SelectContent>
+              </CustomSelect>
               <Input
                 type="string"
                 placeholder="Cat's age"

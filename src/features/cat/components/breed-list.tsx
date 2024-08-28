@@ -1,20 +1,26 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FixedSizeList as List } from 'react-window';
 
-import { SelectItem } from '@/components/ui/form/select';
+import { BREEDS } from '../types/breeds';
 
-// using this approach since the BREEDS array is quite large and I experienced some performance issues when rendering each breed all at once which was unefficient
-export const BreedList = ({ breeds }: { breeds: string[] }) => (
-  <List height={200} itemCount={breeds.length} itemSize={35} width="100%">
-    {({ index, style }) => (
-      <div style={style}>
-        <SelectItem
-          key={breeds[index]}
-          value={breeds[index]}
-          id={`breed-${index}`}
+type BreedListProps = {
+  onSelect: (breed: string) => void;
+};
+
+export const BreedList = ({ onSelect }: BreedListProps) => {
+  return (
+    <List height={200} itemCount={BREEDS.length} itemSize={35} width="100%">
+      {({ index, style }) => (
+        <div
+          style={style}
+          className="text-inherit hover:cursor-pointer"
+          onClick={() => onSelect(BREEDS[index])}
+          key={index}
         >
-          {breeds[index]}
-        </SelectItem>
-      </div>
-    )}
-  </List>
-);
+          {BREEDS[index]}
+        </div>
+      )}
+    </List>
+  );
+};

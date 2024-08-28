@@ -13,7 +13,6 @@ const CustomSelect = React.forwardRef<HTMLDivElement, CustomSelectProps>(
       <Select
         {...props}
         onValueChange={(value) => {
-          console.log(value, registration);
           if (registration?.onChange) {
             registration.onChange({
               target: { value, name: registration.name },
@@ -21,7 +20,9 @@ const CustomSelect = React.forwardRef<HTMLDivElement, CustomSelectProps>(
           }
         }}
       >
-        <div ref={ref}>{children}</div>
+        <div className="text-popover-foreground" ref={ref}>
+          {children}
+        </div>
       </Select>
     );
   },

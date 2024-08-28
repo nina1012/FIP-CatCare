@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
+import { Spinner } from '@/components/ui/common/spinner';
 import { DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input, Label } from '@/components/ui/form';
 import CustomSelect from '@/components/ui/form/custom-select';
@@ -16,7 +17,6 @@ import { isFileList } from '@/utils/isFileList';
 
 import { useUpdateCatData } from '../api/update-cat-data';
 import { Cat } from '../types';
-import { BREEDS } from '../types/breeds';
 
 import { BreedList } from './breed-list';
 import { formCatSchema } from './register-cat-form';
@@ -30,7 +30,7 @@ const updateCatSchema = formCatSchema.extend({
 });
 
 const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
-  const { updateCat } = useUpdateCatData(cat.cat_id);
+  const { updateCat, isPendingUpdateCat } = useUpdateCatData(cat.cat_id);
 
   return (
     <div>
@@ -55,9 +55,12 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
         }}
         schema={updateCatSchema}
       >
-        {({ register, formState, watch }) => {
+        {({ register, formState, watch, setValue }) => {
           const selectedFile = watch('cat_image_url');
           const isFileSelected = selectedFile && selectedFile.length > 0;
+
+          const selectedBreed = watch('breed');
+
           return (
             <>
               <DialogTitle>Edit {cat.name}</DialogTitle>
@@ -93,10 +96,15 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
               />
               <CustomSelect registration={register('breed')}>
                 <SelectTrigger>
-                  <SelectValue placeholder={cat.breed} />
+                  <SelectValue placeholder={selectedBreed || cat.breed} />
                 </SelectTrigger>
                 <SelectContent>
-                  <BreedList breeds={BREEDS} />
+                  {/* TODO, this needs to be fixed soon */}
+                  <BreedList
+                    onSelect={(breed: string) => {
+                      setValue('breed', breed);
+                    }}
+                  />
                 </SelectContent>
               </CustomSelect>
 
@@ -133,8 +141,15 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                 </SelectContent>
               </CustomSelect>
               <div>
-                <Button type="submit" className="w-full">
-                  Edit {cat.name}
+                <Button
+                  type="submit"
+                  className="flex w-full gap-2"
+                  disabled={isPendingUpdateCat}
+                >
+                  Edit {cat.name}{' '}
+                  <span className="inline-block">
+                    {isPendingUpdateCat && <Spinner size="sm" />}
+                  </span>
                 </Button>
               </div>
             </>

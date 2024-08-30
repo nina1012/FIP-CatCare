@@ -49,15 +49,19 @@ export const registerCatFn = async ({
   }
 
   const { name, breed, age, color, weight } = catDetails;
-  const { data, error } = await supabase.rpc('register_new_cat', {
-    _user_id: userID,
-    _name: name,
-    _breed: breed,
-    _age: parseInt(age + '', 10),
-    _weight: parseInt(weight + '', 10),
-    _color: color,
-    _cat_image_url: imageURL || '',
-  });
+  const { data, error } = await supabase
+    // .from('cats')
+    // .insert({ ...catDetails, weight: parseInt(catDetails.weight + '', 10) })
+    // .eq('user_id', userID);
+    .rpc('register_new_cat', {
+      _user_id: userID,
+      _name: name,
+      _breed: breed,
+      _age: parseInt(age + '', 10),
+      _weight: parseInt(weight + '', 10),
+      _color: color,
+      _cat_image_url: imageURL || '',
+    });
 
   if (error) throw new Error(error.message);
   return data;

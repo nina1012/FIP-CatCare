@@ -27,7 +27,7 @@ export const registerFn = async ({
   });
   const { data: users, error: insertionError } = await supabase
     .from('users')
-    .insert({ full_name: fullName, email });
+    .insert({ full_name: fullName, email, user_id: data?.user?.id });
   console.log(users);
 
   if (insertionError) {

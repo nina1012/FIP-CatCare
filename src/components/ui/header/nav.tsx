@@ -13,7 +13,7 @@ import { useUser } from '@/features/auth/api/get-auth-user';
 import { useLogout } from '@/features/auth/api/logout';
 import { useUserData } from '@/features/user/api/get-user-data';
 
-import { AvatarImage } from '../common/avatar';
+import { AvatarFallback, AvatarImage } from '../common/avatar';
 import { Button } from '../common/button';
 import { useToast } from '../toast/use-toast';
 export const Nav = () => {
@@ -75,6 +75,13 @@ export const Nav = () => {
                   className="size-full rounded-full object-cover object-center"
                   alt="Avatar image"
                 />
+                <AvatarFallback>
+                  <img
+                    className="size-full rounded-full object-cover object-center"
+                    src="/avatar-placeholder.png"
+                    alt="avatar"
+                  />
+                </AvatarFallback>
               </Avatar>
             </MenubarTrigger>
             <MenubarContent className="bg-white">

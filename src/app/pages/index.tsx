@@ -45,6 +45,13 @@ export const createRouter = () =>
           },
         },
         {
+          path: 'user',
+          lazy: async () => {
+            const { UserRoute } = await import('./app/user');
+            return { Component: UserRoute };
+          },
+        },
+        {
           path: 'cat/:catID', // Cat details page
           lazy: async () => {
             const { CatDetailsRoute } = await import('./app/cat/[catID]');

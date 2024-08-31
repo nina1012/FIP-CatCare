@@ -89,7 +89,7 @@ export const Nav = () => {
                 <Link to="/app/dashboard">Dashboard</Link>
               </MenubarItem>
               <MenubarItem>
-                <Link to="/app/profile">My Profile</Link>
+                <Link to="/app/user">My Profile</Link>
               </MenubarItem>
               <MenubarItem>
                 <Link to="/app/dosage-calc">Dosage calculator</Link>

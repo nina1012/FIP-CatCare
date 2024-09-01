@@ -61,8 +61,9 @@ export const useUpdateUserData = () => {
     isPending: isPendingUpdateUser,
     error: errorUpdateUser,
   } = useMutation({
-    mutationFn: (updatedData: User) =>
-      updateUserFn({ updatedData: updatedData, userID: user?.id as string }),
+    mutationFn: (
+      updatedData: Pick<User, 'avatar_url' | 'full_name' | 'email'>,
+    ) => updateUserFn({ updatedData: updatedData, userID: user?.id as string }),
 
     onSettled: () => {
       queryClient.invalidateQueries([

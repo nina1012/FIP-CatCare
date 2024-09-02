@@ -16,6 +16,7 @@ import {
 import { Dialog, DialogTrigger } from '@/components/ui/dialog/dialog';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
+import { DailyLogsTable } from '@/features/daily-logs/components/daily-logs-table';
 
 export const CatDetailsRoute = () => {
   const { catID } = useParams();
@@ -57,7 +58,7 @@ export const CatDetailsRoute = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container relative">
       {/* avatar / cat's image */}
       <div className="">
         <Avatar>
@@ -92,22 +93,21 @@ export const CatDetailsRoute = () => {
             <TabsTrigger value="tasks">tasks</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs" className="flex flex-col gap-4">
-            <p className="w-full rounded-sm border border-primary bg-primary/15 p-2 text-xs">
+            <p className="w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
               Calculate your daily log by clicking New Record, input the weight,
               then click Calculate Dose
             </p>
-            <Dialog>
-              <DialogTrigger>
-                <Button>New Record</Button>
-              </DialogTrigger>
-              <DialogContent>
-                Here goes the form for adding daily log
-              </DialogContent>
-            </Dialog>
-            <div>Table goes here</div>
+
+            <DailyLogsTable />
           </TabsContent>
         </Tabs>
       </div>
+      <Dialog>
+        <DialogTrigger>
+          <Button>New Record</Button>
+        </DialogTrigger>
+        <DialogContent>Here goes the form for adding daily log</DialogContent>
+      </Dialog>
     </div>
   );
 };

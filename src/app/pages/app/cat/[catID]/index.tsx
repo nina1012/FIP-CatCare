@@ -1,4 +1,5 @@
 import { Avatar } from '@radix-ui/react-avatar';
+import { DialogContent } from '@radix-ui/react-dialog';
 import { PawPrint } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -6,6 +7,13 @@ import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
 import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/components/ui/common/tabs';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog/dialog';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 
@@ -72,8 +80,33 @@ export const CatDetailsRoute = () => {
         <Badge>Pending Treatment</Badge>
       </div>
       {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
-      <div className="my-4 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
+      <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
+        <UpdateCatDialog cat={catData} />
+        <UpdateCatDialog cat={catData} />
+      </div>
+      <div className="my-8">
+        <Tabs defaultValue="daily-logs" className="">
+          <TabsList>
+            <TabsTrigger value="daily-logs">daily log</TabsTrigger>
+            <TabsTrigger value="tasks">tasks</TabsTrigger>
+          </TabsList>
+          <TabsContent value="daily-logs" className="flex flex-col gap-4">
+            <p className="w-full rounded-sm border border-primary bg-primary/15 p-2 text-xs">
+              Calculate your daily log by clicking New Record, input the weight,
+              then click Calculate Dose
+            </p>
+            <Dialog>
+              <DialogTrigger>
+                <Button>New Record</Button>
+              </DialogTrigger>
+              <DialogContent>
+                Here goes the form for adding daily log
+              </DialogContent>
+            </Dialog>
+            <div>Table goes here</div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

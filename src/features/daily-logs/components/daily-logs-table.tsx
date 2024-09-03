@@ -1,3 +1,11 @@
+import { Spinner } from '@/components/ui/common/spinner';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog/dialog';
 import {
   Table,
   TableBody,
@@ -8,10 +16,29 @@ import {
   TableRow,
 } from '@/components/ui/table/table';
 
-export const DailyLogsTable = () => {
-  const date = new Date();
+import { useDailyLogs } from '../api/get-daily-logs';
+
+import { DailyLogsForm } from './daily-log-form';
+
+type DailyLogTableProps = {
+  catID?: string;
+};
+
+export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
+  const { dailyLogs, isLoadingDailyLogs } = useDailyLogs(catID as string);
+  if (!dailyLogs) return;
+  if (isLoadingDailyLogs) {
+    return (
+      <div className="container">
+        <div className="flex h-96 items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <Table>
+    <Table className="overflow-x-scroll ">
       {/* each of the table rows can be clickable and by clicking a log, the dialog will open up and user can update daily log for that day */}
       <TableCaption>A list of your daily logs</TableCaption>
       <TableHeader>
@@ -21,23 +48,57 @@ export const DailyLogsTable = () => {
           <TableHead>Weight</TableHead>
           <TableHead className="text-right">Date</TableHead>
           <TableHead className="text-right">Brand</TableHead>
-          <TableHead className="text-right">Comment</TableHead>
+          <TableHead className="text-right">Note</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">0</TableCell>
-          <TableCell>0.5mg</TableCell>
-          <TableCell>2.300 kg</TableCell>
-          <TableCell className="text-right">
-            {date.toLocaleString('en-GB', { timeZone: 'UTC' })}
-          </TableCell>
-          <TableCell className="text-right">GS-20</TableCell>
-          <TableCell className="text-right">
-            Comment content goes here
-          </TableCell>
-        </TableRow>
-      </TableBody>
+      <Dialog>
+        {dailyLogs.map((log) => {
+          const {
+            log_id,
+            day,
+            log_date,
+            dose,
+            weight,
+            medication_name,
+            note,
+            cat_id,
+          } = log;
+          return (
+            <>
+              <TableBody>
+                <DialogTrigger key={log_id} className="w-full">
+                  <TableRow>
+                    <TableCell className="font-medium">{day}</TableCell>
+                    <TableCell>{dose}</TableCell>
+                    <TableCell>{weight}</TableCell>
+                    <TableCell className="text-right">{log_date}</TableCell>
+                    <TableCell className="text-right">
+                      {medication_name}
+                    </TableCell>
+                    <TableCell className="text-right">{note}</TableCell>
+                  </TableRow>
+                </DialogTrigger>
+              </TableBody>
+              <DialogContent>
+                <DailyLogsForm />
+              </DialogContent>
+              <Dialog>
+                <DialogTrigger></DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogDescription>
+                      <div>
+                        form for updating daily log should render here...
+                        {cat_id}
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            </>
+          );
+        })}
+      </Dialog>
     </Table>
   );
 };

@@ -1,6 +1,5 @@
 import { Avatar } from '@radix-ui/react-avatar';
-import { DialogContent } from '@radix-ui/react-dialog';
-import { PawPrint } from 'lucide-react';
+import { LogsIcon, PawPrint } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
@@ -13,9 +12,16 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/common/tabs';
-import { Dialog, DialogTrigger } from '@/components/ui/dialog/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog/dialog';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
+import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
 import { DailyLogsTable } from '@/features/daily-logs/components/daily-logs-table';
 
 export const CatDetailsRoute = () => {
@@ -58,7 +64,7 @@ export const CatDetailsRoute = () => {
   }
 
   return (
-    <div className="container relative">
+    <div className="container">
       {/* avatar / cat's image */}
       <div className="">
         <Avatar>
@@ -83,8 +89,14 @@ export const CatDetailsRoute = () => {
       {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
       <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
-        <UpdateCatDialog cat={catData} />
-        <UpdateCatDialog cat={catData} />
+
+        <div className="size-full rounded-md bg-[#009688]/30 p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 hover:ring-[#009688]">
+          <div className="grid !h-full gap-2">
+            <h4 className="text-left font-bold">Treatment progress info</h4>
+            <p>Today is 0 day of treatment</p>
+            <p>84 days left 💊</p>
+          </div>
+        </div>
       </div>
       <div className="my-8">
         <Tabs defaultValue="daily-logs" className="">
@@ -93,21 +105,31 @@ export const CatDetailsRoute = () => {
             <TabsTrigger value="tasks">tasks</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs" className="flex flex-col gap-4">
-            <p className="w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
+            <p className="-order-1 my-4 w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
               Calculate your daily log by clicking New Record, input the weight,
               then click Calculate Dose
             </p>
-
-            <DailyLogsTable />
+            <div className="max-w-sm">
+              <Dialog>
+                <DialogTrigger>
+                  <Button>
+                    <LogsIcon className="mr-2" />
+                    New Record
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogDescription>
+                      <DailyLogsForm />
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            </div>
+            <DailyLogsTable catID={catData?.cat_id as string} />
           </TabsContent>
         </Tabs>
       </div>
-      <Dialog>
-        <DialogTrigger>
-          <Button>New Record</Button>
-        </DialogTrigger>
-        <DialogContent>Here goes the form for adding daily log</DialogContent>
-      </Dialog>
     </div>
   );
 };

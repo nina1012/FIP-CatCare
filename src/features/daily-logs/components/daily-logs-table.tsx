@@ -18,8 +18,6 @@ import {
 
 import { useDailyLogs } from '../api/get-daily-logs';
 
-import { DailyLogsForm } from './daily-log-form';
-
 type DailyLogTableProps = {
   catID?: string;
 };
@@ -80,7 +78,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                 </DialogTrigger>
               </TableBody>
               <DialogContent>
-                <DailyLogsForm />
+                <div>Daily logs form for updating day renders here</div>
               </DialogContent>
               <Dialog>
                 <DialogTrigger></DialogTrigger>

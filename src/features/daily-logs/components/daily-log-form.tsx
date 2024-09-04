@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
@@ -10,30 +11,73 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/form/select';
+import { Textarea } from '@/components/ui/form/textarea';
+import { useToast } from '@/components/ui/toast/use-toast';
 import { useCatData } from '@/features/cat/api/get-cat-data';
+
+import { useCreateDailyLog } from '../api/create-daily-log';
+import { DailyLog } from '../types';
 
 const dailyLogsSchema = z.object({
   day: z.string().optional().default('0'),
   dose: z.string(),
   weight: z.string().optional(),
-  date: z.string().date(),
-  brand: z.enum(['GS-15', 'GS-20']),
+  log_date: z.string().date(),
+  medication_name: z.enum(['GS-15', 'GS-20']),
+  note: z.string().optional(),
 });
 
-type DailyLogsFormProps = {
-  catID?: string | null;
-};
+export const DailyLogsForm = () => {
+  const { catID } = useParams();
 
-export const DailyLogsForm = ({ catID }: DailyLogsFormProps) => {
   const { catData } = useCatData(catID as string);
+  const { toast } = useToast();
+
+  const { createDailyLog } = useCreateDailyLog({
+    onSuccess: () => {
+      toast({
+        title: 'Successful',
+        description: 'You have successfully added a new daily log 😊',
+      });
+    },
+    onError: (error: string) => {
+      toast({
+        title: 'Unsuccessful',
+        description: error,
+        variant: 'destructive',
+      });
+    },
+  });
 
   return (
     <div>
       <DialogTitle>Create daily log for {catData?.name}</DialogTitle>
-      <Form schema={dailyLogsSchema} onSubmit={(values) => console.log(values)}>
+      <Form
+        schema={dailyLogsSchema}
+        onSubmit={({
+          day,
+          log_date,
+          dose,
+          weight,
+          medication_name,
+          note,
+        }: Partial<DailyLog>) => {
+          if (!catID) return;
+          const dailyLog = {
+            day: day ?? 0,
+            log_date,
+            dose,
+            weight,
+            medication_name,
+            note,
+          };
+
+          createDailyLog({ cat_id: catID, ...dailyLog });
+        }}
+      >
         {({ register, formState, watch }) => {
-          const selectedBrand = watch('brand');
-          console.log(formState.errors);
+          const selectedBrand = watch('medication_name');
+          //   console.log(formState.isSubmitSuccessful);
           return (
             <>
               <Label>
@@ -67,15 +111,15 @@ export const DailyLogsForm = ({ catID }: DailyLogsFormProps) => {
               <Label>
                 Date
                 <Input
-                  registration={register('date')}
+                  registration={register('log_date')}
                   type="text"
                   placeholder="20/12/2024, 03:00:00"
-                  error={formState.errors['date']}
+                  error={formState.errors['log_date']}
                 />
               </Label>
               <Label>
                 Brand
-                <CustomSelect registration={register('brand')}>
+                <CustomSelect registration={register('medication_name')}>
                   <SelectTrigger className="text-inherit">
                     <SelectValue
                       placeholder={selectedBrand || 'Select brand'}
@@ -87,7 +131,14 @@ export const DailyLogsForm = ({ catID }: DailyLogsFormProps) => {
                   </SelectContent>
                 </CustomSelect>
               </Label>
-
+              <Label>
+                Note
+                <Textarea
+                  className="resize-none"
+                  placeholder="Enter today's symptoms"
+                  registration={register('note')}
+                ></Textarea>
+              </Label>
               <div>
                 <Button type="submit" className="w-full">
                   Add new log

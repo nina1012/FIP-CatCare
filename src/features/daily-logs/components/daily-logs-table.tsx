@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
 import {
@@ -78,6 +79,8 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                 </DialogTrigger>
               </TableBody>
               <DialogContent>
+                <DialogTitle>Title</DialogTitle>
+                <DialogDescription>Description</DialogDescription>
                 <div>Daily logs form for updating day renders here</div>
               </DialogContent>
               <Dialog>

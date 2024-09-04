@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/dialog/dialog';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
+import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
 import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
 import { DailyLogsTable } from '@/features/daily-logs/components/daily-logs-table';
 
@@ -29,6 +30,7 @@ export const CatDetailsRoute = () => {
   const { catData, isLoadingCatData, catDataError } = useCatData(
     catID as string,
   );
+  const { dailyLogs } = useDailyLogs(catID as string);
 
   if (isLoadingCatData) {
     return (
@@ -93,7 +95,9 @@ export const CatDetailsRoute = () => {
         <div className="size-full rounded-md bg-[#009688]/30 p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 hover:ring-[#009688]">
           <div className="grid !h-full gap-2">
             <h4 className="text-left font-bold">Treatment progress info</h4>
-            <p>Today is 0 day of treatment</p>
+            <p>
+              Today is {dailyLogs && 84 - dailyLogs?.length} day of treatment
+            </p>
             <p>84 days left 💊</p>
           </div>
         </div>

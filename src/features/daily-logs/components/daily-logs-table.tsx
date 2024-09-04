@@ -2,7 +2,6 @@ import { Spinner } from '@/components/ui/common/spinner';
 import {
   Dialog,
   DialogContent,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
 import {
@@ -68,7 +67,6 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                   <TableCell className="text-right">{note}</TableCell>
                 </DialogTrigger>
                 <DialogContent>
-                  <DialogTitle>Update daily log form {day}</DialogTitle>
                   <DailyLogsForm logID={log_id} />
                 </DialogContent>
               </Dialog>

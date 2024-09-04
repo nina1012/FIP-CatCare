@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/form/select';
 import { Textarea } from '@/components/ui/form/textarea';
 import { useToast } from '@/components/ui/toast/use-toast';
-import { useCatData } from '@/features/cat/api/get-cat-data';
 
 import { useCreateDailyLog } from '../api/create-daily-log';
 import { DailyLog } from '../types';
@@ -22,7 +21,6 @@ const dailyLogsSchema = z.object({
   day: z.string().optional().default('0'),
   dose: z.string(),
   weight: z.string().optional(),
-  log_date: z.string().date(),
   medication_name: z.enum(['GS-15', 'GS-20']),
   note: z.string().optional(),
 });
@@ -31,10 +29,9 @@ type DailyLogsFormProps = {
   logID?: string | null;
 };
 
+// this form is used for both creating and updating log, which depends on whether there is a log_id or not
 export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
   const { catID } = useParams();
-
-  const { catData } = useCatData(catID as string);
   const { toast } = useToast();
 
   const { createDailyLog } = useCreateDailyLog({
@@ -47,7 +44,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
     onError: (error: string) => {
       toast({
         title: 'Unsuccessful',
-        description: error,
+        description: error || 'You can only create one log per day.',
         variant: 'destructive',
       });
     },
@@ -55,31 +52,25 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
 
   return (
     <div>
-      <DialogTitle>
-        Create daily log for {catData?.name} {logID}
+      <DialogTitle className="mb-4">
+        {logID ? 'Update daily log' : 'Create daily log'}
       </DialogTitle>
       <Form
-        className="my-4"
         schema={dailyLogsSchema}
         onSubmit={({
-          log_date,
+          day,
           dose,
           weight,
           medication_name,
-          note,
         }: Partial<DailyLog>) => {
-          if (!catID) return;
           const dailyLog = {
-            log_date,
+            day,
             dose,
             weight,
             medication_name,
-            note,
+            log_date: new Date().toISOString(), // Auto-generate the date, this is keeping the user from inserting more logs per day
           };
 
-          //   logID
-          //     ? updateDailyLog({ cat_id, ...dailyLog })
-          //     :
           createDailyLog({ cat_id: catID, ...dailyLog });
         }}
       >
@@ -90,28 +81,25 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               <Input
                 registration={register('day')}
                 type="text"
-                placeholder="Day - 0"
+                placeholder="Day 0"
                 error={formState.errors['day']}
                 disabled
               />
+
               <Input
                 registration={register('dose')}
                 type="text"
                 placeholder="Dose of GS in mg"
                 error={formState.errors['dose']}
               />
+
               <Input
                 registration={register('weight')}
                 type="text"
                 placeholder="Weight in kg"
                 error={formState.errors['weight']}
               />
-              <Input
-                registration={register('log_date')}
-                type="text"
-                placeholder="20/12/2024, 03:00:00"
-                error={formState.errors['log_date']}
-              />
+
               <CustomSelect registration={register('medication_name')}>
                 <SelectTrigger className="text-inherit">
                   <SelectValue placeholder={selectedBrand || 'Select brand'} />
@@ -121,6 +109,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
                   <SelectItem value="GS-20">GS-20</SelectItem>
                 </SelectContent>
               </CustomSelect>
+
               <Textarea
                 className="resize-none"
                 placeholder="Enter today's symptoms"

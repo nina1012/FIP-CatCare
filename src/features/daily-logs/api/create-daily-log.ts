@@ -19,27 +19,30 @@ export const createDailyLogFn = async ({
   catID,
   newDailyLog,
 }: createDailyLogProps): Promise<DailyLog | null> => {
-  if (!newDailyLog) return null;
-
-  const { data: lastLog, error: fetchError } = await supabase
+  // Check if a log already exists for the current day
+  const { data: existingLog, error: fetchError } = await supabase
     .from('daily_logs')
-    .select('day')
+    .select('*')
     .eq('cat_id', catID)
-    .order('day', { ascending: false })
-    .limit(1)
-    .single();
+    // checking the table for the today's date
+    .gte('log_date', new Date().toISOString().split('T')[0] + ' 00:00:00')
+    .lte('log_date', new Date().toISOString().split('T')[0] + ' 23:59:59');
 
-  const nextDay = lastLog ? (lastLog.day as number) + 1 : 0;
-
-  const { data, error } = await supabase
-    .from('daily_logs')
-    .insert([{ ...newDailyLog, cat_id: catID, day: nextDay }]);
-
-  if (error || fetchError) {
-    throw new Error(error?.message);
+  if (fetchError) {
+    throw new Error(fetchError.message);
   }
 
-  return data ? data[0] : null;
+  if (existingLog && existingLog.length > 0) {
+    throw new Error('A daily log for today already exists.');
+  }
+
+  // Proceed with the insertion if no log exists for today
+  const { data, error } = await supabase
+    .from('daily_logs')
+    .insert({ ...newDailyLog, cat_id: catID });
+
+  if (error) throw new Error(error.message);
+  return data;
 };
 
 export const useCreateDailyLog = ({
@@ -53,13 +56,12 @@ export const useCreateDailyLog = ({
   } = useMutation({
     mutationFn: (newDailyLog: Partial<DailyLog>) =>
       createDailyLogFn({ catID: newDailyLog.cat_id as string, newDailyLog }),
-    onSuccess: (data) => {
-      console.log('Mutation Success:', data); // Add this for debugging
+    onSuccess: () => {
       queryClient.invalidateQueries(['cat'] as InvalidateQueryFilters);
       onSuccess?.();
     },
     onError: (error) => {
-      console.error('Mutation Error:', error); // Add this for debugging
+      console.error('Create Daily Log Error:', error);
       onError?.(error);
     },
   });

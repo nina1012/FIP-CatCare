@@ -56,7 +56,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
           return (
             <TableRow key={log_id} className="">
               <Dialog>
-                <DialogTrigger>
+                <DialogTrigger className="!w-full min-w-full">
                   <TableCell className="font-medium">{day}</TableCell>
                   <TableCell>{dose}</TableCell>
                   <TableCell>{weight}</TableCell>

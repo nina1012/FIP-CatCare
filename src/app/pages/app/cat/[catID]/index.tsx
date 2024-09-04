@@ -109,10 +109,16 @@ export const CatDetailsRoute = () => {
             <TabsTrigger value="tasks">tasks</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs" className="flex flex-col gap-4">
-            <p className="-order-1 my-4 w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-              Calculate your daily log by clicking New Record, input the weight,
-              then click Calculate Dose
-            </p>
+            <div className="my-4 flex flex-col gap-2">
+              <p className="-order-1 w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
+                Calculate your daily log by clicking New Record, input the
+                weight, then click Calculate Dose
+              </p>
+              <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
+                If you want to update daily log, click on daily log&apos;s table
+                row below
+              </p>
+            </div>
             <div className="max-w-sm">
               <Dialog>
                 <DialogTrigger>

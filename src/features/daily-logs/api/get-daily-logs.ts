@@ -21,7 +21,7 @@ export const useDailyLogs = (catID: string) => {
     isLoading: isLoadingDailyLogs,
     error: dailyLogsError,
   } = useQuery({
-    queryKey: ['tweets'],
+    queryKey: ['daily-logs', catID],
     queryFn: () => getDailyLogs(catID),
   });
 

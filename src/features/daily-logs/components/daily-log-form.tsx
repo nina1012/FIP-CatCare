@@ -1,3 +1,4 @@
+import { FileWarning } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 
@@ -15,6 +16,7 @@ import { Textarea } from '@/components/ui/form/textarea';
 import { useToast } from '@/components/ui/toast/use-toast';
 
 import { useCreateDailyLog } from '../api/create-daily-log';
+import { useUpdateDailyLog } from '../api/update-daily-log';
 import { DailyLog } from '../types';
 
 const dailyLogsSchema = z.object({
@@ -29,11 +31,11 @@ type DailyLogsFormProps = {
   logID?: string | null;
 };
 
-// this form is used for both creating and updating log, which depends on whether there is a log_id or not
 export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
   const { catID } = useParams();
   const { toast } = useToast();
 
+  const { updateDailyLog } = useUpdateDailyLog(logID as string);
   const { createDailyLog } = useCreateDailyLog({
     onSuccess: () => {
       toast({
@@ -50,28 +52,35 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
     },
   });
 
+  const handleSubmit = (dailyLog: Partial<DailyLog>) => {
+    if (logID) {
+      updateDailyLog({ log_id: logID, ...dailyLog, cat_id: catID });
+    } else {
+      createDailyLog({ cat_id: catID, ...dailyLog });
+    }
+  };
+
   return (
     <div>
       <DialogTitle className="mb-4">
         {logID ? 'Update daily log' : 'Create daily log'}
       </DialogTitle>
+      {!logID && (
+        <div className="my-4 flex w-full flex-col gap-2 rounded-sm border border-[#dfb028] bg-[#dfb028]/40 p-2 py-4 text-xs">
+          <FileWarning className="mx-auto" />
+          <p>
+            You can only post a daily log once a day, if you try to add more
+            logs, the app will crash and you&apos;ll need to refresh the page!
+          </p>
+        </div>
+      )}
       <Form
         schema={dailyLogsSchema}
-        onSubmit={({
-          day,
-          dose,
-          weight,
-          medication_name,
-        }: Partial<DailyLog>) => {
-          const dailyLog = {
-            day,
-            dose,
-            weight,
-            medication_name,
-            log_date: new Date().toISOString(), // Auto-generate the date, this is keeping the user from inserting more logs per day
-          };
-
-          createDailyLog({ cat_id: catID, ...dailyLog });
+        onSubmit={(values: Partial<DailyLog>) => {
+          handleSubmit({
+            log_date: new Date().toISOString(), // Auto-generate the date to ensure only one log per day
+            ...values,
+          });
         }}
       >
         {({ register, formState, watch }) => {
@@ -117,7 +126,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               ></Textarea>
               <div>
                 <Button type="submit" className="w-full">
-                  Add new log
+                  {logID ? 'Update Log' : 'Add new log'}
                 </Button>
               </div>
             </>

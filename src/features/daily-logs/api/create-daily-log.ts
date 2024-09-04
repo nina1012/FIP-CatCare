@@ -21,16 +21,24 @@ export const createDailyLogFn = async ({
 }: createDailyLogProps): Promise<DailyLog | null> => {
   if (!newDailyLog) return null;
 
+  const { data: lastLog, error: fetchError } = await supabase
+    .from('daily_logs')
+    .select('day')
+    .eq('cat_id', catID)
+    .order('day', { ascending: false })
+    .limit(1)
+    .single();
+
+  const nextDay = lastLog ? (lastLog.day as number) + 1 : 0;
+
   const { data, error } = await supabase
     .from('daily_logs')
-    .insert([{ cat_id: catID, ...newDailyLog }]);
+    .insert([{ ...newDailyLog, cat_id: catID, day: nextDay }]);
 
-  if (error) {
-    console.error('Supabase Error:', error);
-    throw new Error(error.message);
+  if (error || fetchError) {
+    throw new Error(error?.message);
   }
 
-  console.log('Supabase Data:', data);
   return data ? data[0] : null;
 };
 

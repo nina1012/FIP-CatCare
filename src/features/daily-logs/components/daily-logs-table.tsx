@@ -2,8 +2,6 @@ import { Spinner } from '@/components/ui/common/spinner';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
@@ -18,6 +16,8 @@ import {
 } from '@/components/ui/table/table';
 
 import { useDailyLogs } from '../api/get-daily-logs';
+
+import { DailyLogsForm } from './daily-log-form';
 
 type DailyLogTableProps = {
   catID?: string;
@@ -43,63 +43,39 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Day</TableHead>
-          <TableHead>Dose</TableHead>
-          <TableHead>Weight</TableHead>
+          <TableHead>Dose (mg)</TableHead>
+          <TableHead>Weight (kg)</TableHead>
           <TableHead className="text-right">Date</TableHead>
           <TableHead className="text-right">Brand</TableHead>
           <TableHead className="text-right">Note</TableHead>
         </TableRow>
       </TableHeader>
-      <Dialog>
+      <TableBody>
         {dailyLogs.map((log) => {
-          const {
-            log_id,
-            day,
-            log_date,
-            dose,
-            weight,
-            medication_name,
-            note,
-            cat_id,
-          } = log;
+          const { log_id, day, log_date, dose, weight, medication_name, note } =
+            log;
           return (
-            <>
-              <TableBody>
-                <DialogTrigger key={log_id} className="w-full">
-                  <TableRow>
-                    <TableCell className="font-medium">{day}</TableCell>
-                    <TableCell>{dose}</TableCell>
-                    <TableCell>{weight}</TableCell>
-                    <TableCell className="text-right">{log_date}</TableCell>
-                    <TableCell className="text-right">
-                      {medication_name}
-                    </TableCell>
-                    <TableCell className="text-right">{note}</TableCell>
-                  </TableRow>
-                </DialogTrigger>
-              </TableBody>
-              <DialogContent>
-                <DialogTitle>Title</DialogTitle>
-                <DialogDescription>Description</DialogDescription>
-                <div>Daily logs form for updating day renders here</div>
-              </DialogContent>
+            <TableRow key={log_id} className="">
               <Dialog>
-                <DialogTrigger></DialogTrigger>
+                <DialogTrigger>
+                  <TableCell className="font-medium">{day}</TableCell>
+                  <TableCell>{dose}</TableCell>
+                  <TableCell>{weight}</TableCell>
+                  <TableCell className="text-right">{log_date}</TableCell>
+                  <TableCell className="text-right">
+                    {medication_name}
+                  </TableCell>
+                  <TableCell className="text-right">{note}</TableCell>
+                </DialogTrigger>
                 <DialogContent>
-                  <DialogHeader>
-                    <DialogDescription>
-                      <div>
-                        form for updating daily log should render here...
-                        {cat_id}
-                      </div>
-                    </DialogDescription>
-                  </DialogHeader>
+                  <DialogTitle>Update daily log form {day}</DialogTitle>
+                  <DailyLogsForm logID={log_id} />
                 </DialogContent>
               </Dialog>
-            </>
+            </TableRow>
           );
         })}
-      </Dialog>
+      </TableBody>
     </Table>
   );
 };

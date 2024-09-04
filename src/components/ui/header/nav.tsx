@@ -47,7 +47,7 @@ export const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/app/profile" className="nav-link">
+          <Link to="/app/user" className="nav-link">
             My Profile
           </Link>
         </li>

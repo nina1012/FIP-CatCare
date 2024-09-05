@@ -117,13 +117,8 @@ export const CatDetailsRoute = () => {
           </TabsList>
           <TabsContent value="daily-logs" className="flex flex-col gap-4">
             <div className="my-4 flex flex-col gap-2">
-              <p className="-order-1 w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-                Calculate your daily log by clicking New Record, fill all the
-                inputs and click Add new daily log
-              </p>
               <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-                If you want to update daily log, click on daily log&apos;s table
-                row below
+                Click each row to update daily log
               </p>
             </div>
             <div className="max-w-sm">

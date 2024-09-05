@@ -13,10 +13,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table/table';
+import { formatDate } from '@/utils/format-dates';
 
 import { useDailyLogs } from '../api/get-daily-logs';
 
 import { DailyLogsForm } from './daily-log-form';
+import { DeleteLogButton } from './delete-log-button';
 
 type DailyLogTableProps = {
   catID?: string;
@@ -24,6 +26,7 @@ type DailyLogTableProps = {
 
 export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
   const { dailyLogs, isLoadingDailyLogs } = useDailyLogs(catID as string);
+
   if (!dailyLogs) return;
   if (isLoadingDailyLogs) {
     return (
@@ -36,7 +39,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
   }
 
   return (
-    <Table className="overflow-x-scroll ">
+    <Table className="overflow-x-scroll">
       {/* each of the table rows can be clickable and by clicking a log, the dialog will open up and user can update daily log for that day */}
       <TableCaption>A list of your daily logs</TableCaption>
       <TableHeader>
@@ -60,7 +63,9 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                   <TableCell className="font-medium">{day}</TableCell>
                   <TableCell>{dose}</TableCell>
                   <TableCell>{weight}</TableCell>
-                  <TableCell className="text-right">{log_date}</TableCell>
+                  <TableCell className="text-right">
+                    {formatDate(new Date(log_date))}
+                  </TableCell>
                   <TableCell className="text-right">
                     {medication_name}
                   </TableCell>
@@ -70,6 +75,9 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                   <DailyLogsForm logID={log_id} />
                 </DialogContent>
               </Dialog>
+              <TableCell>
+                <DeleteLogButton logID={log_id} />
+              </TableCell>
             </TableRow>
           );
         })}

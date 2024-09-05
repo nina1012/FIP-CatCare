@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
-import { DialogTitle } from '@/components/ui/dialog/dialog';
+import { DialogDescription, DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input } from '@/components/ui/form';
 import CustomSelect from '@/components/ui/form/custom-select';
 import {
@@ -65,6 +65,9 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
       <DialogTitle className="mb-4">
         {logID ? 'Update daily log' : 'Create daily log'}
       </DialogTitle>
+      <DialogDescription className="text-primary">
+        Please fill all the inputs
+      </DialogDescription>
       {!logID && (
         <div className="my-4 flex w-full flex-col gap-2 rounded-sm border border-[#dfb028] bg-[#dfb028]/40 p-2 py-4 text-xs">
           <FileWarning className="mx-auto" />

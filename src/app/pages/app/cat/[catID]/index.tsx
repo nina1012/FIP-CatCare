@@ -95,10 +95,18 @@ export const CatDetailsRoute = () => {
         <div className="size-full rounded-md bg-[#009688]/30 p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 hover:ring-[#009688]">
           <div className="grid !h-full gap-2">
             <h4 className="text-left font-bold">Treatment progress info</h4>
-            <p>
-              Today is {dailyLogs && 84 - dailyLogs?.length} day of treatment
-            </p>
-            <p>84 days left 💊</p>
+            {dailyLogs?.length ? (
+              <>
+                <p>
+                  Today is day{' '}
+                  <span className="font-semibold">{dailyLogs?.length}</span> of
+                  treatment
+                </p>
+                <p>{dailyLogs && 84 - dailyLogs?.length} days left 💊</p>
+              </>
+            ) : (
+              <p>{catData?.name} has&apos;nt started its treatment yet</p>
+            )}
           </div>
         </div>
       </div>

@@ -1,23 +1,17 @@
 import { Avatar } from '@radix-ui/react-avatar';
-import { LogsIcon, PawPrint } from 'lucide-react';
+import { CheckCircle, LogsIcon, PawPrint } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
+import { CustomTabContent } from '@/components/ui/tabs/custom-tab-content';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@/components/ui/common/tabs';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTrigger,
-} from '@/components/ui/dialog/dialog';
+} from '@/components/ui/tabs/tabs';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
@@ -115,30 +109,23 @@ export const CatDetailsRoute = () => {
             <TabsTrigger value="daily-logs">daily log</TabsTrigger>
             <TabsTrigger value="tasks">tasks</TabsTrigger>
           </TabsList>
-          <TabsContent value="daily-logs" className="flex flex-col gap-4">
-            <div className="my-4 flex flex-col gap-2">
-              <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-                Click each row to update daily log
-              </p>
-            </div>
-            <div className="max-w-sm">
-              <Dialog>
-                <DialogTrigger>
-                  <Button>
-                    <LogsIcon className="mr-2" />
-                    New daily log
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogDescription>
-                      <DailyLogsForm />
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-            </div>
-            <DailyLogsTable catID={catData?.cat_id as string} />
+          <TabsContent value="daily-logs">
+            <CustomTabContent
+              label="daily log"
+              formComponent={<DailyLogsForm />}
+              icon={<LogsIcon />}
+              tableComponent={
+                <DailyLogsTable catID={catData?.cat_id as string} />
+              }
+            />
+          </TabsContent>
+          <TabsContent value="tasks">
+            <CustomTabContent
+              label="tasks"
+              icon={<CheckCircle />}
+              formComponent={<div>tasks form</div>}
+              tableComponent={<div>tasks table</div>}
+            />
           </TabsContent>
         </Tabs>
       </div>

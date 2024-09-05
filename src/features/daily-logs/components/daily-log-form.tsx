@@ -129,7 +129,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               ></Textarea>
               <div>
                 <Button type="submit" className="w-full">
-                  {logID ? 'Update Log' : 'Add new log'}
+                  {logID ? 'Update daily log' : 'Add new daily log'}
                 </Button>
               </div>
             </>

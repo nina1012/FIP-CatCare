@@ -3,7 +3,6 @@ import { LogsIcon, PawPrint } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
-import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
 import {
@@ -20,6 +19,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
 import { useCatData } from '@/features/cat/api/get-cat-data';
+import { Badges } from '@/features/cat/components/badges';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
 import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
@@ -31,6 +31,10 @@ export const CatDetailsRoute = () => {
     catID as string,
   );
   const { dailyLogs } = useDailyLogs(catID as string);
+
+  if (!dailyLogs) return null;
+
+  const isPendingTreatment = dailyLogs?.length > 0;
 
   if (isLoadingCatData) {
     return (
@@ -80,14 +84,8 @@ export const CatDetailsRoute = () => {
         </Avatar>
         <h4 className="text-center text-2xl font-bold">{catData?.name}</h4>
       </div>
-
-      {/* Badges, for now there are hardcoded badges */}
-      {/* badges will depend on cat's current status */}
-      <div className="pointer-events-none my-4 flex justify-center gap-4 *:text-[10px]">
-        <Badge>TRIAL</Badge>
-        <Badge>Compliant</Badge>
-        <Badge>Pending Treatment</Badge>
-      </div>
+      {/* BADGES */}
+      <Badges isPendingTreatment={isPendingTreatment} />
       {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
       <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
@@ -110,6 +108,7 @@ export const CatDetailsRoute = () => {
           </div>
         </div>
       </div>
+      {/* TABS */}
       <div className="my-8">
         <Tabs defaultValue="daily-logs" className="">
           <TabsList>
@@ -119,8 +118,8 @@ export const CatDetailsRoute = () => {
           <TabsContent value="daily-logs" className="flex flex-col gap-4">
             <div className="my-4 flex flex-col gap-2">
               <p className="-order-1 w-full rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-                Calculate your daily log by clicking New Record, input the
-                weight, then click Calculate Dose
+                Calculate your daily log by clicking New Record, fill all the
+                inputs and click Add new daily log
               </p>
               <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
                 If you want to update daily log, click on daily log&apos;s table
@@ -132,7 +131,7 @@ export const CatDetailsRoute = () => {
                 <DialogTrigger>
                   <Button>
                     <LogsIcon className="mr-2" />
-                    New Record
+                    New daily log
                   </Button>
                 </DialogTrigger>
                 <DialogContent>

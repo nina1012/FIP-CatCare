@@ -1,6 +1,6 @@
 import { DialogTitle } from '@radix-ui/react-dialog';
 
-import Card from '@/components/ui/common/card';
+import { Card } from '@/components/ui/common/card';
 import {
   Dialog,
   DialogContent,
@@ -44,23 +44,14 @@ export const TreatmentProgressCard = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="font-semibold">
-            Treatment progress
-          </DialogTitle>
-          <DialogDescription className="">
-            <div className="flex flex-col gap-4">
-              <p>
-                Today is day{' '}
-                <span className="font-semibold">{dailyLogs?.length}</span> of
-                treatment
-              </p>
-              <p>{84 - dailyLogs?.length} days left 💊</p>
-              <div>
-                <TreatmentProgressBar
-                  progress={(dailyLogs?.length / 84) * 100}
-                />
-              </div>
-            </div>
+          <DialogDescription>
+            <DialogTitle className="text-base font-semibold">
+              Treatment progress
+            </DialogTitle>
+            <TreatmentProgressBar progress={(dailyLogs.length / 84) * 100} />
+            <p className="text-primary">
+              {((dailyLogs.length / 84) * 100).toFixed(1)}%
+            </p>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

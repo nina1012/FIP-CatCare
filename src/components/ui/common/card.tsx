@@ -1,3 +1,5 @@
+import React, { forwardRef } from 'react';
+
 type CardProps = {
   title: string;
   children: React.ReactNode;
@@ -5,29 +7,24 @@ type CardProps = {
   onClick?: () => void;
 };
 
-const Card = ({ title, children, className = '', onClick }: CardProps) => {
-  const clickableClass = onClick ? 'cursor-pointer' : '';
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+  ({ title, children, className = '', onClick }, ref) => {
+    const clickableClass = onClick ? 'cursor-pointer' : '';
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      onClick();
-    }
-  };
-
-  return (
-    <div
-      role={onClick ? 'button' : undefined}
-      onKeyDown={onClick ? handleKeyDown : undefined}
-      onClick={onClick}
-      className={`size-full rounded-md p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 ${clickableClass} ${className}`}
-    >
-      <div className="grid h-full gap-2">
-        <h4 className="text-left font-bold">{title}</h4>
-        {children}
+    return (
+      <div
+        ref={ref}
+        className={`size-full rounded-md p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 ${clickableClass} ${className}`}
+        onClick={onClick}
+        aria-hidden="true"
+      >
+        <div className="grid h-full gap-2">
+          <h4 className="text-left font-bold">{title}</h4>
+          {children}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
-export default Card;
+Card.displayName = 'Card';

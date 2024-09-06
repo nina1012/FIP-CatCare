@@ -1,6 +1,6 @@
 import { CatIcon, Clock, Shield, User, Weight } from 'lucide-react';
 
-import Card from '@/components/ui/common/card';
+import { Card } from '@/components/ui/common/card';
 import {
   Dialog,
   DialogContent,

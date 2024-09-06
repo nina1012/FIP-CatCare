@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/tabs/tabs';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
+import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
 import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
@@ -80,29 +81,12 @@ export const CatDetailsRoute = () => {
       </div>
       {/* BADGES */}
       <Badges isPendingTreatment={isPendingTreatment} />
-      {/* here will go cards that will be clickable and by clicking the card, it should open up the dialog for editing the information */}
+      {/* CLICKABLE CARDS */}
       <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
-
-        <div className="size-full rounded-md bg-[#009688]/30 p-4 shadow-md transition-all hover:shadow-sm hover:ring-1 hover:ring-[#009688]">
-          <div className="grid !h-full gap-2">
-            <h4 className="text-left font-bold">Treatment progress info</h4>
-            {dailyLogs?.length ? (
-              <>
-                <p>
-                  Today is day{' '}
-                  <span className="font-semibold">{dailyLogs?.length}</span> of
-                  treatment
-                </p>
-                <p>{dailyLogs && 84 - dailyLogs?.length} days left 💊</p>
-              </>
-            ) : (
-              <p>{catData?.name} has&apos;nt started its treatment yet</p>
-            )}
-          </div>
-        </div>
+        <TreatmentProgressCard dailyLogs={dailyLogs} catData={catData} />
       </div>
-      {/* TABS */}
+      {/* TABS AND TABLES*/}
       <div className="my-8">
         <Tabs defaultValue="daily-logs" className="">
           <TabsList>

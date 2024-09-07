@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
 
@@ -48,10 +49,11 @@ export const UpdateCatDialog = ({ cat }: UpdateCatDialogProps) => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogDescription>
-            <UpdateCatForm cat={cat} />
-          </DialogDescription>
+          <DialogTitle>Edit {cat.name}</DialogTitle>
         </DialogHeader>
+        <DialogDescription>
+          <UpdateCatForm cat={cat} />
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   );

@@ -33,3 +33,7 @@ This app helps users manage their cats' schedules, add notes and set reminders a
 - [] As a user, I want to add daily logs for each cat including medication dosage and notes
 - [] As a user, I want to upload and view bloodwork and test results for each cat
 - [] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
+
+## Tables and data relationships 🖇️
+
+![Supabase schema visualizer](./public/screenshots/FIP-CatCare-DB.png) (from supabase schema visualizer)

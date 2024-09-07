@@ -44,7 +44,7 @@ export const Reminder = () => {
           className="hover:cursor-pointer"
         />
       </div>
-      <Button onClick={saveReminderTime}>Save reminder time</Button>
+      <Button onClick={saveReminderTime}>Set the reminder</Button>
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
-import { DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input, Label } from '@/components/ui/form';
 import CustomSelect from '@/components/ui/form/custom-select';
 import {
@@ -63,7 +62,6 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
 
           return (
             <>
-              <DialogTitle>Edit {cat.name}</DialogTitle>
               <Label
                 htmlFor="cat_image_url"
                 className="group relative mx-auto my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%]  border-2"
@@ -108,7 +106,6 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                   />
                 </SelectContent>
               </CustomSelect>
-
               <Input
                 type="string"
                 placeholder="Cat's age"
@@ -141,18 +138,16 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                   <SelectItem value="spayed female">Spayed Female</SelectItem>
                 </SelectContent>
               </CustomSelect>
-              <div>
-                <Button
-                  type="submit"
-                  className="flex w-full gap-2"
-                  disabled={isPendingUpdateCat}
-                >
-                  Edit {cat.name}{' '}
-                  <span className="inline-block">
-                    {isPendingUpdateCat && <Spinner size="sm" />}
-                  </span>
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                className="flex w-full gap-2"
+                disabled={isPendingUpdateCat}
+              >
+                Edit {cat.name}{' '}
+                <span className="inline-block">
+                  {isPendingUpdateCat && <Spinner size="sm" />}
+                </span>
+              </Button>
             </>
           );
         }}

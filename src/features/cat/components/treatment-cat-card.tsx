@@ -44,16 +44,16 @@ export const TreatmentProgressCard = ({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogDescription>
-            <DialogTitle className="text-base font-semibold">
-              Treatment progress
-            </DialogTitle>
-            <TreatmentProgressBar progress={(dailyLogs.length / 84) * 100} />
-            <p className="text-primary">
-              {((dailyLogs.length / 84) * 100).toFixed(1)}%
-            </p>
-          </DialogDescription>
+          <DialogTitle className="text-base font-semibold">
+            Treatment progress
+          </DialogTitle>
         </DialogHeader>
+        <DialogDescription>
+          <TreatmentProgressBar progress={(dailyLogs.length / 84) * 100} />
+          <div className="text-primary">
+            {((dailyLogs.length / 84) * 100).toFixed(1)}%
+          </div>
+        </DialogDescription>
       </DialogContent>
     </Dialog>
   );

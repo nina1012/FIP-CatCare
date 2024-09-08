@@ -31,7 +31,6 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
     <div>
       <Form
         onSubmit={(values) => {
-          console.log(values, 'register gets called');
           registering(values);
         }}
         schema={registerInputSchema}

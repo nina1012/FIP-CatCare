@@ -36,7 +36,6 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
       <Form
         data-testid="form"
         onSubmit={(values) => {
-          console.log('Form submitted with values:', values);
           login(values);
         }}
         schema={loginInputSchema}

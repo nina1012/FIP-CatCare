@@ -1,3 +1,4 @@
+import { Bell, BellOff } from 'lucide-react';
 import { SetStateAction, useState } from 'react';
 
 import { Button } from '@/components/ui/common/button';
@@ -15,6 +16,10 @@ export const Reminder = () => {
     target: { value: SetStateAction<string> };
   }) => {
     setReminderTime(event.target.value);
+  };
+
+  const unsetReminder = () => {
+    localStorage.removeItem('reminderTime');
   };
 
   const saveReminderTime = () => {
@@ -44,7 +49,16 @@ export const Reminder = () => {
           className="hover:cursor-pointer"
         />
       </div>
-      <Button onClick={saveReminderTime}>Set the reminder</Button>
+      <div className="flex gap-2">
+        <Button onClick={saveReminderTime}>
+          turn on reminder
+          <Bell className="ml-2" />
+        </Button>
+        <Button onClick={unsetReminder}>
+          turn off reminder
+          <BellOff className="ml-2" />
+        </Button>
+      </div>
     </div>
   );
 };

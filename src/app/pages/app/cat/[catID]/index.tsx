@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/tabs/tabs';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
+import { ChartCard } from '@/features/cat/components/chart-card';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
@@ -85,6 +86,7 @@ export const CatDetailsRoute = () => {
       <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
         <UpdateCatDialog cat={catData} />
         <TreatmentProgressCard dailyLogs={dailyLogs} catData={catData} />
+        <ChartCard dailyLogs={dailyLogs} catData={catData} />
       </div>
       {/* TABS AND TABLES*/}
       <div className="my-8">

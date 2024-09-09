@@ -14,12 +14,12 @@ import {
 } from '@/components/ui/tabs/tabs';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
-import { ChartCard } from '@/features/cat/components/chart-card';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
 import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
 import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
 import { DailyLogsTable } from '@/features/daily-logs/components/daily-logs-table';
+import { ChartCard } from '@/features/visualization/components/chart-card';
 
 export const CatDetailsRoute = () => {
   const { catID } = useParams();

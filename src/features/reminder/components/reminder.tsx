@@ -20,20 +20,23 @@ export const Reminder = () => {
 
   const unsetReminder = () => {
     localStorage.removeItem('reminderTime');
+    setReminderTime('');
   };
 
   const saveReminderTime = () => {
     // Save the reminder time to local storage and add the toast
-    localStorage.setItem('reminderTime', reminderTime);
-    notifyReminderSet(reminderTime);
-    // if permission is granted, check for the reminder to be shown
-    Notification.requestPermission().then((permission) => {
-      if (permission === 'granted') {
-        checkReminder();
-      } else {
-        console.error('Notification permission denied');
-      }
-    });
+    if (reminderTime) {
+      localStorage.setItem('reminderTime', reminderTime);
+      notifyReminderSet(reminderTime);
+      // if permission is granted, check for the reminder to be shown
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          checkReminder();
+        } else {
+          console.error('Notification permission denied');
+        }
+      });
+    }
   };
   return (
     <div className="my-4 flex flex-col items-center gap-4">
@@ -54,7 +57,7 @@ export const Reminder = () => {
           turn on reminder
           <Bell className="ml-2" />
         </Button>
-        <Button onClick={unsetReminder}>
+        <Button variant="destructive" onClick={unsetReminder}>
           turn off reminder
           <BellOff className="ml-2" />
         </Button>

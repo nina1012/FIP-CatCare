@@ -56,6 +56,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                     registration={register('avatar')}
                     className="hidden"
                     id="avatar"
+                    data-testid="avatar"
                   />
                   <div className="">
                     <img
@@ -74,6 +75,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                   placeholder="Full Name"
                   error={formState.errors['fullName']}
                   registration={register('fullName')}
+                  data-testid="fullName"
                 />
               </div>
               <Input
@@ -82,6 +84,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 error={formState.errors['email']}
                 registration={register('email')}
                 autoComplete="email"
+                data-testid="email"
               />
               <Input
                 type="password"
@@ -89,6 +92,7 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
                 error={formState.errors['password']}
                 registration={register('password')}
                 autoComplete="password"
+                data-testid="password"
               />
               <Input
                 type="password"

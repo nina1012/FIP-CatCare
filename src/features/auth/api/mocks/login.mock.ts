@@ -20,6 +20,7 @@ export const mockLoginFn = async ({
       } as any,
     };
   }
+  console.log('mockLoginFn gets called in development');
   throw new Error('Invalid credentials');
 };
 

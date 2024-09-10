@@ -51,12 +51,14 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
                 placeholder="Email Address"
                 error={formState.errors['email']}
                 registration={register('email')}
+                data-testid="email"
               />
               <Input
                 type="password"
                 placeholder="Password"
                 error={formState.errors['password']}
                 registration={register('password')}
+                data-testid="password"
               />
               <div>
                 <Button type="submit" className="w-full">

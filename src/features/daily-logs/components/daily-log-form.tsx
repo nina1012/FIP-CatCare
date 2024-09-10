@@ -110,6 +110,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
                 type="text"
                 placeholder="Weight in kg"
                 error={formState.errors['weight']}
+                pattern="[0-9]+"
               />
 
               <CustomSelect registration={register('medication_name')}>
@@ -119,6 +120,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
                 <SelectContent>
                   <SelectItem value="GS-15">GS-15</SelectItem>
                   <SelectItem value="GS-20">GS-20</SelectItem>
+                  <SelectItem value="GS-30">GS-30</SelectItem>
                 </SelectContent>
               </CustomSelect>
 

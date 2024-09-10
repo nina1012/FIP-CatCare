@@ -122,6 +122,7 @@ export const RegisterCatForm = () => {
                 placeholder="Cat's age"
                 error={formState.errors['age']}
                 registration={register('age')}
+                pattern="[0-9]+"
               />
               <Input
                 type="text"
@@ -134,6 +135,7 @@ export const RegisterCatForm = () => {
                 placeholder="Cat's weight (in kg)"
                 error={formState.errors['weight']}
                 registration={register('weight')}
+                pattern="[0-9]+"
               />
               <Select>
                 <SelectTrigger>

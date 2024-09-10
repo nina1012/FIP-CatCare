@@ -52,6 +52,13 @@ export const createRouter = () =>
           },
         },
         {
+          path: 'dosage-calc',
+          lazy: async () => {
+            const { DosageCalcRoute } = await import('./app/dosage-calc');
+            return { Component: DosageCalcRoute };
+          },
+        },
+        {
           path: 'cat/:catID', // Cat details page
           lazy: async () => {
             const { CatDetailsRoute } = await import('./app/cat/[catID]');

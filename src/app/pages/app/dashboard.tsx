@@ -1,11 +1,13 @@
-import { PawPrintIcon } from 'lucide-react';
+import { PawPrint } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
+import { CustomTabContent } from '@/components/ui/tabs/custom-tab-content';
 import { useUser } from '@/features/auth/api/get-auth-user';
 import { useCats } from '@/features/cat/api/get-cats';
+import { RegisterCatForm } from '@/features/cat/components/register-cat-form';
 
 export const DashboardRoute = () => {
   const { user, isLoadingUser } = useUser();
@@ -52,11 +54,11 @@ export const DashboardRoute = () => {
             );
           })}
         </div>
-        <Link to="../cat/new" className="flex gap-2">
-          <Button>
-            <PawPrintIcon className="mr-2" /> New Cat Registration
-          </Button>
-        </Link>
+        <CustomTabContent
+          label="new registration"
+          formComponent={<RegisterCatForm />}
+          icon={<PawPrint />}
+        ></CustomTabContent>
       </div>
     </div>
   );

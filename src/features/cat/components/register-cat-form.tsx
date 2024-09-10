@@ -1,7 +1,8 @@
-import { Info, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
+import { DialogDescription, DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input, Label } from '@/components/ui/form';
 import CustomSelect from '@/components/ui/form/custom-select';
 import {
@@ -29,11 +30,7 @@ export const formCatSchema = z.object({
   weight: z.string().min(1, 'Required'),
 });
 
-type RegisterCatFormProps = {
-  onSuccess: () => void;
-};
-
-export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
+export const RegisterCatForm = () => {
   const { user } = useUser();
   const { toast } = useToast();
 
@@ -43,7 +40,6 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
         title: "Successful cat's registration",
         description: 'You have successfully added new cat 🐈',
       });
-      onSuccess();
     },
     onError: (error: string) => {
       toast({
@@ -58,9 +54,12 @@ export const RegisterCatForm = ({ onSuccess }: RegisterCatFormProps) => {
 
   return (
     <div>
-      <h4 className="my-4 flex items-center gap-1 text-lg font-medium">
-        Basic info <Info size={16} />
-      </h4>
+      <div className="flex flex-col gap-4">
+        <DialogTitle>Register new cat</DialogTitle>
+        <DialogDescription className="text-primary">
+          Please fill all the inputs
+        </DialogDescription>
+      </div>
       <Form
         onSubmit={(values: Omit<Cat, 'cat_id' | 'user_id' | 'created_at'>) => {
           registerCat(values);

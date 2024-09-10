@@ -10,7 +10,7 @@ import {
 type CustomTabContent = {
   label: string;
   formComponent: React.ReactNode;
-  tableComponent: React.ReactNode;
+  tableComponent?: React.ReactNode;
   icon: React.ReactNode;
 };
 
@@ -22,11 +22,14 @@ export const CustomTabContent = ({
 }: CustomTabContent) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="my-4 flex flex-col gap-2">
-        <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
-          Click each row to update {label}
-        </p>
-      </div>
+      {tableComponent && (
+        <div className="my-4 flex flex-col gap-2">
+          <p className="-order-1 rounded-sm border border-[#1f8caf] bg-[#1f8caf]/10 p-2 text-xs">
+            Click each row to update {label}
+          </p>
+        </div>
+      )}
+
       <div className="max-w-sm">
         <Dialog>
           <DialogTrigger>

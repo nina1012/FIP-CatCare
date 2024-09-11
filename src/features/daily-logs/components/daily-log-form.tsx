@@ -110,7 +110,8 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
                 type="text"
                 placeholder="Weight in kg"
                 error={formState.errors['weight']}
-                pattern="[0-9]+"
+                pattern="[0-9]+([\.,][0-9]+)?"
+                step="0.01"
               />
 
               <CustomSelect registration={register('medication_name')}>

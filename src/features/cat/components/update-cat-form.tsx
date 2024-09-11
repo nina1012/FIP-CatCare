@@ -112,7 +112,8 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                 error={formState.errors['age']}
                 registration={register('age')}
                 defaultValue={cat.age}
-                pattern="[0-9]+"
+                pattern="[0-9]+([\.,][0-9]+)?"
+                step="0.01"
               />
               <Input
                 type="text"
@@ -127,7 +128,8 @@ const UpdateCatForm = ({ cat }: UpdateCatFormProps) => {
                 error={formState.errors['weight']}
                 registration={register('weight')}
                 defaultValue={cat.weight}
-                pattern="[0-9]+"
+                pattern="[0-9]+([\.,][0-9]+)?"
+                step="0.01"
               />
               <CustomSelect registration={register('sex')}>
                 <SelectTrigger>

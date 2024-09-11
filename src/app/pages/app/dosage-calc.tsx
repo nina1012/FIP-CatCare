@@ -25,6 +25,48 @@ export const DosageCalcRoute = () => {
           icon={<Calculator />}
         ></CustomTabContent>
       </div>
+      {/* FAQ and accordion */}
+      {/* <div className="my-12">
+        <h2 className="my-4  text-2xl font-semibold">GS-441524 FAQs</h2>
+        <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>
+              Should I store the GS-441524 in the fridge?
+            </AccordionTrigger>
+            <AccordionContent>
+              GS doesn&apos;t need to be stored in the fridge. It needs to be
+              kept away from heat and light. Ideally in a cupboard or drawer.{' '}
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>How do I calculate my dosage?</AccordionTrigger>
+            <AccordionContent>
+              Your treatment advisory team will give you the calculation to use
+              for calculating the correct dose for your kitty based on
+              kitty&apos;s weight, GS dosage and the brand&apos;s concentration.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger>
+              What will the dosage for pills be?
+            </AccordionTrigger>
+            <AccordionContent>
+              Unless your treatment advisor has recommended increasing dosage
+              the dosage will remain the same with pills as you started with for
+              injections.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-4">
+            <AccordionTrigger>
+              How often do I have to weigh my cat?
+            </AccordionTrigger>
+            <AccordionContent>
+              Weighing two times a week is recommended and even more often if
+              they are kittens.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div> */}
     </div>
   );
 };

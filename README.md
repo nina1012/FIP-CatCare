@@ -5,6 +5,14 @@
 **FIP CatCare app** is a web app for tracking and managing medication schedules, daily health logs, and test results for cats undergoing treatment for FIP. For owners of FIP positive cats, in hope for fast recovery 🍀
 This app helps users manage their cats' schedules, add notes and set reminders and upload test results (bloodwork, etc.).
 
+## What is FIP?
+
+Feline Infectious Peritonitis (FIP) is a serious viral disease that affects cats, caused by certain strains of the feline coronavirus. While many cats infected with feline coronavirus remain healthy, a small percentage of cats develop FIP, which can be fatal if left untreated.
+
+## How Can FIP Be Treated?
+
+FIP used to be considered untreatable, but recent advances have made treatment possible using specific antiviral medications. The treatment often involves precise dosing based on the cat’s weight, the type of FIP (wet, dry, ocular, or neurological), and the medication’s concentration.
+
 ## Planning application structure
 
 ## App requirements 📎

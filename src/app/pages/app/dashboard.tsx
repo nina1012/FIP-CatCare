@@ -1,6 +1,11 @@
 import { PawPrint } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/common/avatar';
 import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
@@ -39,13 +44,15 @@ export const DashboardRoute = () => {
                 key={cat_id}
                 className="my-8 flex w-full items-center gap-6 rounded-md bg-[#dfdddd]/10 p-4 font-semibold shadow-md md:w-[45%] lg:w-[30%]"
               >
-                <img
-                  src={
-                    (cat_image_url || '/public/cat-placeholder.jpg') as string
-                  }
-                  className="size-28 overflow-hidden rounded-full border-2 object-cover object-center"
-                  alt={name}
-                />
+                <Avatar className="size-28">
+                  <AvatarImage
+                    className="mx-auto size-full rounded-full border-2 object-cover object-center"
+                    src={cat_image_url as string}
+                  />
+                  <AvatarFallback className="mx-auto flex size-full gap-1  text-xs font-semibold">
+                    {name} <PawPrint size={12} />
+                  </AvatarFallback>
+                </Avatar>
                 <div className="flex flex-col gap-2">
                   <h5>{name}</h5>
                   <Button>view info</Button>

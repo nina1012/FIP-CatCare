@@ -27,6 +27,7 @@ export const CalculateDosageForm = () => {
       >
         {/* TYPE OF FIP */}
         <RadioGroup
+          aria-roledescription="fip-type"
           defaultValue="wet"
           onValueChange={(value) => setFipType(value)}
         >
@@ -52,6 +53,7 @@ export const CalculateDosageForm = () => {
         {/* CONCENTRATION */}
         <RadioGroup
           defaultValue="15"
+          aria-roledescription="concentration"
           onValueChange={(value) => setConcentration(Number(value))}
         >
           <h4 className="mb-2 font-semibold">Concentration:</h4>
@@ -73,6 +75,7 @@ export const CalculateDosageForm = () => {
         <div>
           <h4 className="font-semibold">Cat&apos;s weight (kg):</h4>
           <input
+            aria-roledescription="weight"
             className="w-full rounded border border-gray-400 p-2"
             type="number"
             value={weight}

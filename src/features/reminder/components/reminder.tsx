@@ -47,6 +47,7 @@ export const Reminder = () => {
         <input
           type="time"
           id="reminder-time"
+          data-testid="reminder-time"
           value={reminderTime}
           onChange={handleTimeChange}
           className="hover:cursor-pointer"

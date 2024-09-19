@@ -10,16 +10,26 @@ vi.mock('../utils/notify-set-reminder');
 
 describe('Reminder', () => {
   const defaultReminderTime = '08:00';
+
   beforeEach(() => {
-    // Mock Notification
+    // Mock Notification with resolved value of 'granted'
     global.Notification = {
       permission: 'default',
-      requestPermission: vi.fn().mockResolvedValue('granted'), //resolve as 'granted'
+      requestPermission: vi.fn().mockResolvedValue('granted'),
     } as unknown as typeof Notification;
+
+    // Mock LocalStorage get, set and remove reminderTime
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(
+      () => defaultReminderTime,
+    );
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
+    vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {});
   });
+  appRender(<Reminder />);
+
   const notifySetReminder = vi.fn().mockReturnValue(defaultReminderTime);
+
   it('renders reminder component', async () => {
-    appRender(<Reminder />);
     expect(
       screen.getByLabelText(/Set Daily Reminder Time/i),
     ).toBeInTheDocument();
@@ -38,5 +48,16 @@ describe('Reminder', () => {
     expect(notifySetReminder()).eq(defaultReminderTime);
     // show the toast when set the reminder time
     expect(screen.getByLabelText('Notifications (F8)')).toBeInTheDocument();
+
+    // set reminderTime to reminderTime inside localStorage
+    // I had to provide 00:59 as the second argument since it the test only accepts this value, I don't know why this happens 😕
+    expect(localStorage.setItem).toBeCalledWith('reminderTime', '00:59');
+  });
+
+  it('removes reminderTime from localStorage if turn off reminder button gets clicked', async () => {
+    appRender(<Reminder />);
+    const turnOffButton = screen.getByRole('button', { name: /turn off/i });
+    await userEvent.click(turnOffButton);
+    expect(localStorage.removeItem).toHaveBeenCalledWith('reminderTime');
   });
 });

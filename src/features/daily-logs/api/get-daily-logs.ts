@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase';
 
 import { DailyLog } from '../types';
 
-export const getDailyLogs = async (
+export const getDailyLogsFn = async (
   catID: string,
 ): Promise<DailyLog[] | null> => {
   const { data, error } = await supabase
@@ -22,7 +22,7 @@ export const useDailyLogs = (catID: string) => {
     error: dailyLogsError,
   } = useQuery({
     queryKey: ['daily-logs', catID],
-    queryFn: () => getDailyLogs(catID),
+    queryFn: () => getDailyLogsFn(catID),
   });
 
   return { dailyLogs, isLoadingDailyLogs, dailyLogsError };

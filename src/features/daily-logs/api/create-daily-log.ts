@@ -23,6 +23,17 @@ export const createDailyLogFn = async ({
   const startOfDay = new Date().setHours(0, 0, 0, 0);
   const endOfDay = new Date().setHours(23, 59, 59, 999);
 
+  // // get the lastLog for incrementing day
+  const { data: lastLog } = await supabase
+    .from('daily_logs')
+    .select('day')
+    .eq('cat_id', catID)
+    .order('day', { ascending: false })
+    .limit(1)
+    .single();
+
+  const nextDay = lastLog ? (lastLog.day as number) + 1 : 0;
+
   // Check if a log already exists for the current day
   const { data: existingLog, error: fetchError } = await supabase
     .from('daily_logs')
@@ -42,7 +53,7 @@ export const createDailyLogFn = async ({
   // Proceed with the insertion if no log exists for today
   const { data, error } = await supabase
     .from('daily_logs')
-    .insert({ ...newDailyLog, cat_id: catID });
+    .insert({ ...newDailyLog, cat_id: catID, day: nextDay });
 
   if (error) throw new Error(error.message);
   return data && data[0];

@@ -28,6 +28,14 @@ describe('createDailyLogFn', () => {
           gte: vi.fn().mockReturnValue({
             lte: vi.fn().mockResolvedValueOnce({ data: [], error: null }),
           }),
+          order: vi.fn().mockReturnValue({
+            limit: vi.fn().mockReturnValue({
+              single: vi.fn().mockReturnValue({
+                data: [],
+                error: null,
+              }),
+            }),
+          }),
         }),
       }),
       insert: vi

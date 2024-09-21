@@ -39,11 +39,11 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
   }
 
   return (
-    <Table className="grid w-full grid-rows-2 sm:overflow-x-scroll">
+    <Table className=" grid w-full grid-rows-2 sm:overflow-x-scroll ">
       {/* each of the table rows can be clickable and by clicking a log, the dialog will open up and user can update daily log for that day */}
       <TableCaption>A list of your daily logs</TableCaption>
       <TableHeader>
-        <TableRow className="grid grid-cols-[repeat(6,minmax(200px,1fr))]">
+        <TableRow className="grid grid-cols-[repeat(6,minmax(100px,1fr)),50px]">
           <TableHead>Day</TableHead>
           <TableHead>Dose (mg)</TableHead>
           <TableHead>Weight (kg)</TableHead>
@@ -59,7 +59,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
           return (
             <TableRow
               key={log_id}
-              className="group grid grid-cols-[repeat(6,minmax(200px,1fr))] overflow-y-scroll"
+              className="group relative grid grid-cols-[repeat(6,minmax(100px,1fr)),50px] items-center "
             >
               <Dialog>
                 <DialogTrigger className="">
@@ -71,13 +71,13 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                 <DialogTrigger className="">
                   <TableCell className="font-medium">{weight}</TableCell>
                 </DialogTrigger>
-                <DialogTrigger className="w-[200px]">
+                <DialogTrigger className="w-[150px]">
                   <TableCell>{formatDate(new Date(log_date))}</TableCell>
                 </DialogTrigger>
                 <DialogTrigger>
                   <TableCell className="">{medication_name}</TableCell>
                 </DialogTrigger>
-                <DialogTrigger className="overflow-scroll text-left">
+                <DialogTrigger className="min-w-60 overflow-scroll text-left">
                   <TableCell>
                     {note && note?.length > 200
                       ? note?.slice(0, 200) + '...'
@@ -88,7 +88,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
                   <DailyLogsForm logID={log_id} />
                 </DialogContent>
               </Dialog>
-              <TableCell className="absolute right-0 z-10 hidden !max-w-min justify-end bg-primary p-0 group-hover:flex">
+              <TableCell className="absolute !right-0 z-10 hidden h-auto !max-w-min items-center !justify-end rounded-md bg-primary p-0 group-hover:flex">
                 <DeleteLogButton logID={log_id} />
               </TableCell>
             </TableRow>

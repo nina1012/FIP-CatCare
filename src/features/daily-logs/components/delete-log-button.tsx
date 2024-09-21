@@ -14,9 +14,10 @@ export const DeleteLogButton = ({ logID }: { logID: string }) => {
   };
   return (
     <Button
-      variant="ghost"
+      variant="destructive"
       onClick={handleDelete}
       disabled={isPending}
+      size="icon"
       aria-label="Delete Log"
     >
       <Trash />

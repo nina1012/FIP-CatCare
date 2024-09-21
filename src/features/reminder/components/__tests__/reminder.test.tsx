@@ -11,6 +11,7 @@ vi.mock('../utils/notify-set-reminder');
 describe('Reminder', () => {
   const defaultReminderTime = '08:00';
 
+  // before each test, mock the Notification and LocalStorage implementations
   beforeEach(() => {
     // Mock Notification with resolved value of 'granted'
     global.Notification = {
@@ -18,7 +19,7 @@ describe('Reminder', () => {
       requestPermission: vi.fn().mockResolvedValue('granted'),
     } as unknown as typeof Notification;
 
-    // Mock LocalStorage get, set and remove reminderTime
+    // Mock LocalStorage
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(
       () => defaultReminderTime,
     );
@@ -27,6 +28,7 @@ describe('Reminder', () => {
   });
   appRender(<Reminder />);
 
+  // this fn is for showing up the toast
   const notifySetReminder = vi.fn().mockReturnValue(defaultReminderTime);
 
   it('renders reminder component', async () => {

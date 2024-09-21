@@ -39,17 +39,17 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
   }
 
   return (
-    <Table className="overflow-x-scroll">
+    <Table className="grid w-full grid-rows-2 sm:overflow-x-scroll">
       {/* each of the table rows can be clickable and by clicking a log, the dialog will open up and user can update daily log for that day */}
       <TableCaption>A list of your daily logs</TableCaption>
       <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Day</TableHead>
+        <TableRow className="grid grid-cols-[repeat(6,minmax(200px,1fr))]">
+          <TableHead>Day</TableHead>
           <TableHead>Dose (mg)</TableHead>
           <TableHead>Weight (kg)</TableHead>
-          <TableHead className="text-right">Date</TableHead>
-          <TableHead className="text-right">Brand</TableHead>
-          <TableHead className="text-right">Note</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Brand</TableHead>
+          <TableHead>Note</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -57,25 +57,38 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
           const { log_id, day, log_date, dose, weight, medication_name, note } =
             log;
           return (
-            <TableRow key={log_id} className="">
+            <TableRow
+              key={log_id}
+              className="group grid grid-cols-[repeat(6,minmax(200px,1fr))] overflow-y-scroll"
+            >
               <Dialog>
-                <DialogTrigger className="!w-full min-w-full">
+                <DialogTrigger className="">
                   <TableCell className="font-medium">{day}</TableCell>
+                </DialogTrigger>
+                <DialogTrigger className="">
                   <TableCell>{dose}</TableCell>
-                  <TableCell>{weight}</TableCell>
-                  <TableCell className="text-right">
-                    {formatDate(new Date(log_date))}
+                </DialogTrigger>
+                <DialogTrigger className="">
+                  <TableCell className="font-medium">{weight}</TableCell>
+                </DialogTrigger>
+                <DialogTrigger className="w-[200px]">
+                  <TableCell>{formatDate(new Date(log_date))}</TableCell>
+                </DialogTrigger>
+                <DialogTrigger>
+                  <TableCell className="">{medication_name}</TableCell>
+                </DialogTrigger>
+                <DialogTrigger className="overflow-scroll text-left">
+                  <TableCell>
+                    {note && note?.length > 200
+                      ? note?.slice(0, 200) + '...'
+                      : note}
                   </TableCell>
-                  <TableCell className="text-right">
-                    {medication_name}
-                  </TableCell>
-                  <TableCell className="text-right">{note}</TableCell>
                 </DialogTrigger>
                 <DialogContent>
                   <DailyLogsForm logID={log_id} />
                 </DialogContent>
               </Dialog>
-              <TableCell>
+              <TableCell className="absolute right-0 z-10 hidden !max-w-min justify-end bg-primary p-0 group-hover:flex">
                 <DeleteLogButton logID={log_id} />
               </TableCell>
             </TableRow>

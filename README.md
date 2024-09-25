@@ -44,6 +44,13 @@ FIP used to be considered untreatable, but recent advances have made treatment p
 - [] As a user, I want to upload and view bloodwork and test results for each cat
 - [] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
 
+## Documentation (Case Study) 📚
+
+- [Problem](./docs/Problem.md)
+- [Solution](./docs/Solution.md)
+- [Target Audience](./docs/Audience.md)
+- [Technical Details](./docs/TechStack.md)
+
 ## Tables and data relationships 🖇️
 
 ![Supabase schema visualizer](./public/screenshots/FIP-CatCare-DB.png) (from supabase schema visualizer)

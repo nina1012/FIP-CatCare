@@ -38,7 +38,7 @@ export const TreatmentProgressCard = ({
               <p>{84 - dailyLogs?.length} days left 💊</p>
             </>
           ) : (
-            <p>{catData?.name} hasn&apos;t started its treatment yet</p>
+            <p>{catData?.name} hasn&apos;t started treatment yet</p>
           )}
         </Card>
       </DialogTrigger>

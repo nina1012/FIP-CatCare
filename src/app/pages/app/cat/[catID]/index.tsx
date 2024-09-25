@@ -83,7 +83,7 @@ export const CatDetailsRoute = () => {
       {/* BADGES */}
       <Badges isPendingTreatment={isPendingTreatment} />
       {/* CLICKABLE CARDS */}
-      <div className="my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%]">
+      <div className="[&>*>last:*]:mb-auto my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%] [&>*]:h-auto">
         <UpdateCatDialog cat={catData} />
         <TreatmentProgressCard dailyLogs={dailyLogs} catData={catData} />
         <ChartCard dailyLogs={dailyLogs} catData={catData} />

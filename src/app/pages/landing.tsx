@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const LandingRoute = () => {
   return (
-    <div className="min-h-screen bg-[#f1f1f1]">
+    <div className="min-h-screen">
       <h1>Landing Route</h1>
       <p>This route is available to everyone</p>
       <p>

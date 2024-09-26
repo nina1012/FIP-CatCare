@@ -55,7 +55,15 @@ export const CustomTable = <T,>({
           ))}
         </TableRow>
       </TableHeader>
-      <TableBody>{data.map(renderRow)}</TableBody>
+      <TableBody>
+        {data.length > 0 ? (
+          data.map(renderRow)
+        ) : (
+          <div className="my-4 flex justify-center text-base">
+            No data to show
+          </div>
+        )}
+      </TableBody>
     </Table>
   );
 };

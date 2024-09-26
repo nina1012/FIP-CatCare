@@ -38,11 +38,11 @@ FIP used to be considered untreatable, but recent advances have made treatment p
 
 ## User stories
 
-- [] As a user, I want to create an account and log in
-- [] As a user, I want to add, view, edit, and delete cats
-- [] As a user, I want to add daily logs for each cat including medication dosage and notes
+- [x] As a user, I want to create an account and log in
+- [x] As a user, I want to add, view, edit, and delete cats
+- [x] As a user, I want to add daily logs for each cat including medication dosage and notes
 - [] As a user, I want to upload and view bloodwork and test results for each cat
-- [] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
+- [x] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
 
 ## Documentation (Case Study) 📚
 

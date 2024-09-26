@@ -18,7 +18,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
         onClick={onClick}
         aria-hidden="true"
       >
-        <div className="grid h-full gap-2">
+        <div className="grid gap-2">
           <h4 className="text-left font-bold">{title}</h4>
           {children}
         </div>

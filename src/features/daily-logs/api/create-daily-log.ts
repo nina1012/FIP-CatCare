@@ -39,8 +39,8 @@ export const createDailyLogFn = async ({
     .from('daily_logs')
     .select('*')
     .eq('cat_id', catID)
-    .gte('log_date', new Date(startOfDay).toISOString())
-    .lte('log_date', new Date(endOfDay).toISOString());
+    .gte('log_date', new Date(startOfDay).toLocaleString())
+    .lte('log_date', new Date(endOfDay).toLocaleString());
 
   if (fetchError) {
     throw new Error(fetchError.message);

@@ -6,7 +6,7 @@ const catData = generateCat();
 export const catHandlers = [
   // cat data mock
   http.get(
-    `http://localhost:5173/app/${catData.cat_id}`,
+    `http://localhost:5173/app/cat/${catData.cat_id}`,
     async ({ request }) => {
       return HttpResponse.json({ ...request }, { status: 200 });
     },

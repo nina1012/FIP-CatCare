@@ -24,8 +24,8 @@ test.describe('Landing page', () => {
   test('should redirect to /auth/login when login link gets clicked', async ({
     page,
   }) => {
-    const registerLink = page.getByRole('link', { name: 'Login' });
-    await registerLink.click();
+    const loginLink = page.getByRole('link', { name: 'Login' });
+    await loginLink.click();
     await page.goto('http://localhost:5173/auth/login');
   });
 });

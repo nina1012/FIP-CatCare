@@ -42,6 +42,10 @@ export const CatDetailsRoute = () => {
     );
   }
 
+  if (!catID) {
+    return <div>Invalid or missed cat ID</div>;
+  }
+
   if (catDataError) {
     return (
       <div className="container">
@@ -84,7 +88,7 @@ export const CatDetailsRoute = () => {
       <Badges isPendingTreatment={isPendingTreatment} />
       {/* CLICKABLE CARDS */}
       <div className="[&>*>last:*]:mb-auto my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%] [&>*]:h-auto">
-        <UpdateCatDialog cat={catData} />
+        <UpdateCatDialog data-testid="update-cat-info" cat={catData} />
         <TreatmentProgressCard dailyLogs={dailyLogs} catData={catData} />
         <ChartCard dailyLogs={dailyLogs} catData={catData} />
       </div>

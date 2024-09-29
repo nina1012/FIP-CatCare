@@ -23,7 +23,7 @@ const dailyLogsSchema = z.object({
   day: z.string().optional().default('0'),
   dose: z.string(),
   weight: z.string().optional(),
-  medication_name: z.enum(['GS-15', 'GS-20']),
+  medication_name: z.enum(['GS-15', 'GS-20', 'GS-30']),
   note: z.string().optional(),
 });
 

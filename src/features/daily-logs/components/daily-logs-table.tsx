@@ -31,16 +31,18 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
       >
         <Dialog>
           <DialogTrigger>
-            <TableCell className="font-medium">{day}</TableCell>
+            <TableCell>Day {day}</TableCell>
           </DialogTrigger>
           <DialogTrigger>
             <TableCell>{dose}</TableCell>
           </DialogTrigger>
           <DialogTrigger>
-            <TableCell className="font-medium">{weight}</TableCell>
+            <TableCell>{weight}</TableCell>
           </DialogTrigger>
           <DialogTrigger>
-            <TableCell>{formatDate(new Date(log_date))}</TableCell>
+            <TableCell className="!w-max">
+              {formatDate(new Date(log_date))}
+            </TableCell>
           </DialogTrigger>
           <DialogTrigger>
             <TableCell className="">{medication_name}</TableCell>
@@ -54,7 +56,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
             <DailyLogsForm logID={log_id} />
           </DialogContent>
         </Dialog>
-        <TableCell className="absolute right-0 z-10 hidden h-auto !max-w-min items-center justify-end rounded-md bg-primary p-0 group-hover:flex">
+        <TableCell className="absolute !right-0 z-10 hidden h-auto !max-w-min items-center justify-end rounded-md bg-primary p-0 group-hover:flex">
           <DeleteLogButton logID={log_id} />
         </TableCell>
       </TableRow>

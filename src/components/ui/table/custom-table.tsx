@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import { Spinner } from '@/components/ui/common/spinner';
 import {
   Table,
@@ -16,6 +18,7 @@ type CustomTableProps<T> = {
   headers: string[]; // headers for each column in table
   renderRow: (item: T) => React.ReactNode;
   caption?: string;
+  numOfCols?: number;
 };
 
 export const CustomTable = <T,>({
@@ -24,6 +27,7 @@ export const CustomTable = <T,>({
   headers,
   renderRow,
   caption = 'A list of records',
+  numOfCols = 7,
 }: CustomTableProps<T>) => {
   if (isLoading) {
     return (
@@ -45,11 +49,20 @@ export const CustomTable = <T,>({
     );
   }
 
+  console.log(`grid-cols-[${numOfCols},minmax(100px,1fr)]`);
+
   return (
     <Table className="grid w-full grid-rows-2 sm:overflow-x-scroll">
       <TableCaption>{caption}</TableCaption>
       <TableHeader>
-        <TableRow className="grid grid-cols-[repeat(7,minmax(100px,1fr))]">
+        <TableRow
+          className={clsx(
+            'grid',
+            numOfCols === 7
+              ? `grid-cols-[repeat(7,minmax(150px,1fr))]`
+              : 'grid-cols-[repeat(2,minmax(150px,1fr))]',
+          )}
+        >
           {headers.map((header) => (
             <TableHead key={header} className="!p-4 text-base font-semibold">
               {header}

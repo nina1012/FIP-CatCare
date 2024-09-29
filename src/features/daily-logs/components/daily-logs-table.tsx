@@ -56,7 +56,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
             <DailyLogsForm logID={log_id} />
           </DialogContent>
         </Dialog>
-        <TableCell className="absolute !right-0 z-10 hidden h-auto !max-w-min items-center justify-end rounded-md bg-primary p-0 group-hover:flex">
+        <TableCell className="relative !right-0 z-10 hidden h-auto !max-w-min items-center justify-end rounded-md bg-primary p-0 group-hover:flex">
           <DeleteLogButton logID={log_id} />
         </TableCell>
       </TableRow>

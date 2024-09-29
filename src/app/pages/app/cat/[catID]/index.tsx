@@ -1,5 +1,5 @@
 import { Avatar } from '@radix-ui/react-avatar';
-import { CheckCircle, LogsIcon, PawPrint } from 'lucide-react';
+import { LogsIcon, PawPrint } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
@@ -12,8 +12,6 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs/tabs';
-import { BloodworkForm } from '@/features/bloodworks/components/blood-work-form';
-import { BloodworkTable } from '@/features/bloodworks/components/blood-work-table';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
@@ -99,7 +97,6 @@ export const CatDetailsRoute = () => {
         <Tabs defaultValue="daily-logs" className="">
           <TabsList>
             <TabsTrigger value="daily-logs">daily log</TabsTrigger>
-            <TabsTrigger value="blood work">blood work</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs">
             <CustomTabContent
@@ -108,16 +105,6 @@ export const CatDetailsRoute = () => {
               icon={<LogsIcon />}
               tableComponent={
                 <DailyLogsTable catID={catData?.cat_id as string} />
-              }
-            />
-          </TabsContent>
-          <TabsContent value="blood work">
-            <CustomTabContent
-              label="blood work"
-              icon={<CheckCircle />}
-              formComponent={<BloodworkForm />}
-              tableComponent={
-                <BloodworkTable catID={catData?.cat_id as string} />
               }
             />
           </TabsContent>

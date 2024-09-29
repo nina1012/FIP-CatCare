@@ -51,7 +51,9 @@ export const CustomTable = <T,>({
       <TableHeader>
         <TableRow className="grid grid-cols-[repeat(7,minmax(100px,1fr))]">
           {headers.map((header) => (
-            <TableHead key={header}>{header}</TableHead>
+            <TableHead key={header} className="!p-4 text-base font-semibold">
+              {header}
+            </TableHead>
           ))}
         </TableRow>
       </TableHeader>

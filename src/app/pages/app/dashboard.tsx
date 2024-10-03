@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/common/avatar';
 import { Badge } from '@/components/ui/common/badge';
 import { Button } from '@/components/ui/common/button';
-import { Spinner } from '@/components/ui/common/spinner';
+import { Loader } from '@/components/ui/common/loader';
 import { CustomTabContent } from '@/components/ui/tabs/custom-tab-content';
 import { useUser } from '@/features/auth/api/get-auth-user';
 import { useCats } from '@/features/cat/api/get-cats';
@@ -22,7 +22,7 @@ export const DashboardRoute = () => {
     return (
       <div className="container">
         <div className="flex h-96 items-center justify-center">
-          <Spinner size="lg" />
+          <Loader />
         </div>
       </div>
     );

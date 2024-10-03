@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 
 import { AvatarFallback, AvatarImage } from '@/components/ui/common/avatar';
 import { Button } from '@/components/ui/common/button';
-import { Spinner } from '@/components/ui/common/spinner';
+import { Loader } from '@/components/ui/common/loader';
 import { CustomTabContent } from '@/components/ui/tabs/custom-tab-content';
 import {
   Tabs,
@@ -36,7 +36,7 @@ export const CatDetailsRoute = () => {
     return (
       <div className="container">
         <div className="flex h-96 items-center justify-center">
-          <Spinner size="lg" />
+          <Loader />
         </div>
       </div>
     );

@@ -26,7 +26,7 @@ export const CatDetailsRoute = () => {
   const { catData, isLoadingCatData, catDataError } = useCatData(
     catID as string,
   );
-  const { dailyLogs } = useDailyLogs(catID as string);
+  const { dailyLogs } = useDailyLogs(catID as string, 0, 5);
 
   if (!dailyLogs) return null;
 

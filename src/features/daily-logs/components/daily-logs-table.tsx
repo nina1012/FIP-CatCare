@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import {
   Dialog,
@@ -18,24 +18,26 @@ type DailyLogTableProps = {
   catID?: string;
 };
 
-export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
+export const DailyLogsTable = memo(({ catID }: DailyLogTableProps) => {
+  const headers = ['Day', 'Dose (ml)', 'Weight (kg)', 'Date', 'Brand', 'Note'];
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const { dailyLogs, isLoadingDailyLogs } = useDailyLogs(catID as string);
-  const headers = ['Day', 'Dose (mg)', 'Weight (kg)', 'Date', 'Brand', 'Note'];
+  const { dailyLogs, isLoadingDailyLogs, totalLogsCount } = useDailyLogs(
+    catID as string,
+    page,
+    rowsPerPage,
+  );
 
-  // Handle page change
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 
-  // Handle rows per page change
-  const handleRowsPerPageChange = (rows: number) => {
-    setRowsPerPage(rows);
-    setPage(0); // Reset to first page when changing rows per page
+  const handleRowsPerPageChange = (newRowsPerPage: number) => {
+    setRowsPerPage(newRowsPerPage);
+    setPage(0); // reset page to 0 when rows per page changes
   };
-
   const renderRow = (log: any) => {
     const { log_id, day, log_date, dose, weight, medication_name, note } = log;
     return (
@@ -48,7 +50,7 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
             <TableCell>Day {day}</TableCell>
           </DialogTrigger>
           <DialogTrigger>
-            <TableCell>{dose}</TableCell>
+            <TableCell>{dose} ml</TableCell>
           </DialogTrigger>
           <DialogTrigger>
             <TableCell>{weight}</TableCell>
@@ -79,14 +81,16 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
 
   return (
     <CustomTable
-      data={dailyLogs || []}
-      isLoading={isLoadingDailyLogs}
       headers={headers}
+      data={dailyLogs}
+      isLoading={isLoadingDailyLogs}
       renderRow={renderRow}
       page={page}
       rowsPerPage={rowsPerPage}
+      totalCount={totalLogsCount}
       onPageChange={handlePageChange}
       onRowsPerPageChange={handleRowsPerPageChange}
     />
   );
-};
+});
+DailyLogsTable.displayName = 'DailyLogsTable';

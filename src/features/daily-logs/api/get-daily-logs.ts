@@ -6,24 +6,37 @@ import { DailyLog } from '../types';
 
 export const getDailyLogsFn = async (
   catID: string,
-): Promise<DailyLog[] | null> => {
-  const { data, error } = await supabase
+  page: number,
+  rowsPerPage: number,
+): Promise<{ data: DailyLog[]; totalCount: number } | null> => {
+  const from = page * rowsPerPage;
+  const to = from + rowsPerPage - 1;
+
+  const { data, error, count } = await supabase
     .from('daily_logs')
-    .select()
-    .eq('cat_id', catID);
+    .select('*', { count: 'exact' })
+    .eq('cat_id', catID)
+    .range(from, to);
+
   if (error) throw new Error(error.message);
-  return data;
+
+  return { data: data || [], totalCount: count || 0 };
 };
 
-export const useDailyLogs = (catID: string) => {
-  const {
-    data: dailyLogs,
-    isLoading: isLoadingDailyLogs,
-    error: dailyLogsError,
-  } = useQuery({
-    queryKey: ['daily-logs', catID],
-    queryFn: () => getDailyLogsFn(catID),
+export const useDailyLogs = (
+  catID: string,
+  page: number,
+  rowsPerPage: number,
+) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['daily-logs', catID, page, rowsPerPage],
+    queryFn: () => getDailyLogsFn(catID, page, rowsPerPage),
   });
 
-  return { dailyLogs, isLoadingDailyLogs, dailyLogsError };
+  return {
+    dailyLogs: data?.data || [],
+    isLoadingDailyLogs: isLoading,
+    dailyLogsError: error,
+    totalLogsCount: data?.totalCount || 0,
+  };
 };

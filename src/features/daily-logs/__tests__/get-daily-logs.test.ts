@@ -47,7 +47,8 @@ describe('getDailyLogsFn', () => {
     }));
 
     (supabase.from as Mock).mockImplementation(mockFrom);
-    const dailyLogs = await getDailyLogsFn(catID);
+    //  test table to show 5 rows and first page
+    const dailyLogs = await getDailyLogsFn(catID, 0, 5);
 
     expect(dailyLogs).toContainEqual(logs);
   });

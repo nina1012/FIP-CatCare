@@ -20,10 +20,12 @@ type CustomTableProps<T> = {
   renderRow: (item: T) => React.ReactNode;
   caption?: string;
   numOfCols?: number;
-  page: number; // External page state
-  rowsPerPage: number; // External rowsPerPage state
-  onPageChange: (newPage: number) => void; // External handler for page changes
-  onRowsPerPageChange: (rows: number) => void; // External handler for rows per page changes
+  // for pagination
+  page: number;
+  rowsPerPage: number;
+  totalCount: number;
+  onPageChange: (newPage: number) => void;
+  onRowsPerPageChange: (rows: number) => void;
 };
 
 export const CustomTable = <T,>({
@@ -34,6 +36,7 @@ export const CustomTable = <T,>({
   caption = 'A list of records',
   numOfCols = 7,
   page,
+  totalCount,
   rowsPerPage,
   onPageChange,
   onRowsPerPageChange,
@@ -47,11 +50,6 @@ export const CustomTable = <T,>({
   ) => {
     onRowsPerPageChange(parseInt(event.target.value, 10));
   };
-
-  const paginatedData = data.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage,
-  );
 
   if (isLoading) {
     return (
@@ -93,8 +91,8 @@ export const CustomTable = <T,>({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {paginatedData.length > 0 ? (
-          paginatedData.map(renderRow)
+        {data.length > 0 ? (
+          data.map(renderRow)
         ) : (
           <div className="my-4 flex justify-center text-base">
             No data to show
@@ -107,9 +105,9 @@ export const CustomTable = <T,>({
           <TablePagination
             rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
             colSpan={numOfCols}
-            count={data.length}
             rowsPerPage={rowsPerPage}
             page={page}
+            count={totalCount}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
             ActionsComponent={TablePaginationActions}

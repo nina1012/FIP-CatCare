@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import { supabase } from '@/lib/supabase';
 
@@ -31,6 +31,7 @@ export const useDailyLogs = (
   const { data, isLoading, error } = useQuery({
     queryKey: ['daily-logs', catID, page, rowsPerPage],
     queryFn: () => getDailyLogsFn(catID, page, rowsPerPage),
+    placeholderData: keepPreviousData,
   });
 
   return {

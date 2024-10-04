@@ -1,3 +1,5 @@
+import { TablePagination } from '@mui/material';
+import TablePaginationActions from '@mui/material/TablePagination/TablePaginationActions';
 import clsx from 'clsx';
 
 import { Spinner } from '@/components/ui/common/spinner';
@@ -5,20 +7,23 @@ import {
   Table,
   TableBody,
   TableCaption,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table/table';
 
-// I put the generic because I want to reuse this custom table for my daily-logs, bloodwork, ...
-// so the table can take as props different types (DailyLog i.e.)
 type CustomTableProps<T> = {
-  data: T[]; // for daily-logs -> DailyLogs[]
+  data: T[];
   isLoading: boolean;
-  headers: string[]; // headers for each column in table
+  headers: string[];
   renderRow: (item: T) => React.ReactNode;
   caption?: string;
   numOfCols?: number;
+  page: number; // External page state
+  rowsPerPage: number; // External rowsPerPage state
+  onPageChange: (newPage: number) => void; // External handler for page changes
+  onRowsPerPageChange: (rows: number) => void; // External handler for rows per page changes
 };
 
 export const CustomTable = <T,>({
@@ -28,7 +33,26 @@ export const CustomTable = <T,>({
   renderRow,
   caption = 'A list of records',
   numOfCols = 7,
+  page,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
 }: CustomTableProps<T>) => {
+  const handlePageChange = (_event: unknown, newPage: number) => {
+    onPageChange(newPage);
+  };
+
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    onRowsPerPageChange(parseInt(event.target.value, 10));
+  };
+
+  const paginatedData = data.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage,
+  );
+
   if (isLoading) {
     return (
       <div className="container">
@@ -39,17 +63,15 @@ export const CustomTable = <T,>({
     );
   }
 
-  if (!data) {
+  if (!data || data.length === 0) {
     return (
       <div className="container">
         <div className="flex h-96 items-center justify-center">
-          <h3>No data to show </h3>
+          <h3>No data to show</h3>
         </div>
       </div>
     );
   }
-
-  console.log(`grid-cols-[${numOfCols},minmax(100px,1fr)]`);
 
   return (
     <Table className="grid w-full grid-rows-2 sm:overflow-x-scroll">
@@ -71,14 +93,29 @@ export const CustomTable = <T,>({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.length > 0 ? (
-          data.map(renderRow)
+        {paginatedData.length > 0 ? (
+          paginatedData.map(renderRow)
         ) : (
           <div className="my-4 flex justify-center text-base">
             No data to show
           </div>
         )}
       </TableBody>
+      {/* MUI Components */}
+      <TableFooter>
+        <TableRow>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+            colSpan={numOfCols}
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handlePageChange}
+            onRowsPerPageChange={handleRowsPerPageChange}
+            ActionsComponent={TablePaginationActions}
+          />
+        </TableRow>
+      </TableFooter>
     </Table>
   );
 };

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   Dialog,
   DialogContent,
@@ -8,7 +10,6 @@ import { TableCell, TableRow } from '@/components/ui/table/table';
 import { formatDate } from '@/utils/format-dates';
 
 import { useDailyLogs } from '../api/get-daily-logs';
-import { DailyLog } from '../types';
 
 import { DailyLogsForm } from './daily-log-form';
 import { DeleteLogButton } from './delete-log-button';
@@ -18,9 +19,22 @@ type DailyLogTableProps = {
 };
 
 export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
-  const { dailyLogs, isLoadingDailyLogs } = useDailyLogs(catID as string);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const { dailyLogs, isLoadingDailyLogs } = useDailyLogs(catID as string);
   const headers = ['Day', 'Dose (mg)', 'Weight (kg)', 'Date', 'Brand', 'Note'];
+
+  // Handle page change
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
+  // Handle rows per page change
+  const handleRowsPerPageChange = (rows: number) => {
+    setRowsPerPage(rows);
+    setPage(0); // Reset to first page when changing rows per page
+  };
 
   const renderRow = (log: any) => {
     const { log_id, day, log_date, dose, weight, medication_name, note } = log;
@@ -65,11 +79,14 @@ export const DailyLogsTable = ({ catID }: DailyLogTableProps) => {
 
   return (
     <CustomTable
-      data={dailyLogs as DailyLog[]}
+      data={dailyLogs || []}
       isLoading={isLoadingDailyLogs}
       headers={headers}
       renderRow={renderRow}
-      caption="A list of your daily logs"
+      page={page}
+      rowsPerPage={rowsPerPage}
+      onPageChange={handlePageChange}
+      onRowsPerPageChange={handleRowsPerPageChange}
     />
   );
 };

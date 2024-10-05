@@ -103,7 +103,7 @@ export const CustomTable = <T,>({
       <TableFooter>
         <TableRow>
           <TablePagination
-            rowsPerPageOptions={[5, 10, { label: 'All', value: -1 }]}
+            rowsPerPageOptions={[5, 10]}
             colSpan={numOfCols}
             rowsPerPage={rowsPerPage}
             page={page}

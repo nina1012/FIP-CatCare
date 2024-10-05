@@ -13,6 +13,23 @@ export const Header = () => {
         />
         <h1 className="text-xl">FIP CatCare</h1>
       </Link>
+      <ul className="flex gap-8">
+        <li>
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/#features">
+            Features
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-link" to="/#aboutFIP">
+            About FIP
+          </Link>
+        </li>
+      </ul>
       <nav>
         <ul
           className="relative hidden h-full cursor-default select-none items-center justify-center gap-10
@@ -20,7 +37,7 @@ export const Header = () => {
       "
         >
           <li>
-            <Button variant="link">
+            <Button variant="outline">
               <Link to="/auth/register" className="">
                 Register
               </Link>

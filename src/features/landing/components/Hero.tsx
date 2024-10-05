@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/common/button';
 
 export const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-between gap-10 p-20 md:flex-row md:gap-20">
-      <div className="flex w-2/3 flex-col gap-6 text-center md:text-left">
+    <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:gap-20">
+      <div className="flex flex-col gap-6 text-center md:w-2/3 md:text-left">
         <div className="mx-auto inline-block w-fit rounded-3xl !bg-pink-200 p-1 !text-[10px] transition-all hover:ring-1 hover:ring-primary md:m-0">
           <Link to="/#feature" className="flex items-center gap-1 pr-2 ">
             <Badge
@@ -29,7 +29,7 @@ export const Hero = () => {
           FIP treatment progress, helping you stay informed and proactive every
           step of the way
         </p>
-        <div className="mx-auto flex gap-4 md:mx-0 [&>button]:w-1/3">
+        <div className="mx-auto flex gap-4 md:mx-0 [&>button]:md:w-1/4">
           <Button variant="outline">
             <Link to="/auth/register" className="">
               Create an account
@@ -42,7 +42,7 @@ export const Hero = () => {
           </Button>
         </div>
       </div>
-      <div className="w-1/3">
+      <div className="md:w-1/3">
         <img
           src="./src/features/landing/assets/illustration.svg"
           alt="illustration"

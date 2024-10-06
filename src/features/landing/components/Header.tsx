@@ -37,19 +37,15 @@ export const Header = () => {
       "
         >
           <li>
-            <Button variant="outline">
-              <Link to="/auth/register" className="">
-                Register
-              </Link>
-            </Button>
+            <Link to="/auth/register" className="">
+              <Button variant="outline">Register</Button>
+            </Link>
           </li>
 
           <li>
-            <Button>
-              <Link to="/auth/login" className="">
-                Login
-              </Link>
-            </Button>
+            <Link to="/auth/login" className="">
+              <Button>Login</Button>
+            </Link>
           </li>
         </ul>
       </nav>

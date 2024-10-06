@@ -83,3 +83,7 @@
     @apply hover:text-primary underline-offset-8 hover:underline transition-all;
   }
 }
+
+body {
+  background-color: hsl(338, 53%, 50%);
+}

@@ -1,7 +1,8 @@
-import { AboutFIP } from '@/features/landing/components/AboutFIP';
-import { Features } from '@/features/landing/components/Features';
-import { Header } from '@/features/landing/components/Header';
-import { Hero } from '@/features/landing/components/Hero';
+import { AboutFIP } from '@/features/landing/components/about-FIP';
+import { Features } from '@/features/landing/components/features';
+import { Footer } from '@/features/landing/components/footer';
+import { Header } from '@/features/landing/components/header';
+import { Hero } from '@/features/landing/components/hero';
 
 export const LandingRoute = () => {
   return (
@@ -14,17 +15,13 @@ export const LandingRoute = () => {
       <div className="relative flex h-min w-full flex-none flex-col flex-nowrap items-center justify-start gap-0 overflow-visible bg-primary p-6">
         <Header />
         <div className="z-20 flex min-h-screen w-full flex-col bg-white pt-4 backdrop-opacity-35">
-          {/* container for all the sections */}
           <div className="flex flex-col gap-10 p-5 md:gap-20 md:p-20">
             <Hero />
             <Features />
-            <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:gap-20">
-              <img src="./src/features/landing/assets/2.png" alt="phone" />
-            </div>
-
             <AboutFIP />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 export const AboutFIP = () => {
   // bg-[#00968840]
   return (
-    <section id="aboutFIP" className="flex flex-col gap-4  p-5">
+    <section id="aboutFIP" className="flex flex-col gap-4">
       <div className="mx-auto w-3/4 text-lg text-neutral-700">
         <h2 className="my-8 text-center text-3xl font-semibold">
           What is FIP?
@@ -36,6 +36,7 @@ export const AboutFIP = () => {
           include lethargy, fever, weight loss, and difficulty breathing. Early
           detection is crucial to managing the disease.
         </p>
+        <p>There are 3 main stages of FIP:</p>
 
         <div className="mt-10 grid grid-cols-1 gap-10 text-center md:grid-cols-3">
           <div className="flex flex-col gap-4 rounded-md border-2 border-[#00968830] bg-[#00968830] p-4 ">

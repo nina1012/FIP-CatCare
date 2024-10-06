@@ -24,25 +24,21 @@ export const Hero = () => {
           Track Your Cat&apos;s
           <span className="text-primary"> FIP </span>Treatment Easily
         </h1>
-        <p className="mx-auto w-2/3 md:mx-0">
-          All the tools you need to monitor, manage, and analyze your cat&apos;s
+        <p className="mx-auto md:mx-0">
+          The only app you need to monitor, manage, and analyze your cat&apos;s
           FIP treatment progress, helping you stay informed and proactive every
           step of the way
         </p>
         <div className="mx-auto flex gap-4 md:mx-0 [&>button]:md:w-1/4">
-          <Button variant="outline">
-            <Link to="/auth/register" className="">
-              Create an account
-            </Link>
-          </Button>
-          <Button>
-            <Link to="/auth/login" className="">
-              Log in
-            </Link>
-          </Button>
+          <Link to="/auth/register" className="">
+            <Button variant="outline">Create an account</Button>
+          </Link>
+          <Link to="/auth/login" className="">
+            <Button>Log in</Button>
+          </Link>
         </div>
       </div>
-      <div className="md:w-1/3">
+      <div className="md:w-1/2">
         <img
           src="./src/features/landing/assets/illustration.svg"
           alt="illustration"

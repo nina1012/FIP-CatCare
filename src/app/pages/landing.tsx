@@ -1,3 +1,4 @@
+import { AboutFIP } from '@/features/landing/components/AboutFIP';
 import { Features } from '@/features/landing/components/Features';
 import { Header } from '@/features/landing/components/Header';
 import { Hero } from '@/features/landing/components/Hero';
@@ -6,7 +7,7 @@ export const LandingRoute = () => {
   return (
     <div className="relative min-h-screen">
       <img
-        className="absolute left-0 top-0 z-10 h-auto max-h-full opacity-60 sm:top-0 md:-left-1/4"
+        className="pointer-events-none absolute left-0 top-0 z-10 h-auto max-h-full opacity-60 sm:top-0 md:-left-1/4"
         src="/cute-pink-paws.png"
         alt="paws"
       />
@@ -14,9 +15,14 @@ export const LandingRoute = () => {
         <Header />
         <div className="z-20 flex min-h-screen w-full flex-col bg-white pt-4 backdrop-opacity-35">
           {/* container for all the sections */}
-          <div className="flex flex-col gap-10 p-20 md:gap-20">
+          <div className="flex flex-col gap-10 p-5 md:gap-20 md:p-20">
             <Hero />
             <Features />
+            <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:gap-20">
+              <img src="./src/features/landing/assets/2.png" alt="phone" />
+            </div>
+
+            <AboutFIP />
           </div>
         </div>
       </div>

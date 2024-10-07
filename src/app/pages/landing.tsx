@@ -1,4 +1,5 @@
 import { AboutFIP } from '@/features/landing/components/about-FIP';
+import { AppExplaination } from '@/features/landing/components/app-explaination';
 import { Features } from '@/features/landing/components/features';
 import { Footer } from '@/features/landing/components/footer';
 import { Header } from '@/features/landing/components/header';
@@ -17,8 +18,9 @@ export const LandingRoute = () => {
         <div className="z-20 flex min-h-screen w-full flex-col bg-white pt-4 backdrop-opacity-35">
           <div className="flex flex-col gap-10 p-5 md:gap-20 md:p-20">
             <Hero />
-            <Features />
             <AboutFIP />
+            <AppExplaination />
+            <Features />
           </div>
         </div>
         <Footer />

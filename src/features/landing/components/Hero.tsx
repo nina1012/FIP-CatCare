@@ -24,7 +24,7 @@ export const Hero = () => {
           Track Your Cat&apos;s
           <span className="text-primary"> FIP </span>Treatment Easily
         </h1>
-        <p className="mx-auto md:mx-0">
+        <p className="mx-auto text-gray-600 md:mx-0">
           The only app you need to monitor, manage, and analyze your cat&apos;s
           FIP treatment progress, helping you stay informed and proactive every
           step of the way

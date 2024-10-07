@@ -24,11 +24,11 @@ export const Features = () => {
   return (
     <section
       id="features"
-      className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3"
+      className="container mt-10 grid grid-cols-1 gap-10 md:grid-cols-3"
     >
       {features.map((feature) => (
         <div className="flex flex-col gap-3" key={feature.heading}>
-          <span className="text-primary">{feature.icon}</span>
+          <span className="text-5xl text-primary">{feature.icon}</span>
           <h5 className="font-semibold">{feature.heading}</h5>
           <p>{feature.desciption}</p>
         </div>

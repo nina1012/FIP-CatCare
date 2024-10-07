@@ -20,13 +20,13 @@ export const Header = () => {
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/#features">
-            Features
+          <Link className="nav-link" to="/#aboutFIP">
+            About FIP
           </Link>
         </li>
         <li>
-          <Link className="nav-link" to="/#aboutFIP">
-            About FIP
+          <Link className="nav-link" to="/#features">
+            Features
           </Link>
         </li>
       </ul>

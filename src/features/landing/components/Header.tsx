@@ -13,7 +13,7 @@ export const Header = () => {
         />
         <h1 className="text-xl">FIP CatCare</h1>
       </Link>
-      <ul className="flex gap-8">
+      <ul className="flex gap-8 ">
         <li>
           <Link to="/" className="nav-link">
             Home

@@ -80,10 +80,12 @@
 
 @layer utilities {
   .nav-link {
-    @apply hover:text-primary underline-offset-8 hover:underline transition-all;
+    @apply hover:text-primary underline-offset-8 hover:underline transition-all text-xs md:text-base;
   }
 }
 
 body {
   background-color: hsl(338, 53%, 50%);
+  color: rgb(55 65 81) !important;
+  color: rgb(31 41 55) !important;
 }

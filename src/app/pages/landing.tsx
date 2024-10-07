@@ -27,6 +27,11 @@ export const LandingRoute = () => {
         </div>
         <Footer />
       </div>
+      <img
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 h-auto max-h-full opacity-60"
+        src="/cute-pink-paws.png"
+        alt="paws"
+      />
     </div>
   );
 };

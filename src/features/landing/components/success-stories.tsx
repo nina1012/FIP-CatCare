@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const SuccessStories = () => {
   const cats = [
     {
@@ -18,12 +20,30 @@ export const SuccessStories = () => {
         "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
       name: 'Gary',
     },
+    {
+      img: './src/features/landing/assets/cat1.jpeg',
+      description:
+        'Luna showed tremendous courage throughout the treatment. The app helped her family keep track of her health logs, ensuring every step was carefully monitored.',
+      name: 'Luna',
+    },
+    {
+      img: './src/features/landing/assets/cat2.jpeg',
+      description:
+        "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
+      name: 'Gary',
+    },
+    {
+      img: './src/features/landing/assets/cat3.jpeg',
+      description:
+        "Whiskers's journey was tough, but with consistent tracking and treatment, he's now thriving. His family never missed a dose thanks to the reminders in the app.",
+      name: 'Whiskers',
+    },
   ];
   return (
     <section className="my-8">
       <div className="">
         <h2 className="mb-6 text-center text-4xl font-bold">
-          Success Stories: Triumph Over FIP
+          Success Stories: Triumph Over FIP 🌟
         </h2>
         <p className="mx-auto max-w-3xl text-center text-lg text-gray-700">
           The greatest highlight of our journey is seeing these brave cats
@@ -33,7 +53,7 @@ export const SuccessStories = () => {
           help every step of the way. 🐾💖
         </p>
       </div>
-      <div className="mt-8 grid grid-cols-1 justify-center gap-4 md:grid-cols-3">
+      <div className="my-8 grid grid-cols-1 justify-center gap-4 md:grid-cols-3">
         {cats.map((cat) => (
           <div
             key={cat.name}
@@ -44,12 +64,25 @@ export const SuccessStories = () => {
               alt={cat.name}
               className="size-full overflow-hidden rounded-md object-cover object-center"
             />
-            <div className="mt-2 text-center text-gray-700">
+            <div className="mt-2 py-4 text-center">
               <h6 className="text-lg font-semibold">{cat.name}</h6>
-              <p>{cat.description}</p>
+              <blockquote>{cat.description}</blockquote>
             </div>
           </div>
         ))}
+      </div>
+      <div className="my-8 flex items-center justify-center p-5 text-gray-700">
+        <Link
+          to="/"
+          className="flex items-center justify-center gap-2 font-bold"
+        >
+          <img
+            src="./src/features/landing/assets/cat-medication.png"
+            className="h-auto max-h-16"
+            alt="FIP CatCare"
+          />
+          <h1 className="text-4xl">FIP CatCare</h1>
+        </Link>
       </div>
     </section>
   );

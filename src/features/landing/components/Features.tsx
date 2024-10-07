@@ -24,7 +24,7 @@ export const Features = () => {
   return (
     <section
       id="features"
-      className="container my-10 grid grid-cols-1 gap-10 md:grid-cols-3"
+      className="my-10 grid grid-cols-1 gap-10 rounded-md bg-secondary p-10 md:grid-cols-3"
     >
       {features.map((feature) => (
         <div

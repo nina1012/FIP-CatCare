@@ -1,8 +1,11 @@
 export const AboutFIP = () => {
   // bg-[#00968840]
   return (
-    <section id="aboutFIP" className="my-4 flex flex-col gap-4">
-      <div className="mx-auto text-lg text-neutral-700 md:w-3/4">
+    <section
+      id="aboutFIP"
+      className="my-4 flex flex-col gap-4 text-center md:text-left"
+    >
+      <div className="mx-auto text-lg text-neutral-700 md:w-3/4 ">
         <h2 className="my-8 text-center text-3xl font-semibold">
           What is FIP?
         </h2>

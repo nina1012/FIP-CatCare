@@ -2,7 +2,7 @@ import { InstagramLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
 
 export const Footer = () => {
   return (
-    <footer className="w-full bg-gray-900 py-6 text-white">
+    <footer className="w-full bg-gray-900 py-6 text-center text-white md:text-left">
       <div className="mx-auto grid grid-cols-1 gap-4 px-6 md:grid-cols-3">
         <div>
           <h5 className="mb-2 text-lg font-semibold">About FIP CatCare App</h5>
@@ -25,8 +25,18 @@ export const Footer = () => {
         </div>
 
         <div>
-          <h5 className="mb-2 text-lg font-semibold">Contact Us</h5>
-          <p>Email: support@fipcatcare.com</p>
+          <h5 className="mb-2 text-lg font-semibold">
+            Created and developed by:{' '}
+            <a
+              target="_blank"
+              href="https://github.com/nina1012"
+              rel="noreferrer"
+              className="hover:underline"
+            >
+              nina1012
+            </a>
+          </h5>
+          <p>Made with ❤️ for cats and cats&apos; owners</p>
         </div>
       </div>
     </footer>

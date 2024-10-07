@@ -1,12 +1,11 @@
 export const AboutFIP = () => {
   // bg-[#00968840]
   return (
-    <section id="aboutFIP" className="flex flex-col gap-4">
-      <div className="mx-auto w-3/4 text-lg text-neutral-700">
+    <section id="aboutFIP" className="my-4 flex flex-col gap-4">
+      <div className="mx-auto text-lg text-neutral-700 md:w-3/4">
         <h2 className="my-8 text-center text-3xl font-semibold">
           What is FIP?
         </h2>
-
         <p className="">
           <span className="text-primary">
             Feline Infectious Peritonitis, (FIP)
@@ -27,11 +26,11 @@ export const AboutFIP = () => {
           Learn more
         </a>
       </div>
-      <div className="mx-auto w-3/4 text-lg text-neutral-700">
+      <div className="mx-auto text-lg text-neutral-700 md:w-3/4">
         <h3 className="my-8 text-center text-2xl font-semibold">
           3 stages of infection
         </h3>
-        <p>
+        <p className="text-center md:text-left">
           FIP is caused by a mutated form of the feline coronavirus. Symptoms
           include lethargy, fever, weight loss, and difficulty breathing. Early
           detection is crucial to managing the disease.

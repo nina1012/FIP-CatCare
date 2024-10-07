@@ -1,11 +1,11 @@
 export const AppExplaination = () => {
   return (
-    <section className="">
+    <section className="container">
       <h2 className="my-8 text-center text-3xl font-semibold">
         How Our App Helps You and Your Cat
       </h2>
-      <div className="flex items-center justify-evenly">
-        <div className="w-1/2 text-xl text-gray-700">
+      <div className="flex flex-col items-center justify-evenly md:flex-row">
+        <div className="text-center text-xl text-gray-700 md:w-1/2 md:max-w-2xl md:text-left">
           <p>
             <strong>FIP CatCare App</strong> is designed to make managing FIP
             treatment and monitoring your cat&apos;s progress easier and

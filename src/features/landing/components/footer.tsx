@@ -2,7 +2,7 @@ import { InstagramLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
 
 export const Footer = () => {
   return (
-    <footer className="bg-gray-900 py-6 text-white">
+    <footer className="w-full bg-gray-900 py-6 text-white">
       <div className="mx-auto grid grid-cols-1 gap-4 px-6 md:grid-cols-3">
         <div>
           <h5 className="mb-2 text-lg font-semibold">About FIP CatCare App</h5>

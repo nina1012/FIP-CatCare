@@ -24,11 +24,11 @@ export const Features = () => {
   return (
     <section
       id="features"
-      className="my-10 grid grid-cols-1 gap-10 rounded-md bg-secondary p-10 md:grid-cols-3"
+      className="my-10 grid grid-cols-1 gap-10 rounded-md p-10 md:grid-cols-3"
     >
       {features.map((feature) => (
         <div
-          className="flex flex-col items-center gap-3 text-center md:items-start md:text-left"
+          className="flex flex-col items-center gap-3 rounded-md bg-slate-50 p-4 text-center md:items-start md:text-left"
           key={feature.heading}
         >
           <span className="text-5xl text-primary">{feature.icon}</span>

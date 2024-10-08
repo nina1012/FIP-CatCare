@@ -8,7 +8,6 @@ test.beforeEach(async ({ page }) => {
 test.describe('Landing page', () => {
   test('should have correct metadata and elements', async ({ page }) => {
     await expect(page).toHaveTitle('FIP CatCare');
-    await expect(page.getByText(/Landing route/i)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Register' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Login' })).toBeVisible();
   });

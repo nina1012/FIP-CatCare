@@ -10,9 +10,14 @@ export const AboutFIP = () => {
           What is FIP?
         </h2>
         <p className="">
-          <span className="text-primary">
+          <a
+            href="https://en.wikipedia.org/wiki/Feline_infectious_peritonitis"
+            target="_blank"
+            className="nav-link inline-block p-px text-3xl text-primary transition-all hover:underline"
+            rel="noreferrer"
+          >
             Feline Infectious Peritonitis, (FIP)
-          </span>{' '}
+          </a>{' '}
           is a viral disease of cats caused by certain strains of a virus called
           the feline coronavirus. FIP is a viral disease that can lead to severe
           illness if not treated early. Understanding the symptoms and

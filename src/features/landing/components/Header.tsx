@@ -32,7 +32,7 @@ export const Header = () => {
       </ul>
       <nav>
         <ul
-          className="relative hidden h-full cursor-default select-none items-center justify-center gap-10
+          className="relative hidden h-full cursor-default select-none items-center justify-center gap-4
       rounded-sm px-2 py-1.5 text-base font-medium outline-none *:text-xs focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 md:flex
       "
         >

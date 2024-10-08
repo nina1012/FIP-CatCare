@@ -27,7 +27,7 @@ export const AppExplaination = () => {
           </p>
           <p>
             <a
-              className="nav-link inline-block p-px text-primary transition-all hover:underline"
+              className="nav-link inline-block p-px text-xl text-primary transition-all hover:underline"
               href="https://en.wikipedia.org/wiki/GS-441524"
               target="_blank"
               rel="noreferrer"
@@ -49,7 +49,7 @@ export const AppExplaination = () => {
         </div>
         <div className="overflow-hidden rounded-lg">
           <img
-            src="./src/features/landing/assets/p.png"
+            src="./src/features/landing/assets/phone.png"
             alt="Phone app"
             className="overflow-hidden rounded-lg"
           />

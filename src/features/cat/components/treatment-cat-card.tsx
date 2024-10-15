@@ -12,7 +12,7 @@ import { DailyLog } from '@/features/daily-logs/types';
 
 import { Cat } from '../types';
 
-import { TreatmentProgressBar } from './treatment-progress-bar';
+import { CatHealthMonitoring } from './cat-health-monitoring';
 
 type TreatmentProgressProps = {
   dailyLogs: DailyLog[] | null;
@@ -24,6 +24,7 @@ export const TreatmentProgressCard = ({
   catData,
 }: TreatmentProgressProps) => {
   if (!dailyLogs || !catData) return;
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -49,10 +50,11 @@ export const TreatmentProgressCard = ({
           </DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          <TreatmentProgressBar progress={(dailyLogs.length / 84) * 100} />
+          {/* <TreatmentProgressBar progress={(dailyLogs.length / 84) * 100} />
           <div className="text-primary">
             {((dailyLogs.length / 84) * 100).toFixed(1)}%
-          </div>
+          </div> */}
+          <CatHealthMonitoring cat={catData} />
         </DialogDescription>
       </DialogContent>
     </Dialog>

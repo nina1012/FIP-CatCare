@@ -32,7 +32,7 @@ export const loginFn = async ({
 };
 
 export const useLogin = ({ onSuccess, onError }: UseLoginOptions = {}) => {
-  const mutationFn = import.meta.env.DEV ? loginFn : mockLoginFn; // TODO, before building, change to PROD
+  const mutationFn = import.meta.env.PROD ? loginFn : mockLoginFn; // TODO, before building, change to PROD
 
   const { mutate: login, isPending } = useMutation({
     mutationFn,

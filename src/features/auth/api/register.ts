@@ -45,7 +45,7 @@ export const useRegister = ({
   onSuccess,
   onError,
 }: UseRegisterOptions = {}) => {
-  const mutationFn = import.meta.env.DEV ? registerFn : mockRegisterFn; // TODO, before building, change to PROD
+  const mutationFn = import.meta.env.PROD ? registerFn : mockRegisterFn; // TODO, before building, change to PROD
 
   const { mutate: registering, isPending } = useMutation({
     mutationFn,

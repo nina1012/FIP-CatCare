@@ -3,37 +3,37 @@ import { Link } from 'react-router-dom';
 export const SuccessStories = () => {
   const cats = [
     {
-      img: './src/features/landing/assets/cat3.jpeg',
+      img: '/landing-assets/cat3.jpeg',
       description:
         "Whiskers's journey was tough, but with consistent tracking and treatment, he's now thriving. His family never missed a dose thanks to the reminders in the app.",
       name: 'Whiskers',
     },
     {
-      img: './src/features/landing/assets/cat1.jpeg',
+      img: '/landing-assets/cat1.jpeg',
       description:
         'Luna showed tremendous courage throughout the treatment. The app helped her family keep track of her health logs, ensuring every step was carefully monitored.',
       name: 'Luna',
     },
     {
-      img: './src/features/landing/assets/cat2.jpeg',
+      img: '/landing-assets/cat2.jpeg',
       description:
         "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
       name: 'Gary',
     },
     {
-      img: './src/features/landing/assets/cat1.jpeg',
+      img: '/landing-assets/cat1.jpeg',
       description:
         'Luna showed tremendous courage throughout the treatment. The app helped her family keep track of her health logs, ensuring every step was carefully monitored.',
       name: 'Luna',
     },
     {
-      img: './src/features/landing/assets/cat2.jpeg',
+      img: '/landing-assets/cat2.jpeg',
       description:
         "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
       name: 'Gary',
     },
     {
-      img: './src/features/landing/assets/cat3.jpeg',
+      img: '/landing-assets/cat3.jpeg',
       description:
         "Whiskers's journey was tough, but with consistent tracking and treatment, he's now thriving. His family never missed a dose thanks to the reminders in the app.",
       name: 'Whiskers',
@@ -77,7 +77,7 @@ export const SuccessStories = () => {
           className="flex items-center justify-center gap-2 font-bold"
         >
           <img
-            src="./src/features/landing/assets/cat-medication.png"
+            src="/landing-assets/cat-medication.png"
             className="h-auto max-h-16"
             alt="FIP CatCare"
           />

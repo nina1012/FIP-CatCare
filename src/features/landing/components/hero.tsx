@@ -40,7 +40,7 @@ export const Hero = () => {
       </div>
       <div className="md:w-1/2">
         <img
-          src="./src/features/landing/assets/illustration.svg"
+          src="/landing-assets/illustration.svg"
           alt="illustration"
           className="block !size-full object-contain"
         />

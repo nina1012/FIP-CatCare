@@ -13,7 +13,7 @@ export const AppExplaination = () => {
             className="flex items-center justify-center gap-2 font-bold"
           >
             <img
-              src="./src/features/landing/assets/cat-medication.png"
+              src="/landing-assets/cat-medication.png"
               className="h-auto max-h-16"
               alt="FIP CatCare"
             />
@@ -49,7 +49,7 @@ export const AppExplaination = () => {
         </div>
         <div className="overflow-hidden rounded-lg">
           <img
-            src="./src/features/landing/assets/phone.png"
+            src="/landing-assets/phone.png"
             alt="Phone app"
             className="overflow-hidden rounded-lg"
           />

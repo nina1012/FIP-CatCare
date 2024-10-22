@@ -2,16 +2,13 @@ import { Link } from 'react-router-dom';
 
 export const AppExplaination = () => {
   return (
-    <section className="container">
+    <section className="">
       <h2 className="my-8 text-center text-3xl font-semibold">
         How Our App Helps You and Your Cat
       </h2>
-      <div className="flex flex-col items-center justify-evenly gap-4 lg:flex-row lg:gap-0">
+      <div className="flex flex-col items-center justify-evenly gap-8 lg:flex-row lg:gap-8">
         <div className="flex flex-col gap-6 text-center text-xl text-gray-700 lg:w-1/2 lg:max-w-2xl lg:text-left">
-          <Link
-            to="/"
-            className="flex items-center justify-center gap-2 font-bold"
-          >
+          <Link to="/" className="hidden items-center gap-2 font-bold md:flex">
             <img
               src="/landing-assets/cat-medication.png"
               className="h-auto max-h-16"
@@ -51,7 +48,7 @@ export const AppExplaination = () => {
           <img
             src="/landing-assets/phone.png"
             alt="Phone app"
-            className="overflow-hidden rounded-lg"
+            className="overflow-hidden rounded-lg object-cover"
           />
         </div>
       </div>

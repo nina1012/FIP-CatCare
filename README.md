@@ -1,3 +1,6 @@
+---
+---
+
 # FIP CatCare App 🐈 💉💊
 
 ## Project Description 📖
@@ -16,6 +19,51 @@ Feline Infectious Peritonitis (FIP) is a serious viral disease that affects cats
 FIP used to be considered untreatable, but recent advances have made treatment possible using specific antiviral medications. The treatment often involves precise dosing based on the cat’s weight, the type of FIP (wet, dry, ocular, or neurological), and the medication’s concentration.
 
 ## Planning application structure
+
+## Installation and Setup 🛠️
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone git@github.com:nina1012/FIP-CatCare.git
+   cd FIP-CatCare
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables:**
+
+   1. **Create a `.env` file** in the root directory of your project:
+
+      ```bash
+      touch .env
+      ```
+
+   2. **Add the following variables to your `.env` file.** Replace `<YOUR_SUPABASE_URL>` and `<YOUR_SUPABASE_ANON_KEY>` with your actual Supabase credentials:
+
+      ```bash
+      VITE_SUPABASE_URL=<YOUR_SUPABASE_URL>
+      VITE_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+      ```
+
+   3. **Example of how your `.env` file should look:**
+
+      ```bash
+      VITE_SUPABASE_URL=https://your-project-id.supabase.co
+      VITE_SUPABASE_ANON_KEY=your_anon_key
+      ```
+
+**Note**: Ensure that your `.env` file is not shared publicly, as it contains sensitive information. Since this app is built using Vite, remember to prefix your environment variables with `VITE_`
+
+4. **Run the development server:**
+
+   ```bash
+   npm run dev
+   ```
 
 ## App requirements 📎
 
@@ -54,3 +102,7 @@ FIP used to be considered untreatable, but recent advances have made treatment p
 ## Tables and data relationships 🖇️
 
 ![Supabase schema visualizer](./public/screenshots/FIP-CatCare-DB.png) (from supabase schema visualizer)
+
+```
+
+```

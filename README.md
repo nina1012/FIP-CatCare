@@ -18,7 +18,20 @@ Feline Infectious Peritonitis (FIP) is a serious viral disease that affects cats
 
 FIP used to be considered untreatable, but recent advances have made treatment possible using specific antiviral medications. The treatment often involves precise dosing based on the cat’s weight, the type of FIP (wet, dry, ocular, or neurological), and the medication’s concentration.
 
-## Planning application structure
+## Getting Started 💻
+
+You have two options to get started with the **FIP CatCare App**:
+
+1. **Use the Test Account**:
+
+   - If you want to quickly explore the app's functionality, you can use the test account provided below:
+     - **Email**: test@user.com
+     - **Password**: password
+
+   **Note**: This test account is read-only and designed for preview purposes. Any data entered or modified will not be saved permanently.
+
+2. **Follow Installation Instructions**:
+   - If you’d like to set up the app on your local machine, please follow the installation instructions below:
 
 ## Installation and Setup 🛠️
 
@@ -64,6 +77,8 @@ FIP used to be considered untreatable, but recent advances have made treatment p
    ```bash
    npm run dev
    ```
+
+## Planning application structure
 
 ## App requirements 📎
 

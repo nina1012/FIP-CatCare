@@ -13,7 +13,7 @@ export const AboutFIP = () => {
           <a
             href="https://en.wikipedia.org/wiki/Feline_infectious_peritonitis"
             target="_blank"
-            className="nav-link inline-block p-px text-3xl text-primary transition-all hover:underline"
+            className="nav-link inline-block p-px !text-base text-primary transition-all hover:underline"
             rel="noreferrer"
           >
             Feline Infectious Peritonitis, (FIP)

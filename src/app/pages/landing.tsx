@@ -14,10 +14,10 @@ export const LandingRoute = () => {
         src="/cute-pink-paws.png"
         alt="paws"
       />
-      <div className="relative flex h-min w-full flex-none flex-col flex-nowrap items-center justify-start gap-0 overflow-visible bg-primary p-6">
+      <div className="relative flex h-min w-full flex-none flex-col flex-nowrap items-center justify-start gap-0 overflow-visible bg-primary p-3 md:p-6">
         <Header />
         <div className="z-20 flex min-h-screen w-full flex-col bg-white pt-4 backdrop-opacity-35">
-          <div className="flex flex-col gap-10 p-5 md:gap-20 md:p-20">
+          <div className="flex flex-col gap-10 p-5 md:gap-20 md:px-20">
             <Hero />
             <AboutFIP />
             <AppExplaination />

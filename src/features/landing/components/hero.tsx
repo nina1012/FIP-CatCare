@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/common/button';
 
 export const Hero = () => {
   return (
-    <div className="flex flex-col items-center justify-between gap-10 md:flex-row md:gap-20">
-      <div className="flex flex-col gap-6 text-center md:w-2/3 md:text-left">
+    <div className="flex flex-col items-center justify-evenly gap-8 lg:flex-row lg:gap-8">
+      <div className="flex flex-col gap-6 text-center md:w-1/2 md:text-left">
         <div className="mx-auto inline-block w-fit rounded-3xl !bg-pink-200 p-1 !text-[10px] transition-all hover:ring-1 hover:ring-primary md:m-0">
           <Link to="/#feature" className="flex items-center gap-1 pr-2 ">
             <Badge

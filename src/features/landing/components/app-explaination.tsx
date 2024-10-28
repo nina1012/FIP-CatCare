@@ -8,7 +8,10 @@ export const AppExplaination = () => {
       </h2>
       <div className="flex flex-col items-center justify-evenly gap-8 lg:flex-row lg:gap-8">
         <div className="flex flex-col gap-6 text-center text-xl text-gray-700 lg:w-1/2 lg:max-w-2xl lg:text-left">
-          <Link to="/" className="hidden items-center gap-2 font-bold md:flex">
+          <Link
+            to="/"
+            className="hidden items-center justify-center gap-2 font-bold md:flex lg:justify-start"
+          >
             <img
               src="/landing-assets/cat-medication.png"
               className="h-auto max-h-16"
@@ -24,7 +27,7 @@ export const AppExplaination = () => {
           </p>
           <p>
             <a
-              className="nav-link inline-block p-px text-xl text-primary transition-all hover:underline"
+              className="nav-link inline-block p-px !text-base text-primary transition-all hover:underline"
               href="https://en.wikipedia.org/wiki/GS-441524"
               target="_blank"
               rel="noreferrer"

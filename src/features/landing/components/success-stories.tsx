@@ -20,24 +20,6 @@ export const SuccessStories = () => {
         "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
       name: 'Gary',
     },
-    {
-      img: '/landing-assets/cat1.jpeg',
-      description:
-        'Luna showed tremendous courage throughout the treatment. The app helped her family keep track of her health logs, ensuring every step was carefully monitored.',
-      name: 'Luna',
-    },
-    {
-      img: '/landing-assets/cat2.jpeg',
-      description:
-        "Gary's recovery was made easier with the app's comprehensive health records. His weight and medication were closely monitored, making his treatment smoother.",
-      name: 'Gary',
-    },
-    {
-      img: '/landing-assets/cat3.jpeg',
-      description:
-        "Whiskers's journey was tough, but with consistent tracking and treatment, he's now thriving. His family never missed a dose thanks to the reminders in the app.",
-      name: 'Whiskers',
-    },
   ];
   return (
     <section className="my-8">

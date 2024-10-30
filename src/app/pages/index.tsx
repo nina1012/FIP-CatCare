@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { Notifications } from '@/features/notifications/notifications';
 import { ProtectedRoute } from '@/lib/auth';
 
 import { AppRoot } from './app/root';
@@ -34,6 +35,7 @@ export const createRouter = () =>
       element: (
         <ProtectedRoute>
           <AppRoot />
+          <Notifications />
         </ProtectedRoute>
       ),
       children: [

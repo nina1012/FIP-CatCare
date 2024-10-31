@@ -11,6 +11,9 @@ import {
 } from '@/components/ui/common/menubar';
 import { useUser } from '@/features/auth/api/get-auth-user';
 import { useLogout } from '@/features/auth/api/logout';
+import { useNotifications } from '@/features/notifications/api/get-notifications';
+import NotificationBell from '@/features/notifications/components/notification-bell';
+import { Notifications } from '@/features/notifications/components/notifications';
 import { useUserData } from '@/features/user/api/get-user-data';
 
 import { AvatarFallback, AvatarImage } from '../common/avatar';
@@ -34,8 +37,10 @@ export const Nav = () => {
       });
     },
   });
+  const { notifications } = useNotifications();
   return (
-    <nav>
+    <nav className="flex items-center">
+      {/* menu on desktop screen */}
       <ul
         className="relative hidden h-full cursor-default select-none items-center justify-center gap-10
       rounded-sm px-2 py-1.5 text-base font-medium outline-none *:text-xs focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 md:flex
@@ -56,16 +61,34 @@ export const Nav = () => {
             Dosage calculator
           </Link>
         </li>
-        <li>
-          <Button
-            className="flex w-full justify-start"
-            onClick={() => logout()}
-          >
-            Logout
-          </Button>
-        </li>
       </ul>
-      <div className="block md:hidden md:opacity-0">
+      <div className="hidden gap-2 md:flex">
+        <Menubar className="rounded border-none">
+          <MenubarMenu>
+            <MenubarTrigger className="hover:cursor-pointer">
+              <NotificationBell hasNotifications={notifications.length > 0} />
+            </MenubarTrigger>
+            <MenubarContent className="">
+              <Notifications notifications={notifications} />
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
+        <Button className="flex w-full justify-start" onClick={() => logout()}>
+          Logout
+        </Button>
+      </div>
+      {/* menu on mobile screen */}
+      <div className="flex items-center gap-2 md:hidden md:opacity-0">
+        <Menubar className="rounded border-none">
+          <MenubarMenu>
+            <MenubarTrigger>
+              <NotificationBell hasNotifications={notifications.length > 0} />
+            </MenubarTrigger>
+            <MenubarContent>
+              <Notifications notifications={notifications} />
+            </MenubarContent>
+          </MenubarMenu>
+        </Menubar>
         <Menubar className="size-12 rounded-full">
           <MenubarMenu>
             <MenubarTrigger className="rounded-full !bg-transparent p-0  hover:cursor-pointer">

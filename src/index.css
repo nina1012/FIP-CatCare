@@ -80,7 +80,7 @@
 
 @layer utilities {
   .nav-link {
-    @apply hover:text-primary underline-offset-8 hover:underline transition-all text-xs md:text-base;
+    @apply hover:text-primary underline-offset-8 hover:underline transition-all text-xs md:text-sm;
   }
 }
 

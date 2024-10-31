@@ -1,14 +1,15 @@
-import { Bell, BellDot } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { supabase } from '@/lib/supabase';
 
-export function Notifications() {
+export const useNotifications = () => {
   const [notifications, setNotifications] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Subscribe to the notifications table via real-time channel
     // used channel().on() - because of the typescript and to create real-time channel which allows us to listen to specific db changes
+    // When we subscribe to the channel this way, the WebSocket connection is being opened and it listens to events to happen (insert, update, etc.)
     const channel = supabase
       .channel('notifications-channel')
       .on(
@@ -22,20 +23,12 @@ export function Notifications() {
         },
       )
       .subscribe();
+    setIsLoading(false);
 
     // cleanup the subscription when the component unmounts
     return () => {
       supabase.removeChannel(channel);
     };
   }, []);
-
-  return (
-    <div className="relative z-50 bg-red-400">
-      <h2>Your Notifications</h2>
-      {notifications.length > 0 ? <BellDot /> : <Bell />}
-      {notifications.map((notification) => (
-        <div key={notification.id}>{notification.message}</div>
-      ))}
-    </div>
-  );
-}
+  return { notifications, isLoading };
+};

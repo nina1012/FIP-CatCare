@@ -8,6 +8,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/testing/setup.ts'],
+    include: ['src/**/*.test.ts'],
+    exclude: ['src/e2e/**'],
   },
   define: {
     'process.env.NODE_ENV': "'test'",

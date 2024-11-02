@@ -37,7 +37,7 @@ export const Nav = () => {
       });
     },
   });
-  const { notifications } = useNotifications();
+  const { notifications, deleteNotification } = useNotifications();
   return (
     <nav className="flex items-center">
       {/* menu on desktop screen */}
@@ -66,10 +66,18 @@ export const Nav = () => {
         <Menubar className="rounded border-none">
           <MenubarMenu>
             <MenubarTrigger className="hover:cursor-pointer">
-              <NotificationBell hasNotifications={notifications.length > 0} />
+              <NotificationBell
+                hasNotifications={
+                  notifications.filter((not) => not.deleted === false).length >
+                  0
+                }
+              />
             </MenubarTrigger>
             <MenubarContent className="">
-              <Notifications notifications={notifications} />
+              <Notifications
+                notifications={notifications}
+                deleteNotification={deleteNotification}
+              />
             </MenubarContent>
           </MenubarMenu>
         </Menubar>
@@ -82,10 +90,18 @@ export const Nav = () => {
         <Menubar className="rounded border-none">
           <MenubarMenu>
             <MenubarTrigger>
-              <NotificationBell hasNotifications={notifications.length > 0} />
+              <NotificationBell
+                hasNotifications={
+                  notifications.filter((not) => not.deleted === false).length >
+                  0
+                }
+              />
             </MenubarTrigger>
             <MenubarContent>
-              <Notifications notifications={notifications} />
+              <Notifications
+                notifications={notifications}
+                deleteNotification={deleteNotification}
+              />
             </MenubarContent>
           </MenubarMenu>
         </Menubar>

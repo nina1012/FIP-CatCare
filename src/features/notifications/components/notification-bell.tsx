@@ -4,9 +4,10 @@ interface NotificationBellProps {
   hasNotifications: boolean;
 }
 
-const NotificationBell: React.FC<NotificationBellProps> = ({
+export const NotificationBell: React.FC<NotificationBellProps> = ({
   hasNotifications,
 }) => {
+  // hasNotification should only care about notifications that are not set deleted = true!!!
   return (
     <div className="relative">
       <Bell className="text-inherit" />

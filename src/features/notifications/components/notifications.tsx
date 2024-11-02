@@ -4,8 +4,10 @@ import { NotificationItem } from './notification-item';
 
 export const Notifications = ({
   notifications = [],
+  deleteNotification,
 }: {
   notifications: Notification[];
+  deleteNotification: (id: string) => Promise<void>;
 }) => {
   return (
     <div className=" rounded-lg bg-gray-50 p-2">
@@ -19,6 +21,7 @@ export const Notifications = ({
             key={notification.id}
             title={notification.title}
             message={notification.message}
+            deleteNotification={() => deleteNotification(notification.id)}
           />
         ))
       ) : (

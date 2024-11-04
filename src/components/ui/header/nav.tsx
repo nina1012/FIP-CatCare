@@ -63,7 +63,10 @@ export const Nav = () => {
         </li>
       </ul>
       <div className="hidden gap-2 md:flex">
-        <Menubar className="rounded border-none">
+        <Menubar
+          data-testid="menu-notifications"
+          className="rounded border-none"
+        >
           <MenubarMenu>
             <MenubarTrigger className="hover:cursor-pointer">
               <NotificationBell
@@ -73,7 +76,7 @@ export const Nav = () => {
                 }
               />
             </MenubarTrigger>
-            <MenubarContent className="">
+            <MenubarContent data-testid="notifications" className="">
               <Notifications
                 notifications={notifications}
                 deleteNotification={deleteNotification}

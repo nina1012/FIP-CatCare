@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '@/lib/react-query';
 import { supabase } from '@/lib/supabase';
 
-import { mockRegisterFn } from './mocks/register.mock';
+// import { mockRegisterFn } from './mocks/register.mock';
 
 type UseRegisterOptions = {
   onSuccess?: (user: AuthResponse['data']) => void;
@@ -45,10 +45,10 @@ export const useRegister = ({
   onSuccess,
   onError,
 }: UseRegisterOptions = {}) => {
-  const mutationFn = import.meta.env.PROD ? registerFn : mockRegisterFn; // TODO, before building, change to PROD
-
+  // testing the msw!!!
+  // const mutationFn = import.meta.env.PROD ? registerFn : mockRegisterFn;
   const { mutate: registering, isPending } = useMutation({
-    mutationFn,
+    mutationFn: registerFn,
     mutationKey: ['auth-user'],
     onSuccess: (data) => {
       queryClient.setQueryData(['auth-user'], {

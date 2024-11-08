@@ -5,7 +5,7 @@ export const AboutFIP = () => {
       id="aboutFIP"
       className="my-4 flex flex-col gap-4 text-center md:text-left"
     >
-      <div className="mx-auto text-lg text-neutral-700 md:w-3/4 ">
+      <div className="mx-auto text-lg text-neutral-700 lg:w-3/4 ">
         <h2 className="my-8 text-center text-3xl font-semibold">
           What is FIP?
         </h2>
@@ -45,7 +45,7 @@ export const AboutFIP = () => {
         </p>
         <p>There are 3 main stages of FIP:</p>
 
-        <div className="mt-10 grid grid-cols-1 gap-10 text-center md:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-10 text-center lg:grid-cols-3">
           <div className="flex flex-col gap-4 rounded-md border-2 border-[#00968830] bg-[#00968830] p-4 ">
             <h5 className="text-3xl font-semibold">Early Stage</h5>
             <p className="text-lg">

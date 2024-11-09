@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const AppExplaination = () => {
   return (
-    <section className="">
+    <section className="my-4 flex flex-col gap-4 text-center md:text-left">
       <div className="mx-auto text-lg text-neutral-700">
         <h2 className="my-8 text-center text-3xl font-semibold">
           How Our App Helps You and Your Cat

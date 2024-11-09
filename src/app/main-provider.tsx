@@ -4,6 +4,7 @@ import { LucideRefreshCcw } from 'lucide-react';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
+import DevBadge from '@/components/ui/common/dev-badge';
 import { Spinner } from '@/components/ui/common/spinner';
 import { Toaster } from '@/components/ui/toast/toaster';
 import { queryClient } from '@/lib/react-query';
@@ -36,6 +37,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <QueryClientProvider client={queryClient}>
           {import.meta.env.DEV && <ReactQueryDevtools />}
+          <DevBadge />
           {children}
           <Toaster />
         </QueryClientProvider>

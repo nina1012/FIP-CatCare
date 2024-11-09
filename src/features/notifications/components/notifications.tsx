@@ -18,6 +18,7 @@ export const Notifications = ({
       {notifications.length > 0 ? (
         notifications.map((notification) => (
           <NotificationItem
+            data-testid={`notification-item-${notification.id}`}
             key={notification.id}
             title={notification.title}
             message={notification.message}
@@ -25,7 +26,9 @@ export const Notifications = ({
           />
         ))
       ) : (
-        <div className="text-sm">No notifications</div>
+        <div data-testid="no-notifications" className="text-sm">
+          No notifications
+        </div>
       )}
     </div>
   );

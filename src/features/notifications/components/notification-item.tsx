@@ -12,7 +12,10 @@ export const NotificationItem = ({
   deleteNotification,
 }: NotificationItemProps) => {
   return (
-    <div className="mb-2 flex items-start justify-between rounded-lg border-l-4 border-primary bg-white p-4 shadow-lg">
+    <div
+      data-testid="notification-item"
+      className="mb-2 flex items-start justify-between rounded-lg border-l-4 border-primary bg-white p-4 shadow-lg"
+    >
       <div className="grow">
         <h4 className="text-base font-bold text-gray-800">{title}</h4>
         <p className="text-sm text-gray-600">{message}</p>

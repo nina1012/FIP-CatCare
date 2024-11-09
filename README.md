@@ -20,6 +20,10 @@ FIP used to be considered untreatable, but recent advances have made treatment p
 
 ## Getting Started 💻
 
+#### Important Notice ⚠️
+
+**Please Note**: Some actions and features in this project are **not functional in production** because they rely on specific data or configurations that have yet to be pushed to the production database.
+
 You have two options to get started with the **FIP CatCare App**:
 
 1. **Use the Test Account**:

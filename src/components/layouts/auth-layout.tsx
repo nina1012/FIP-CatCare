@@ -1,3 +1,5 @@
+import { Logo } from '../ui/common/logo';
+
 type AuthLayoutProps = {
   children: React.ReactNode;
   title: string;
@@ -13,9 +15,10 @@ export const AuthLayout = ({ children, title }: AuthLayoutProps) => {
       />
       <div className="relative sm:mx-auto sm:w-full sm:max-w-lg">
         <div className="rounded-lg bg-white px-4 py-8 shadow sm:px-10">
-          <h2 className="mb-4 text-3xl font-extrabold text-gray-900">
-            {title}
-          </h2>
+          <div className="mb-4 flex justify-start bg-white">
+            <Logo />
+          </div>
+          <h2 className="mb-4 text-3xl font-bold text-gray-900">{title}</h2>
           {children}
         </div>
       </div>

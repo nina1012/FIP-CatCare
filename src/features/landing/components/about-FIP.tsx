@@ -5,45 +5,49 @@ export const AboutFIP = () => {
       id="aboutFIP"
       className="my-4 flex flex-col gap-4 text-center md:text-left"
     >
-      <div className="mx-auto text-lg text-neutral-700 lg:w-3/4 ">
+      <div className="mx-auto text-lg text-neutral-700 ">
         <h2 className="my-8 text-center text-3xl font-semibold">
           What is FIP?
         </h2>
-        <p className="">
+        <div className="mx-auto max-w-3xl text-center text-lg text-gray-700">
+          <p>
+            <a
+              href="https://en.wikipedia.org/wiki/Feline_infectious_peritonitis"
+              target="_blank"
+              className="nav-link inline-block p-px !text-base text-primary transition-all hover:underline"
+              rel="noreferrer"
+            >
+              Feline Infectious Peritonitis, (FIP)
+            </a>{' '}
+            is a viral disease of cats caused by certain strains of a virus
+            called the feline coronavirus. FIP is a viral disease that can lead
+            to severe illness if not treated early. Understanding the symptoms
+            and monitoring progress is key to your cat&apos;s recovery.
+          </p>
+          <p>
+            FIP is extremely fatal with an estimated mortality rate of ~96% if
+            untreated.
+          </p>
           <a
-            href="https://en.wikipedia.org/wiki/Feline_infectious_peritonitis"
-            target="_blank"
-            className="nav-link inline-block p-px !text-base text-primary transition-all hover:underline"
-            rel="noreferrer"
+            className="my-4 inline-block rounded p-2 ring-1 ring-neutral-700 hover:text-primary hover:ring-primary"
+            href="https://icatcare.org/app/uploads/2024/02/FIP-pet-owner-brochure-FINAL-V1-Feb-2024-A5-161.pdf"
           >
-            Feline Infectious Peritonitis, (FIP)
-          </a>{' '}
-          is a viral disease of cats caused by certain strains of a virus called
-          the feline coronavirus. FIP is a viral disease that can lead to severe
-          illness if not treated early. Understanding the symptoms and
-          monitoring progress is key to your cat&apos;s recovery.
-        </p>
-        <p>
-          FIP is extremely fatal with an estimated mortality rate of ~96% if
-          untreated.
-        </p>
-        <a
-          className="my-4 inline-block rounded p-2 ring-1 ring-neutral-700 hover:text-primary hover:ring-primary"
-          href="https://icatcare.org/app/uploads/2024/02/FIP-pet-owner-brochure-FINAL-V1-Feb-2024-A5-161.pdf"
-        >
-          Learn more
-        </a>
+            Learn more
+          </a>
+        </div>
       </div>
-      <div className="mx-auto text-lg text-neutral-700 md:w-3/4">
+      <div className="mx-auto text-lg text-neutral-700">
         <h3 className="my-8 text-center text-2xl font-semibold">
           3 stages of infection
         </h3>
-        <p className="text-center md:text-left">
-          FIP is caused by a mutated form of the feline coronavirus. Symptoms
-          include lethargy, fever, weight loss, and difficulty breathing. Early
-          detection is crucial to managing the disease.
-        </p>
-        <p>There are 3 main stages of FIP:</p>
+        <div className="mx-auto max-w-3xl text-center text-lg text-gray-700">
+          <p>
+            FIP is caused by a mutated form of the feline coronavirus. Symptoms
+            include lethargy, fever, weight loss, and difficulty breathing.
+            Early detection is crucial to managing the disease.
+          </p>
+          <p>There are 3 main stages of FIP:</p>
+        </div>
 
         <div className="mt-10 grid grid-cols-1 gap-10 text-center lg:grid-cols-3">
           <div className="flex flex-col gap-4 rounded-md border-2 border-[#00968830] bg-[#00968830] p-4 ">

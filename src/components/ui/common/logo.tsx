@@ -11,7 +11,7 @@ export const Logo = ({ className }: LogoProps) => {
       to="/"
       className={clsx(
         className,
-        'mx-auto flex items-center justify-center gap-2 ',
+        'flex items-center justify-center gap-2 md:mx-0 ',
       )}
     >
       <img

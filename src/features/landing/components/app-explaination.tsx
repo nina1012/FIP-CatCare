@@ -8,7 +8,7 @@ export const AppExplaination = () => {
           How Our App Helps You and Your Cat
         </h2>
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-8">
-          <div className="flex min-w-96 flex-col gap-6 text-center text-xl text-gray-700 lg:w-2/3 lg:max-w-2xl lg:text-left">
+          <div className="flex flex-col gap-6 text-center text-xl text-gray-700 md:min-w-96 lg:w-2/3 lg:max-w-2xl lg:text-left">
             <Link
               to="/"
               className="hidden items-center justify-center gap-2 font-bold md:flex lg:justify-start"

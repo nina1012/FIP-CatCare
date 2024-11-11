@@ -3,6 +3,14 @@
 
 # FIP CatCare App 🐈 💉💊
 
+The only app you need to monitor, manage, and analyze your cat's FIP treatment progress, helping you stay informed and proactive every step of the way
+
+## Table of Contents
+
+- [Project Description](#project-description)
+- [Getting started](#getting-started)
+- [Installation and Setup](#installation-and-setup)
+
 ## Project Description 📖
 
 **FIP CatCare app** is a web app for tracking and managing medication schedules, daily health logs, and test results for cats undergoing treatment for FIP. For owners of FIP positive cats, in hope for fast recovery 🍀

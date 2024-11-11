@@ -67,4 +67,11 @@ export const createRouter = () =>
         },
       ],
     },
+    {
+      path: '*',
+      lazy: async () => {
+        const { NotFoundRoute } = await import('./not-found');
+        return { Component: NotFoundRoute };
+      },
+    },
   ]);

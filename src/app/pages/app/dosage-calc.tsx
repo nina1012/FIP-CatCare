@@ -27,7 +27,7 @@ export const DosageCalcRoute = () => {
         ></CustomTabContent>
       </div>
       {/* FAQ and accordion */}
-      {/* <div className="my-12">
+      {/* <div className="my-12 w-1/2">
         <h2 className="my-4  text-2xl font-semibold">GS-441524 FAQs</h2>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
@@ -68,6 +68,9 @@ export const DosageCalcRoute = () => {
           </AccordionItem>
         </Accordion>
       </div> */}
+      <div className="size-1/2 opacity-50">
+        <img src="/cute-pink-paws.png" alt="cat" />
+      </div>
     </div>
   );
 };

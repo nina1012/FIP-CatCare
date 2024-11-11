@@ -3,10 +3,10 @@ export const Loader = () => {
     <div className="size-40 text-center">
       <img
         alt="loader"
-        src="/cat-medication.png"
-        className="size-full rounded-lg"
+        src="/white-cat.png"
+        className="size-full animate-pulse rounded-lg"
       />
-      <h4 className="mt-4 font-semibold">Loading...</h4>
+      <h4 className="font-semibold">Loading...</h4>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/common/button';
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-40 flex h-20 w-full items-center !justify-between bg-white px-4 shadow-sm backdrop-blur-2xl md:px-8">
+    <header className="sticky top-0 z-40 flex h-20 w-full items-center !justify-between rounded-t-lg bg-white px-4 shadow-sm backdrop-blur-2xl md:px-8">
       <Link
         to="/"
         className="flex items-center justify-center gap-1 break-keep font-bold md:gap-2"

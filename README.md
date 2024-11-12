@@ -5,7 +5,7 @@
 
 The only app you need to monitor, manage, and analyze your cat's FIP treatment progress, helping you stay informed and proactive every step of the way
 
-![Application overview image](./public/screenshots/application-overview.png)
+![Application overview image](./public/screenshots/FIP-CatCare.png)
 
 ## Table of Contents
 

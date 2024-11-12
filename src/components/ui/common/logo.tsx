@@ -19,7 +19,10 @@ export const Logo = ({ className }: LogoProps) => {
         className="mx-auto inline-block h-auto max-h-10"
         alt="FIP CatCare"
       />
-      <h1 className="hidden text-center text-sm font-extrabold md:text-xl lg:inline-block xl:text-2xl">
+      <h1
+        aria-hidden="true"
+        className="hidden text-center text-sm font-extrabold md:text-xl lg:inline-block xl:text-2xl"
+      >
         FIP CatCare
       </h1>
     </Link>

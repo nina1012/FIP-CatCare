@@ -15,7 +15,7 @@ const DevBadge = () => {
 
       {showMessage && (
         <div
-          className="absolute bottom-0 right-0 mt-2 flex w-80 justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-lg outline-primary"
+          className="absolute bottom-0 right-0 flex w-80 justify-between rounded-lg border border-gray-200 bg-white p-4 shadow-lg outline-primary"
           onClick={() => setShowMessage(false)}
           aria-hidden="true"
         >

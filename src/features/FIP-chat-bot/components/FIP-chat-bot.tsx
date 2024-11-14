@@ -24,8 +24,8 @@ export const FIPChatBot = () => {
       <Button onClick={toggleIsOpen} className="justify-self-end">
         <Cat />
       </Button>
-      <div className={clsx(isOpen ? 'flex' : 'hidden')}>
-        <form onSubmit={handleSubmit}>
+      <div className={clsx(isOpen ? 'block' : 'hidden')}>
+        <form onSubmit={handleSubmit} className="flex gap-4">
           <input
             type="text"
             value={prompt}

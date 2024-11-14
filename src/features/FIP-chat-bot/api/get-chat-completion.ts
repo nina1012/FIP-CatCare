@@ -1,4 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { InvalidateQueryFilters, useMutation } from '@tanstack/react-query';
+
+import { queryClient } from '@/lib/react-query';
 
 export const getChatCompletion = async (prompt: string) => {
   const response = await fetch('/api/openai', {
@@ -14,14 +16,21 @@ export const getChatCompletion = async (prompt: string) => {
   }
 
   const data = await response.json();
+  console.log(data.message);
   return data.message;
 };
 
-export const useChatCompletion = (prompt: string) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['chat', prompt],
-    queryFn: () => getChatCompletion(prompt),
+export const useChatCompletion = () => {
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: getChatCompletion,
+    mutationKey: ['chat'],
+    onSuccess: () => {
+      queryClient.invalidateQueries(['chat'] as InvalidateQueryFilters);
+    },
+    onError: (error) => {
+      console.error('Create Chat Completion error:', error);
+    },
   });
 
-  return { data, isLoading, error };
+  return { mutate, isPending, error };
 };

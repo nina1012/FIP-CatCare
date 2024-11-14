@@ -1,0 +1,34 @@
+import { VercelRequest, VercelResponse } from '@vercel/node';
+
+import openai from '../src/lib/openai-client';
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  const allowedOrigin =
+    process.env.NODE_ENV === 'production'
+      ? process.env.PROD_FRONTEND_URL
+      : process.env.DEV_FRONTEND_URL;
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin || '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  console.log(allowedOrigin);
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  try {
+    const { prompt } = req.body;
+    const response = await openai.chat.completions.create({
+      messages: [{ role: 'system', content: prompt }],
+      model: 'gpt-3.5-turbo',
+    });
+
+    res.status(200).json(response.choices[0].message.content);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}

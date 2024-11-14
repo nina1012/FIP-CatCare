@@ -3,6 +3,7 @@ export const enableMocking = async () => {
     ![typeof window, typeof document].includes('undefined');
   if (isBrowser() && process.env.NODE_ENV === 'development') {
     const { worker } = await import('./browser');
-    import.meta.env.DEV ? worker.start() : worker.stop();
+    // import.meta.env.DEV ? worker.start() : worker.stop();
+    worker.stop();
   }
 };

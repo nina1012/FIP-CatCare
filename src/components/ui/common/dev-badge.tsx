@@ -5,7 +5,7 @@ const DevBadge = () => {
   const [showMessage, setShowMessage] = useState(false);
 
   return (
-    <div className="fixed bottom-4 left-4 z-[1000]">
+    <div className="fixed bottom-4 left-4 z-50">
       <button
         onClick={() => setShowMessage(!showMessage)}
         className="animate-pulse rounded-full bg-yellow-500 px-3 py-1 text-sm font-bold text-white shadow-lg transition hover:bg-yellow-600"

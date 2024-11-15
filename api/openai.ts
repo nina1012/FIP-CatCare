@@ -3,28 +3,37 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { openai } from '../src/lib/openai-client';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
     const { prompt } = req.body;
-    const response = await openai.chat.completions.create({
-      messages: [{ role: 'system', content: prompt }],
-      model: 'gpt-4',
+
+    if (!prompt) {
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+
+    const completion = await openai.completions.create({
+      prompt: prompt,
+      model: 'gpt-3.5-turbo',
+      max_tokens: 100,
     });
 
-    res.status(200).json(response.choices[0].message.content);
+    console.log('OpenAI completion:', completion);
+
+    if (!completion) {
+      return res.status(500).json({ error: 'No response from OpenAI' });
+    }
+    return res.status(200).json({ message: completion });
   } catch (error) {
-    console.error('Error interacting with OpenAI:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error:', error);
+    return res.status(500).json({ error: 'Error fetching chat completion' });
   }
 }
+
+const completion = await openai.chat.completions.create({
+  model: 'gpt-4o',
+  messages: [{ role: 'user', content: 'write a haiku about ai' }],
+});
+console.log(completion);

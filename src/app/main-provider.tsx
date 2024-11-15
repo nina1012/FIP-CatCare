@@ -7,7 +7,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import DevBadge from '@/components/ui/common/dev-badge';
 import { Spinner } from '@/components/ui/common/spinner';
 import { Toaster } from '@/components/ui/toast/toaster';
-import { FIPChatBot } from '@/features/FIP-chat-bot/components/FIP-chat-bot';
 import { queryClient } from '@/lib/react-query';
 
 const ErrorFallback = () => {
@@ -39,7 +38,6 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         <QueryClientProvider client={queryClient}>
           {import.meta.env.DEV && <ReactQueryDevtools />}
           <DevBadge />
-          <FIPChatBot />
           {children}
           <Toaster />
         </QueryClientProvider>

@@ -3,6 +3,8 @@
 
 # FIP CatCare App 🐈 💉💊
 
+_(🆕 features, ongoing updates!)_
+
 The only app you need to monitor, manage, and analyze your cat's FIP treatment progress, helping you stay informed and proactive every step of the way
 
 ![Application overview image](./public/screenshots/FIP-CatCare.png)

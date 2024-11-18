@@ -1,5 +1,6 @@
 import { AboutFIP } from '@/features/landing/components/about-FIP';
 import { AppExplaination } from '@/features/landing/components/app-explaination';
+import { FAQ } from '@/features/landing/components/faq';
 import { Features } from '@/features/landing/components/features';
 import { Footer } from '@/features/landing/components/footer';
 import { Header } from '@/features/landing/components/header';
@@ -22,6 +23,7 @@ export const LandingRoute = () => {
             <AboutFIP />
             <AppExplaination />
             <Features />
+            <FAQ />
             <SuccessStories />
           </div>
         </div>

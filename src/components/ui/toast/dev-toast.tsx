@@ -12,9 +12,9 @@ export const DevToast = () => {
           <>
             <p>Explore the app with our demo account:</p>
             <p>
-              <strong>Username:</strong> <code>demo@example.com</code>
+              <strong>Username:</strong> <code>test@user.com</code>
               <br />
-              <strong>Password:</strong> <code>password123</code>
+              <strong>Password:</strong> <code>password</code>
               <div>
                 <a
                   className="text-primary underline"
@@ -23,7 +23,7 @@ export const DevToast = () => {
                     localStorage.setItem('dev-toast-has-been-seen', 'true')
                   }
                 >
-                  Log in page
+                  Log in
                 </a>
               </div>
             </p>

@@ -21,7 +21,7 @@ export const DosageCalcRoute = () => {
         <div className="flex flex-col gap-8">
           <h2 className="text-2xl font-semibold">Dosage Calculator</h2>
           <p className="max-w-xl">
-            We offer GS-441524 in three concentrations: 15 mg, 20 mg, and 30 mg.
+            We offer GS-441524 in three concentrations: 15 mg, 20 mg and 30 mg.
             As your cat recovers, it will start to gain weight. Monitoring
             progress in recovery is important. You should weigh your cat every
             week and adjust the medication dose using this calculator to match

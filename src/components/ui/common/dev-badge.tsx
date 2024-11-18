@@ -21,7 +21,7 @@ const DevBadge = () => {
         >
           <p className="text-sm text-gray-700">
             <strong>FIP CatCare app</strong> is currently in development. Some
-            features may be incomplete, and data may not be stored permanently.
+            features may be incomplete and data may not be stored permanently.
             Please explore, but note that this is a work in progress! Thank you
             for your understanding! 🐾
           </p>

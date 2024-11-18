@@ -8,6 +8,8 @@ import {
 } from '@/components/ui/toast/toast';
 import { useToast } from '@/components/ui/toast/use-toast';
 
+import { DevToast } from './dev-toast';
+
 export function Toaster() {
   const { toasts } = useToast();
 
@@ -27,6 +29,7 @@ export function Toaster() {
           </Toast>
         );
       })}
+      <DevToast />
       <ToastViewport />
     </ToastProvider>
   );

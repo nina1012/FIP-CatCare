@@ -44,7 +44,7 @@ export const AppExplaination = () => {
             <p>
               This app is specifically designed to support cats undergoing FIP
               treatment with GS medication, helping pet owners track medication
-              schedules, log daily health updates, and monitor progress
+              schedules, log daily health updates and monitor progress
               throughout the treatment journey.
             </p>
           </div>

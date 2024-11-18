@@ -1,14 +1,17 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
+import { useUser } from '@/features/auth/api/get-auth-user';
+
 type LogoProps = {
   className?: string;
 };
 
 export const Logo = ({ className }: LogoProps) => {
+  const { user } = useUser();
   return (
     <Link
-      to="/"
+      to={user ? '/app/dashboard' : '/'}
       className={clsx(
         className,
         'flex items-center justify-center gap-2 md:mx-0 ',

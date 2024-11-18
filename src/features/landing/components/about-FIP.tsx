@@ -43,8 +43,8 @@ export const AboutFIP = () => {
         <div className="mx-auto max-w-3xl text-center text-lg text-gray-700">
           <p>
             FIP is caused by a mutated form of the feline coronavirus. Symptoms
-            include lethargy, fever, weight loss and difficulty breathing. Early
-            detection is crucial to managing the disease.
+            include lethargy, fever, weight loss, and difficulty breathing.
+            Early detection is crucial to managing the disease.
           </p>
           <p>There are 3 main stages of FIP:</p>
         </div>
@@ -53,7 +53,7 @@ export const AboutFIP = () => {
           <div className="flex flex-col gap-4 rounded-md border-2 border-[#00968830] bg-[#00968830] p-4 ">
             <h5 className="text-3xl font-semibold">Early Stage</h5>
             <p className="text-lg">
-              Intermittent fever, slight decrease in appetite, weight loss and
+              Intermittent fever, slight decrease in appetite, weight loss, and
               lethargy.
             </p>
           </div>
@@ -68,7 +68,7 @@ export const AboutFIP = () => {
             <h5 className="text-3xl font-semibold">Late Stage</h5>
             <p className="text-lg">
               Worsening of mid stage symptoms + Stopped feeding, cloudy eyes,
-              loss of coordination, paralysis and convulsions.
+              loss of coordination, paralysis, and convulsions.
             </p>
           </div>
         </div>

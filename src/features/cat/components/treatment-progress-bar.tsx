@@ -18,7 +18,7 @@ export const TreatmentProgressBar = ({
   }, [progress]);
 
   return (
-    <div className="flex items-center gap-4 py-2">
+    <div className="flex gap-4 py-2">
       <Progress value={p} className="w-4/5" />
       <Star
         className={`${clsx('stroke-primary', p === 100 ? 'fill-[#dfb028]' : 'fill-white')}`}

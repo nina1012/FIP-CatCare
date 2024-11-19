@@ -8,22 +8,48 @@ type CatHealthMonitoringProps = {
 };
 
 export const CatHealthMonitoring = ({ cat }: CatHealthMonitoringProps) => {
+  // CatHealthMonitoring component tracks weight changes
+  // additional health metrics will be added in future updates
   const { allDailyLogs } = useAllDailyLogs(cat.cat_id);
 
-  // This component should notify the cat's owner about the progress of the treatment
-  // for now it only monitors the weight changes
-  const weightChange = checkForWeightLoss(allDailyLogs);
-  console.log(weightChange);
-  return (
-    <div>
+  if (!allDailyLogs || allDailyLogs.length === 0) {
+    return (
       <div>
         <h1 className="text-lg">Health Monitoring for {cat.name}</h1>
-        <div style={{ color: 'red' }}>
-          {weightChange &&
-            "Warning, we've noticed that your cat has lost weight in past 7 days"}
-        </div>
-        {/* more health details */}
+        <p>
+          No logs available. Start logging daily updates to monitor {cat.name}
+          &apos;s health progress.
+        </p>
       </div>
+    );
+  }
+
+  if (allDailyLogs.length < 7) {
+    return (
+      <div>
+        <h3 className="my-2 text-lg">Health Monitoring for {cat.name}</h3>
+        <p>
+          Health monitoring requires at least 7 days of daily logs. Currently,
+          you have only {allDailyLogs.length} logs. Keep logging daily to enable
+          monitoring and warnings.
+        </p>
+      </div>
+    );
+  }
+
+  const weightChange = checkForWeightLoss(allDailyLogs);
+
+  return (
+    <div>
+      <h3 className="text-base font-medium">
+        Health Monitoring for {cat.name}
+      </h3>
+
+      <div className="text-red-400">
+        {weightChange &&
+          "Warning, we've noticed that your cat has lost weight in the past 7 days!"}
+      </div>
+      {/* More health details will be here */}
     </div>
   );
 };

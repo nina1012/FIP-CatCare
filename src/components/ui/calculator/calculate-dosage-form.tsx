@@ -77,7 +77,7 @@ export const CalculateDosageForm = () => {
           <input
             aria-roledescription="weight"
             className="w-full rounded border border-gray-400 p-2"
-            type="number"
+            type="string"
             value={weight}
             onChange={(e) => setWeight(Number(e.target.value))}
             placeholder="Enter weight in kg"
@@ -86,7 +86,7 @@ export const CalculateDosageForm = () => {
 
         <div>
           <h3 className="font-semibold">Daily Dose Required</h3>
-          <div className="font-bold text-primary">
+          <div className="text-primary font-bold">
             {dailyDose.toFixed(2)} ml
           </div>
         </div>

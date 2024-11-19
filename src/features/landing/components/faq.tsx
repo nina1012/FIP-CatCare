@@ -10,33 +10,33 @@ export const FAQ = () => {
     {
       trigger: 'What is FIP?',
       content:
-        'FIP, or Feline Infectious Peritonitis, is a serious disease caused by a mutation of the feline coronavirus. It primarily affects cats’ immune systems and can lead to severe symptoms such as fever, lethargy, weight loss, and fluid buildup in the abdomen or chest.',
+        'FIP, or Feline Infectious Peritonitis, is a serious disease caused by a mutation of the feline coronavirus. It primarily affects cats’ immune systems and can lead to severe symptoms such as fever, lethargy, weight loss and fluid buildup in the abdomen or chest.',
     },
     {
       trigger: 'How is FIP treated?',
       content:
-        'FIP treatment has advanced significantly, and antivirals like GS-441524 have shown promising results. Treatment typically involves administering medication over several weeks under veterinary guidance. Early diagnosis and consistent treatment are critical for success.',
+        'FIP treatment has advanced significantly and antivirals like GS-441524 have shown promising results. Treatment typically involves administering medication over several weeks under veterinary guidance. Early diagnosis and consistent treatment are critical for success.',
     },
     {
       trigger: 'Is the treatment for FIP effective?',
       content:
-        "Many cats treated with modern antiviral medications have made full recoveries. Success depends on factors like the stage of the disease, the cat's overall health, and adherence to the treatment protocol.",
+        "Many cats treated with modern antiviral medications have made full recoveries. Success depends on factors like the stage of the disease, the cat's overall health and adherence to the treatment protocol.",
     },
     {
       trigger: 'Does your application provide medical advice or medication?',
       content:
-        "No, my application does not provide medical advice, prescribe medications, or diagnose conditions. It is a resource to help cat owners understand FIP better, connect with supportive communities, and track their pet's progress during treatment.",
+        "No, my application does not provide medical advice, prescribe medications, or diagnose conditions. It is a resource to help cat owners understand FIP better and track their pet's progress during treatment.",
     },
-    {
-      trigger: 'Who can use the chatbot in your application?',
-      content:
-        'Currently, the chatbot is under development and will soon be available to registered users. It is designed to provide general information about FIP, answer common questions, and guide users to trusted resources.',
-    },
-    {
-      trigger: 'Can I ask the chatbot non-FIP-related questions?',
-      content:
-        'The chatbot is specifically tailored to address FIP-related topics to provide focused and relevant support. For other inquiries, I recommend consulting your veterinarian.',
-    },
+    // {
+    //   trigger: 'Who can use the chatbot in your application?',
+    //   content:
+    //     'Currently, the chatbot is under development and will soon be available to registered users. It is designed to provide general information about FIP, answer common questions and guide users to trusted resources.',
+    // },
+    // {
+    //   trigger: 'Can I ask the chatbot non-FIP-related questions?',
+    //   content:
+    //     'The chatbot is specifically tailored to address FIP-related topics to provide focused and relevant support. For other inquiries, I recommend consulting your veterinarian.',
+    // },
     {
       trigger: 'Is the application free to use?',
       content: 'Yes, the basic features of the application are free.',
@@ -67,7 +67,9 @@ export const FAQ = () => {
               <AccordionTrigger className="font-bold text-primary">
                 {FAQ.trigger}
               </AccordionTrigger>
-              <AccordionContent>{FAQ.content}</AccordionContent>
+              <AccordionContent className="text-inherit">
+                {FAQ.content}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.47.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",

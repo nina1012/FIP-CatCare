@@ -5,7 +5,7 @@ export const Features = () => {
     {
       heading: 'Track Daily Progress',
       desciption:
-        "Easily log your cat's weight, medication doses, and treatment notes to monitor progress every day",
+        "Easily log your cat's weight, medication doses and treatment notes to monitor progress every day",
       icon: <LineChart />,
     },
     {

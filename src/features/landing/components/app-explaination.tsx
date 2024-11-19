@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 export const AppExplaination = () => {
   return (
     <section className="my-4 flex flex-col gap-4 text-center md:text-left">
-      <div className="mx-auto text-lg text-neutral-700">
+      <div className="mx-auto text-neutral-700">
         <h2 className="my-8 text-center text-3xl font-semibold">
           How Our App Helps You and Your Cat
         </h2>
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row lg:gap-8">
-          <div className="flex flex-col gap-6 text-center text-xl text-gray-700 md:min-w-96 lg:w-2/3 lg:max-w-2xl lg:text-left">
+          <div className="flex flex-col gap-6 text-center text-gray-700 md:min-w-96 lg:w-2/3 lg:max-w-2xl lg:text-left">
             <Link
               to="/"
               className="hidden items-center justify-center gap-2 font-bold md:flex lg:justify-start"
@@ -28,7 +28,7 @@ export const AppExplaination = () => {
             </p>
             <p>
               <a
-                className="nav-link inline-block p-px !text-base text-primary transition-all hover:underline"
+                className="nav-link inline-block p-px text-primary transition-all hover:underline"
                 href="https://en.wikipedia.org/wiki/GS-441524"
                 target="_blank"
                 rel="noreferrer"
@@ -44,7 +44,7 @@ export const AppExplaination = () => {
             <p>
               This app is specifically designed to support cats undergoing FIP
               treatment with GS medication, helping pet owners track medication
-              schedules, log daily health updates, and monitor progress
+              schedules, log daily health updates and monitor progress
               throughout the treatment journey.
             </p>
           </div>

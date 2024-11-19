@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import { Link } from 'react-router-dom';
 
 export const SuccessStories = () => {
@@ -27,7 +28,7 @@ export const SuccessStories = () => {
         <h2 className="mb-6 text-center text-4xl font-bold">
           Success Stories: Triumph Over FIP 🌟
         </h2>
-        <p className="mx-auto max-w-3xl text-center text-lg text-gray-700">
+        <p className="mx-auto max-w-3xl text-center text-gray-700">
           The greatest highlight of our journey is seeing these brave cats
           conquer FIP successfully! Their stories of resilience and recovery
           inspire us every day. These little fighters remind us that with the
@@ -35,17 +36,19 @@ export const SuccessStories = () => {
           help every step of the way. 🐾💖
         </p>
       </div>
-      <div className="my-8 grid grid-cols-1 justify-center gap-4 md:grid-cols-3">
+      <div className="my-8 grid justify-center gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {cats.map((cat) => (
           <div
             key={cat.name}
             className="flex flex-col overflow-hidden rounded-md bg-white p-4 shadow-md"
           >
-            <img
-              src={cat.img}
-              alt={cat.name}
-              className="size-full overflow-hidden rounded-md object-cover object-center"
-            />
+            <div className="aspect-w-4 aspect-h-3">
+              <img
+                src={cat.img}
+                alt={cat.name}
+                className="w-full rounded-md object-cover"
+              />
+            </div>
             <div className="mt-2 py-4 text-center">
               <h6 className="text-lg font-semibold">{cat.name}</h6>
               <blockquote>{cat.description}</blockquote>

@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog/dialog';
+import { useAllDailyLogs } from '@/features/daily-logs/api/get-all-daily-logs';
 import { DailyLog } from '@/features/daily-logs/types';
 
 import { Cat } from '../types';
@@ -24,9 +25,10 @@ export const TreatmentProgressCard = ({
   dailyLogs,
   catData,
 }: TreatmentProgressProps) => {
-  if (!dailyLogs || !catData) return null;
+  const { allDailyLogs } = useAllDailyLogs(catData?.cat_id as string);
+  if (!dailyLogs || !catData || !allDailyLogs) return null;
 
-  const progressPercentage = ((dailyLogs.length / 84) * 100).toFixed(1);
+  const progressPercentage = ((allDailyLogs.length / 84) * 100).toFixed(1);
 
   return (
     <Dialog>
@@ -41,14 +43,14 @@ export const TreatmentProgressCard = ({
                 <p>
                   Today is day{' '}
                   <span className="font-semibold text-primary">
-                    {dailyLogs?.length}
+                    {allDailyLogs?.length}
                   </span>{' '}
                   of treatment.
                 </p>
                 <p>
                   Only{' '}
                   <span className="font-semibold text-primary">
-                    {84 - dailyLogs?.length}
+                    {84 - allDailyLogs?.length}
                   </span>{' '}
                   days left 💊
                 </p>

@@ -2,6 +2,7 @@ import { useAllDailyLogs } from '@/features/daily-logs/api/get-all-daily-logs';
 
 import { Cat } from '../types';
 import { checkForWeightLoss } from '../utils/checkWeight';
+import { sendAlert } from '../utils/sendAlert';
 
 type CatHealthMonitoringProps = {
   cat: Cat;
@@ -38,6 +39,23 @@ export const CatHealthMonitoring = ({ cat }: CatHealthMonitoringProps) => {
   }
 
   const weightChange = checkForWeightLoss(allDailyLogs);
+
+  if (!weightChange) {
+    return (
+      <div>
+        <h3 className="my-2 text-lg">Health Monitoring for {cat.name}</h3>
+        <p>
+          Everything is just fine and your {cat.name}&apos;s progress is
+          purrfect! Good job! 🐾 ✨
+        </p>
+      </div>
+    );
+  }
+
+  if (weightChange) {
+    // send alert to owner about weight loss
+    sendAlert();
+  }
 
   return (
     <div>

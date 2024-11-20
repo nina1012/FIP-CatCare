@@ -3,7 +3,7 @@ export const AboutFIP = () => {
   return (
     <section
       id="aboutFIP"
-      className="my-4 flex flex-col gap-4 text-center md:text-left"
+      className="container my-4 flex flex-col gap-4 text-center md:text-left"
     >
       <div className="mx-auto text-neutral-700 ">
         <h2 className="my-8 text-center text-3xl font-semibold">

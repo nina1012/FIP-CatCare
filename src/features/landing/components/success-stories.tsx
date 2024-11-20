@@ -42,11 +42,11 @@ export const SuccessStories = () => {
             key={cat.name}
             className="flex flex-col overflow-hidden rounded-md bg-white p-4 shadow-md"
           >
-            <div className="aspect-w-4 aspect-h-3">
+            <div className="">
               <img
                 src={cat.img}
                 alt={cat.name}
-                className="w-full rounded-md object-cover"
+                className="rounded-m w-full object-cover"
               />
             </div>
             <div className="mt-2 py-4 text-center">

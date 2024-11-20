@@ -16,6 +16,7 @@ import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
 import { UpdateCatDialog } from '@/features/cat/components/update-cat-dialog';
+import { useAllDailyLogs } from '@/features/daily-logs/api/get-all-daily-logs';
 import { useDailyLogs } from '@/features/daily-logs/api/get-daily-logs';
 import { DailyLogsForm } from '@/features/daily-logs/components/daily-log-form';
 import { DailyLogsTable } from '@/features/daily-logs/components/daily-logs-table';
@@ -27,8 +28,9 @@ export const CatDetailsRoute = () => {
     catID as string,
   );
   const { dailyLogs } = useDailyLogs(catID as string, 0, 5);
+  const { allDailyLogs } = useAllDailyLogs(catID as string);
 
-  if (!dailyLogs) return null;
+  if (!dailyLogs || !allDailyLogs) return null;
 
   const isPendingTreatment = dailyLogs?.length > 0;
 
@@ -70,7 +72,16 @@ export const CatDetailsRoute = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container relative">
+      {/* This is visible only for test@user.com, to let developers know that they can explore application without registering and warn developer that entered data might be lost */}
+      {catID === '434b2cdc-8ae2-4193-8243-d0ef489495ac' && (
+        <div className="fixed top-28 z-50 flex flex-col gap-3 rounded-lg bg-yellow-300 p-4">
+          <h3 className="font-semibold">
+            📢 You&apos;re using developer account!
+          </h3>
+          <p>Data from this profile might be lost</p>
+        </div>
+      )}
       {/* avatar / cat's image */}
       <div className="">
         <Avatar>
@@ -89,8 +100,8 @@ export const CatDetailsRoute = () => {
       {/* CLICKABLE CARDS */}
       <div className="[&>*>last:*]:mb-auto my-8 flex w-full flex-col gap-8 md:max-w-4xl md:flex-row md:*:w-[30%] md:*:min-w-[30%] [&>*]:h-auto">
         <UpdateCatDialog data-testid="update-cat-info" cat={catData} />
-        <TreatmentProgressCard dailyLogs={dailyLogs} catData={catData} />
-        <ChartCard dailyLogs={dailyLogs} catData={catData} />
+        <TreatmentProgressCard dailyLogs={allDailyLogs} catData={catData} />
+        <ChartCard dailyLogs={allDailyLogs} catData={catData} />
       </div>
       {/* TABS AND TABLES*/}
       <div className="my-8">

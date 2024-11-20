@@ -64,10 +64,10 @@ export const FAQ = () => {
         <Accordion type="multiple" className="mx-auto mt-4 max-w-3xl">
           {faq.map((FAQ, i) => (
             <AccordionItem key={FAQ.trigger} value={`item-${i}`}>
-              <AccordionTrigger className="font-bold text-primary">
+              <AccordionTrigger className="text-sm font-bold text-primary md:text-base">
                 {FAQ.trigger}
               </AccordionTrigger>
-              <AccordionContent className="text-inherit">
+              <AccordionContent className="text-sm text-inherit md:text-base">
                 {FAQ.content}
               </AccordionContent>
             </AccordionItem>

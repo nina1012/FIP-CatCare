@@ -36,11 +36,11 @@ export const SuccessStories = () => {
           help every step of the way. 🐾💖
         </p>
       </div>
-      <div className="container my-8 grid justify-center gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="container my-8 flex flex-wrap justify-center gap-4 [&>*]:w-full [&>*]:md:w-2/5 [&>*]:lg:w-[30%]">
         {cats.map((cat) => (
           <div
             key={cat.name}
-            className="grid grid-rows-[250px,auto] overflow-hidden rounded-md bg-white p-4 shadow-md"
+            className="grid grid-rows-[250px,auto] overflow-hidden rounded-lg bg-white p-4 shadow-lg"
           >
             <div className="">
               <img

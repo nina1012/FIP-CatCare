@@ -19,36 +19,18 @@ type ChartCardProps = {
 };
 
 export const ChartCard = ({ dailyLogs, catData }: ChartCardProps) => {
-  if (!dailyLogs || !catData) return;
-  const days = [
-    'Day 0',
-    'Day 5',
-    'Day 10',
-    'Day 15',
-    'Day 20',
-    'Day 25',
-    'Day 30',
-    'Day 35',
-    'Day 40',
-    'Day 45',
-    'Day 50',
-    'Day 55',
-    'Day 60',
-    'Day 65',
-    'Day 70',
-    'Day 75',
-    'Day 80',
-    'Day 85',
-  ].map((day) => +day.split(' ')[1]);
+  if (!dailyLogs || !catData) return null;
 
-  const weightData = dailyLogs.map((log, i) =>
-    days[i] === i ? log.weight : 0,
-  );
-  const doseData = dailyLogs.map((log, i) => {
-    if (log.dose) {
-      return days[i] === i ? parseFloat(log?.dose) : 0;
-    }
-    return 0;
+  const days = Array.from({ length: 18 }, (_, i) => (i + 1) * 5); // get every 5th day - [0, 5, 10, 15, ... 85]
+
+  const weightData = days.map((day) => {
+    const log = dailyLogs.find((log) => log.day === day);
+    return log && log.weight ? log.weight : 0;
+  });
+
+  const doseData = days.map((day) => {
+    const log = dailyLogs.find((log) => log.day === day);
+    return log && log.dose ? parseFloat(log.dose) : 0;
   });
 
   return (
@@ -66,19 +48,18 @@ export const ChartCard = ({ dailyLogs, catData }: ChartCardProps) => {
               icon: <WeightIcon />,
               chartComponent: (
                 <BarChart
-                  colors={['#1f8caf']}
+                  colors={['#c33c6d70']}
                   xAxis={[
                     {
-                      min: 0.3,
-                      max: 10,
+                      min: 0,
+                      max: Math.max(...days),
                       scaleType: 'band',
                       dataKey: 'day',
                       data: days,
                     },
                   ]}
-                  series={[{ data: weightData, label: `weight in kg` }]}
+                  series={[{ data: weightData, label: `Weight in kg` }]}
                   width={450}
-                  className="size-auto overflow-hidden"
                   height={400}
                 />
               ),
@@ -88,20 +69,18 @@ export const ChartCard = ({ dailyLogs, catData }: ChartCardProps) => {
               icon: <PillBottle />,
               chartComponent: (
                 <BarChart
-                  colors={['#1f8caf']}
+                  colors={['#c33c6d70']}
                   xAxis={[
                     {
-                      min: 0.05,
-                      max: 100,
-                      tickLabelInterval: 'auto',
+                      min: 0,
+                      max: Math.max(...days),
                       scaleType: 'band',
                       dataKey: 'day',
                       data: days,
                     },
                   ]}
-                  series={[{ data: doseData, label: `dose in ml` }]}
+                  series={[{ data: doseData, label: `Dose in ml` }]}
                   width={450}
-                  className="size-auto overflow-hidden"
                   height={400}
                 />
               ),

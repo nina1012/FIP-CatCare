@@ -84,7 +84,7 @@ export const TreatmentProgressCard = ({
                 {catData.name}.
               </p>
             </div>
-
+            <hr className="text-gray-400" />
             {/* Health Monitoring */}
             <div>
               <CatHealthMonitoring cat={catData} />

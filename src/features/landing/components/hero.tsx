@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRightIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +10,12 @@ export const Hero = () => {
     <div className="container flex flex-col items-center justify-evenly gap-8 lg:min-h-[650px] lg:flex-row lg:gap-8">
       <div className="flex flex-col gap-6 text-center lg:w-1/2 lg:text-left">
         <div className="mx-auto inline-block w-fit rounded-3xl !bg-pink-200 p-1 !text-[10px] transition-all hover:ring-1 hover:ring-primary lg:m-0">
-          <Link to="/#feature" className="flex items-center gap-1 pr-2 ">
+          <a
+            href="https://github.com/nina1012/FIP-CatCare"
+            target="_blank"
+            className="group flex items-center gap-1 pr-2 "
+            rel="noreferrer"
+          >
             <Badge
               variant="outline"
               className="pointer-events-none bg-white text-inherit"
@@ -17,8 +23,11 @@ export const Hero = () => {
               new!
             </Badge>
             We&apos;re launching new features!{' '}
-            <ArrowRightIcon className="text-primary" size={10} />
-          </Link>
+            <ArrowRightIcon
+              className="inline-block text-primary transition-all group-hover:ml-2"
+              size={10}
+            />
+          </a>
         </div>
         <h1 className="text-6xl">
           Track Your Cat&apos;s
@@ -38,13 +47,20 @@ export const Hero = () => {
           </Link>
         </div>
       </div>
-      <div className="lg:w-1/2">
-        <img
-          src="/landing-assets/illustration.svg"
-          alt="illustration"
-          className="block !size-full object-contain"
-        />
-      </div>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.15, delay: 1, ease: 'backInOut' }}
+          className="lg:w-1/2"
+        >
+          <img
+            src="/landing-assets/illustration.svg"
+            alt="illustration"
+            className="block !size-full object-contain"
+          />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

@@ -108,6 +108,7 @@ export const CatDetailsRoute = () => {
         <Tabs defaultValue="daily-logs" className="">
           <TabsList>
             <TabsTrigger value="daily-logs">daily log</TabsTrigger>
+            <TabsTrigger value="bloodwork">bloodwork</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs">
             <CustomTabContent
@@ -118,6 +119,9 @@ export const CatDetailsRoute = () => {
                 <DailyLogsTable catID={catData?.cat_id as string} />
               }
             />
+          </TabsContent>
+          <TabsContent value="bloodwork">
+            <div className="my-8 text-lg font-medium">Under development 🛠️</div>
           </TabsContent>
         </Tabs>
       </div>

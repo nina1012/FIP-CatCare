@@ -96,3 +96,5 @@ You have two options to get started with the **FIP CatCare App**:
 ### Design Inspiration 🎨
 
 This project’s design was inspired by [FIP Oasis](https://fipoasis.com) and [Cure FIP](https://www.curefip.com/), with custom tweaks to fit my app’s functionality and style.
+
+![FIP CatCare App](./public/FIPCatCare-logo.png) (FIP CatCare App)

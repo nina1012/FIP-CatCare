@@ -36,7 +36,7 @@ export const SuccessStories = () => {
           help every step of the way. 🐾💖
         </p>
       </div>
-      <div className="container my-8 flex flex-wrap justify-center gap-4 [&>*]:w-full [&>*]:md:w-2/5 [&>*]:lg:w-[30%]">
+      <div className="my-8 flex flex-wrap justify-center gap-4 md:container [&>*]:w-full [&>*]:md:w-2/5 [&>*]:lg:w-[30%]">
         {cats.map((cat) => (
           <div
             key={cat.name}

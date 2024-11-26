@@ -115,6 +115,8 @@ Contributions are always welcome to make this project better together! ✨ If yo
    ```
 8. Push your branch and open a Pull Request
 
+Thank you for contributing and helping improve this project! ❤️
+
 ### Design Inspiration 🎨
 
 This project’s design was inspired by [FIP Oasis](https://fipoasis.com) and [Cure FIP](https://www.curefip.com/), with custom tweaks to fit my app’s functionality and style.

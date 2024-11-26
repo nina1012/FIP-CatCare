@@ -11,6 +11,7 @@ The only app you need to monitor, manage and analyze your cat's FIP treatment pr
 - [Project Description](#project-description-)
 - [Getting started](#getting-started-)
 - [Installation and Setup](#installation-and-setup)
+- [Contribution](#contributing)
 - [Problem and how FIP CatCare app solves it](/docs/Problem.md)
 - [App requirements, users stories and tables and database relationship](/docs/App-requirements.md)
 
@@ -92,6 +93,27 @@ You have two options to get started with the **FIP CatCare App**:
    ```bash
    npm run dev
    ```
+
+## Contributing 💡
+
+Contributions are always welcome to make this project better together! ✨ If you have any ideas, suggestions, or fixes, feel free to contribute. Follow the steps to get started:
+
+1. **Fork the Repository**  
+   Click the "Fork" button at the top-right corner of this repository to create your copy.
+2. **Clone Your Fork**  
+   Clone the forked repository to your local machine:
+   ```bash
+   git clone https://github.com/your-username/FIP-CatCare.git
+   ```
+3. Create a branch: `git checkout -b feature-name`
+4. Install dependecies by running the `npm install` script.
+5. Make some changes
+6. Test your changes
+7. Commit your changes
+   ```bash
+   git commit -m "Add: Description of your changes"
+   ```
+8. Push your branch and open a Pull Request
 
 ### Design Inspiration 🎨
 

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { z } from 'zod';
 
 import { Button } from '@/components/ui/common/button';
+import { Spinner } from '@/components/ui/common/spinner';
 import { DialogDescription, DialogTitle } from '@/components/ui/dialog/dialog';
 import { Form, Input } from '@/components/ui/form';
 import CustomSelect from '@/components/ui/form/custom-select';
@@ -16,6 +17,7 @@ import { Textarea } from '@/components/ui/form/textarea';
 import { useToast } from '@/components/ui/toast/use-toast';
 
 import { useCreateDailyLog } from '../api/create-daily-log';
+import { useDailyLog } from '../api/get-daily-log';
 import { useUpdateDailyLog } from '../api/update-daily-log';
 import { DailyLog } from '../types';
 
@@ -35,8 +37,11 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
   const { catID } = useParams();
   const { toast } = useToast();
 
-  const { updateDailyLog } = useUpdateDailyLog(logID as string);
-  const { createDailyLog } = useCreateDailyLog({
+  const { updateDailyLog, isPending: isUpdating } = useUpdateDailyLog(
+    logID as string,
+  );
+  console.log(isUpdating);
+  const { createDailyLog, isCreatingDailyLog: isCreating } = useCreateDailyLog({
     onSuccess: () => {
       toast({
         title: 'Successful',
@@ -52,13 +57,27 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
     },
   });
 
-  const handleSubmit = (dailyLog: Partial<DailyLog>) => {
+  const { dailyLog } = useDailyLog(logID as string);
+
+  if (!logID || !dailyLog) return;
+
+  const handleSubmit = (formValues: Partial<DailyLog>) => {
+    const logData = {
+      ...dailyLog[0],
+      ...formValues,
+      cat_id: catID,
+      log_date: !logID ? new Date().toISOString() : dailyLog[0].log_date,
+      updated_at: logID ? new Date().toISOString() : dailyLog[0].updated_at,
+    };
+
     if (logID) {
-      updateDailyLog({ log_id: logID, ...dailyLog, cat_id: catID });
+      updateDailyLog(logData);
     } else {
-      createDailyLog({ cat_id: catID, ...dailyLog });
+      createDailyLog(logData);
     }
   };
+
+  const { weight, medication_name, dose, note, day } = dailyLog[0];
 
   return (
     <div>
@@ -80,10 +99,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
       <Form
         schema={dailyLogsSchema}
         onSubmit={(values: Partial<DailyLog>) => {
-          handleSubmit({
-            log_date: new Date().toISOString(), // Auto-generate the date to ensure only one log per day
-            ...values,
-          });
+          handleSubmit(values);
         }}
       >
         {({ register, formState, watch }) => {
@@ -93,6 +109,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               <Input
                 registration={register('day')}
                 type="text"
+                defaultValue={day}
                 placeholder="Day 0"
                 error={formState.errors['day']}
                 disabled
@@ -101,6 +118,8 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               <Input
                 registration={register('dose')}
                 type="text"
+                pattern="[0-9]+([\.,][0-9]+)?"
+                defaultValue={dose || ''}
                 placeholder="Dose of GS in mg"
                 error={formState.errors['dose']}
               />
@@ -108,6 +127,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               <Input
                 registration={register('weight')}
                 type="text"
+                defaultValue={weight || ''}
                 placeholder="Weight in kg"
                 error={formState.errors['weight']}
                 pattern="[0-9]+([\.,][0-9]+)?"
@@ -116,7 +136,11 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
 
               <CustomSelect registration={register('medication_name')}>
                 <SelectTrigger className="text-inherit">
-                  <SelectValue placeholder={selectedBrand || 'Select brand'} />
+                  <SelectValue
+                    placeholder={
+                      selectedBrand || medication_name || 'Select brand'
+                    }
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="GS-15">GS-15</SelectItem>
@@ -128,10 +152,13 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
               <Textarea
                 className="resize-none"
                 placeholder="Enter today's symptoms"
+                defaultValue={note || ''}
                 registration={register('note')}
               ></Textarea>
               <div>
                 <Button type="submit" className="w-full">
+                  {!isUpdating ||
+                    (isCreating && <Spinner size="sm" className="bg-white" />)}
                   {logID ? 'Update daily log' : 'Add new daily log'}
                 </Button>
               </div>

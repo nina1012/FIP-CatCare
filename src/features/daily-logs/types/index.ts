@@ -8,5 +8,5 @@ export type DailyLog = {
   note: string | null;
   day: number;
   created_at: string | null;
-  updated_at: string | null;
+  updated_at: Date | string | null;
 };

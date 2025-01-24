@@ -41,6 +41,29 @@ export const useUpdateDailyLog = (logID: string) => {
         logID,
       ] as InvalidateQueryFilters);
     },
+    onMutate: async (newDailyLog) => {
+      await queryClient.cancelQueries(['daily_logs'] as InvalidateQueryFilters);
+
+      // previous cache
+      const previousLogs = queryClient.getQueryData<DailyLog[]>(['daily_logs']);
+
+      // optimistically update the cache with the most recent dataa
+      queryClient.setQueryData(['daily_logs'], (logs?: DailyLog[]) => {
+        console.log(newDailyLog, logs);
+        return logs
+          ? [
+              ...logs,
+              { ...newDailyLog, updated_at: new Date().toISOString() },
+            ].sort(
+              (a, b) =>
+                new Date(a.updated_at as Date).getTime() +
+                new Date(b.updated_at as Date).getTime(),
+            )
+          : [{ ...newDailyLog, updated_at: new Date().toISOString() }];
+      });
+
+      return { previousLogs };
+    },
     onError: (error) => {
       throw new Error(error.message);
     },

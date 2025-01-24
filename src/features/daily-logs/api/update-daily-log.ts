@@ -56,9 +56,9 @@ export const useUpdateDailyLog = (logID: string) => {
               { ...newDailyLog, updated_at: new Date().toISOString() },
             ].sort(
               (a, b) =>
-                new Date(a.updated_at as Date).getTime() +
+                new Date(a.updated_at as Date).getTime() -
                 new Date(b.updated_at as Date).getTime(),
-            )
+            ) // sort by log_date which wouldn't cause reordering since we update the updated_at
           : [{ ...newDailyLog, updated_at: new Date().toISOString() }];
       });
 

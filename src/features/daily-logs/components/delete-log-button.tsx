@@ -1,6 +1,17 @@
 import { Trash } from 'lucide-react';
 
-import { Button } from '@/components/ui/common/button';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog/alert-dialog';
+import { Spinner } from '@/components/ui/common/spinner';
 
 import { useDeleteDailyLog } from '../api/delete-daily-log';
 
@@ -13,14 +24,25 @@ export const DeleteLogButton = ({ logID }: { logID: string }) => {
     }
   };
   return (
-    <Button
-      variant="destructive"
-      onClick={handleDelete}
-      disabled={isPending}
-      size="icon"
-      aria-label="Delete Log"
-    >
-      <Trash />
-    </Button>
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <Trash />
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDelete}>
+            {isPending && <Spinner size="md" />} Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

@@ -54,7 +54,7 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
     },
   });
 
-  const { dailyLog, isLoading } = useDailyLog(logID!);
+  const { dailyLog, isLoading } = useDailyLog(logID as string);
 
   const handleSubmit = (data: Partial<DailyLog>) => {
     if (logID) {

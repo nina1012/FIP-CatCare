@@ -1,5 +1,7 @@
 ## App requirements 📎
 
+## Requirements
+
 - Functional requirements:
 
   - public facing part - landing page (that will educate cats' owners what FIP is and how to treat and cure it), also can have a gallery of already cured cats 😻 - available for anonymous and authenticated users
@@ -14,8 +16,13 @@
   - manage multiple cats (1 owner can have many cats)
 
 - Non-functional requirements:
+
   - responsive design (mobile first)
   - reliable notifications
+
+## Architecture / High-level design
+
+Diagram
 
 ## User stories
 
@@ -25,6 +32,20 @@
 - [] As a user, I want to upload and view bloodwork and test results for each cat
 - [x] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
 
-## Tables and data relationships 🖇️
+## Data model : Tables and data relationships 🖇️
 
 ![Supabase schema visualizer](../public/screenshots/FIP-CatCare-DB.png) (from supabase schema visualizer)
+
+## Interface definition (API)
+
+All endpoints can be found inside `src/features/feature-name/api` folders.
+Each file in these directories contains the function that interacts with the respective endpoint, along with a React Query hook for easy data fetching and/or mutation.
+
+## Optimizations and deep dive
+
+- Performance:
+  To optimize performance for the daily-logs-table.tsx, I utilized table with pagination from MUI. This approach ensures that only a limited number of daily logs are rendered initially, reducing the load time and improving responsiveness.
+
+- User experience and a11y:
+
+  For good UX/UI and accessibility, I have used shadcnUI and MUI that have built-in support for a11y and follow modern design principles.

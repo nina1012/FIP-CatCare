@@ -18,3 +18,5 @@ However, with the advent of new treatments and medications, managing FIP is now 
 - if treatment is not tracked, there is a possibilty of incorrect dosage, missed medications and relapse
 
 As a fellow cat lover who has personally cared for multiple FIP positive cats at the same time, I created this app to help others going through the same experience.
+
+If you have any suggestions, feel free to open a pull request and contribute to FIP CatCare app. Your contributions are greatly appreciated! 🚀 🐈

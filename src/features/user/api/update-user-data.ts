@@ -19,29 +19,28 @@ export const updateUserFn = async ({
 }: updateUserDataProps): Promise<User | null> => {
   if (!userID || !updatedData) return null;
 
-  let newData: Partial<User> = {};
-  let avatarFile, avatarURL;
+  let avatarURL;
 
   // if user updated their avatar image
-  if (updatedData.avatar_url?.length && isFileList(updatedData.avatar_url)) {
-    avatarFile = updatedData.avatar_url?.item(0); // grabs the first item from FileList
-    if (avatarFile) {
-      const fileType = avatarFile.type.split('/').at(1);
-      const avatarImageName = `avatar_url${Date.now()}.${fileType}`;
+  if (updatedData.avatar_url && isFileList(updatedData.avatar_url)) {
+    const file = updatedData.avatar_url.item(0);
+    if (file) {
+      const fileType = file.type.split('/').pop();
+      const avatarImageName = `avatar_${Date.now()}.${fileType}`;
       avatarURL = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/user_images/${avatarImageName}`;
 
-      // uploading image to bucket
       await uploadImage({
-        image: avatarFile,
+        image: file,
         imageName: avatarImageName,
         bucketName: 'user_images',
       });
     }
   }
 
-  newData = {
-    avatar_url: avatarURL,
+  const newData: Partial<User> = {
+    avatar_url: avatarURL || updatedData.avatar_url,
     full_name: updatedData.full_name,
+    email: updatedData.email,
   };
 
   const { data, error } = await supabase

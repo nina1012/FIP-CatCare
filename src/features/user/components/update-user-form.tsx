@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
 import { Form, Input, Label } from '@/components/ui/form';
 import { loginInputSchema } from '@/lib/auth';
-import { isFileList } from '@/utils/isFileList';
+// import { isFileList } from '@/utils/isFileList';
 
 import { useUpdateUserData } from '../api/update-user-data';
 import { User } from '../types';
@@ -18,28 +18,33 @@ type UpdateUserFormProps = {
 
 const updateUserSchema = loginInputSchema.extend({
   avatar_url: z.instanceof(FileList).optional().or(z.string()),
-  full_name: z.string().optional(),
+  full_name: z.string(),
   email: z.string(),
 });
-const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
-  const { updateUser, isPendingUpdateUser } = useUpdateUserData();
+const UpdateUserForm = ({ userData }: UpdateUserFormProps) => {
+  const { updateUser, isPendingUpdateUser, errorUpdateUser } =
+    useUpdateUserData();
 
-  if (!userData) return;
+  if (!userData) return null;
+
   return (
-    <div>
+    <div className="mb-12">
       <Form
         onSubmit={(values) => {
-          console.log(values);
-          let imageUrl;
-          // if user didn't update info, keep the old cat_image_url
+          let avatarUrl;
+
+          // If no file selected, use the existing avatar URL
           if (values.avatar_url && values.avatar_url.length === 0) {
-            imageUrl = userData?.avatar_url;
+            avatarUrl = userData?.avatar_url;
           }
-          updateUser({
-            avatar_url: values.avatar_url ? values.avatar_url : imageUrl,
-            full_name: values.full_name ? values.full_name : userData.full_name,
-            email: userData.email,
-          });
+
+          // Ensure transformed data is passed
+          const updatedData = {
+            ...values,
+            avatar_url: avatarUrl || values.avatar_url,
+          };
+
+          updateUser(updatedData);
         }}
         schema={updateUserSchema}
       >
@@ -51,7 +56,7 @@ const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
             <>
               <Label
                 htmlFor="avatarUrl"
-                className="group relative mx-auto my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%]  border-2"
+                className="group relative mx-auto my-4 flex size-20 cursor-pointer flex-col items-center justify-center self-center rounded-[50%] border-2"
               >
                 <Plus className="absolute right-0 top-0 z-10 rounded-full border border-primary bg-background text-primary transition-all focus-within:text-white group-hover:bg-primary group-hover:text-white" />
                 <Input
@@ -63,8 +68,8 @@ const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
                 <div className="border-2">
                   <img
                     src={
-                      isFileSelected && isFileList(selectedFile[0])
-                        ? selectedFile[0] + ''
+                      isFileSelected && selectedFile?.[0] instanceof File
+                        ? URL.createObjectURL(selectedFile[0])
                         : (userData.avatar_url as string)
                     }
                     alt="Preview"
@@ -74,19 +79,24 @@ const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
               </Label>
               <Input
                 type="email"
-                placeholder={userData.email as string}
+                placeholder="Email"
                 registration={register('email')}
-                // disabled
                 error={formState.errors['email']}
-                value={userData.email as string}
+                defaultValue={userData.email as string}
               />
               <Input
                 type="text"
-                placeholder={userData.full_name as string}
+                placeholder="Full Name"
                 error={formState.errors['full_name']}
                 registration={register('full_name')}
                 defaultValue={userData.full_name as string}
               />
+
+              {errorUpdateUser && (
+                <div className="text-sm text-red-500">
+                  {errorUpdateUser.message}
+                </div>
+              )}
 
               <div className="flex justify-center gap-4">
                 <Link to="/app/dashboard">
@@ -95,9 +105,7 @@ const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
 
                 <Button type="submit">
                   Edit {userData.full_name}{' '}
-                  <span className="inline-block">
-                    {isPendingUpdateUser && <Spinner size="sm" />}
-                  </span>
+                  {isPendingUpdateUser && <Spinner size="sm" />}
                 </Button>
               </div>
             </>
@@ -108,4 +116,4 @@ const UpdateCatForm = ({ userData }: UpdateUserFormProps) => {
   );
 };
 
-export default memo(UpdateCatForm);
+export default memo(UpdateUserForm);

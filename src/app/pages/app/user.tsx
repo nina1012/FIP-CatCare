@@ -1,6 +1,7 @@
 import { useUser } from '@/features/auth/api/get-auth-user';
 import { Reminder } from '@/features/reminder/components/reminder';
 import { useUserData } from '@/features/user/api/get-user-data';
+import UpdateUserForm from '@/features/user/components/update-user-form';
 
 export const UserRoute = () => {
   const { user } = useUser();
@@ -11,7 +12,11 @@ export const UserRoute = () => {
   return (
     <div className="container">
       <h2 className="mb-4 text-2xl font-semibold">Your profile</h2>
-      <div>Here goes the form for updating user&apos;s data</div>
+      <div className="container max-w-xl">
+        <UpdateUserForm userData={userData} />
+      </div>
+      <hr className="my-12" />
+      <h2 className="mb-4 text-2xl font-semibold">Set reminder</h2>
       <Reminder />
     </div>
   );

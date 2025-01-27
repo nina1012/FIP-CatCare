@@ -6,8 +6,6 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/common/button';
 import { Spinner } from '@/components/ui/common/spinner';
 import { Form, Input, Label } from '@/components/ui/form';
-import { loginInputSchema } from '@/lib/auth';
-// import { isFileList } from '@/utils/isFileList';
 
 import { useUpdateUserData } from '../api/update-user-data';
 import { User } from '../types';
@@ -16,11 +14,12 @@ type UpdateUserFormProps = {
   userData: Pick<User, 'avatar_url' | 'email' | 'full_name'>;
 };
 
-const updateUserSchema = loginInputSchema.extend({
-  avatar_url: z.instanceof(FileList).optional().or(z.string()),
-  full_name: z.string(),
-  email: z.string(),
+const updateUserSchema = z.object({
+  avatar_url: z.instanceof(FileList).optional().or(z.string().optional()),
+  full_name: z.string() || '',
+  email: z.string() || '',
 });
+
 const UpdateUserForm = ({ userData }: UpdateUserFormProps) => {
   const { updateUser, isPendingUpdateUser, errorUpdateUser } =
     useUpdateUserData();
@@ -32,19 +31,17 @@ const UpdateUserForm = ({ userData }: UpdateUserFormProps) => {
       <Form
         onSubmit={(values) => {
           let avatarUrl;
-
           // If no file selected, use the existing avatar URL
           if (values.avatar_url && values.avatar_url.length === 0) {
             avatarUrl = userData?.avatar_url;
           }
-
           // Ensure transformed data is passed
           const updatedData = {
             ...values,
             avatar_url: avatarUrl || values.avatar_url,
           };
-
           updateUser(updatedData);
+          console.log(values);
         }}
         schema={updateUserSchema}
       >

@@ -25,21 +25,24 @@ export const DeleteLogButton = ({ logID }: { logID: string }) => {
   };
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Trash />
+      <AlertDialogTrigger className="bg-white p-2">
+        <Trash className="text-red-500" />
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete this
+            daily log and remove data from our servers.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>
-            {isPending && <Spinner size="md" />} Continue
+          <AlertDialogAction
+            className="hover:bg-gray-200 hover:text-primary focus:bg-gray-200 focus:text-primary "
+            onClick={handleDelete}
+          >
+            {isPending && <Spinner size="md" />} Yes, I&apos;m sure
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

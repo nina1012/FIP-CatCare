@@ -24,14 +24,14 @@ export const Footer = () => {
           </div>
         </div>
 
-        <div>
+        <div className="md:text-right">
           <h5 className="mb-2 text-lg font-semibold">
             Created and developed by:{' '}
             <a
               target="_blank"
               href="https://github.com/nina1012"
               rel="noreferrer"
-              className="hover:underline"
+              className="transition-colors hover:text-primary hover:underline"
             >
               nina1012
             </a>

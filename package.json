@@ -117,7 +117,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.3.4",
     "vite-node": "^2.0.5",
-    "vitest": "^2.0.5"
+    "vitest": "^2.1.9"
   },
   "msw": {
     "workerDirectory": [

@@ -32,6 +32,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui"
   },
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",

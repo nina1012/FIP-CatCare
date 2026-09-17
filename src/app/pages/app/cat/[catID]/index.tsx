@@ -53,7 +53,7 @@ export const CatDetailsRoute = () => {
       <div className="container">
         <div className="flex h-96 flex-col items-center justify-center gap-4">
           <h4 className="text-lg font-medium">
-            Error has occured while fetching the cat&apos;s data
+            Error has occurred while fetching the cat&apos;s data
           </h4>
           <img
             className="h-auto max-w-32 object-cover object-center"

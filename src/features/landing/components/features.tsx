@@ -4,19 +4,19 @@ export const Features = () => {
   const features = [
     {
       heading: 'Track Daily Progress',
-      desciption:
+      description:
         "Easily log your cat's weight, medication doses and treatment notes to monitor progress every day",
       icon: <LineChart />,
     },
     {
       heading: 'Comprehensive Health Records',
-      desciption:
+      description:
         "Keep a detailed history of your cat's FIP treatment, ensuring that all essential data is stored in one place",
       icon: <BriefcaseMedical />,
     },
     {
       heading: 'Reminders and Alerts',
-      desciption:
+      description:
         "Set medication reminders and get notifications to stay on top of your cat's treatment schedule",
       icon: <BellIcon />,
     },
@@ -33,7 +33,7 @@ export const Features = () => {
         >
           <span className="text-5xl text-primary">{feature.icon}</span>
           <h5 className="font-semibold">{feature.heading}</h5>
-          <p>{feature.desciption}</p>
+          <p>{feature.description}</p>
         </div>
       ))}
     </section>

@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useAllDailyLogs } from '@/features/daily-logs/api/get-all-daily-logs';
 
 import { Cat } from '../types';
@@ -12,6 +14,13 @@ export const CatHealthMonitoring = ({ cat }: CatHealthMonitoringProps) => {
   // CatHealthMonitoring component tracks weight changes
   // additional health metrics will be added in future updates
   const { allDailyLogs } = useAllDailyLogs(cat.cat_id);
+  const weightChange = checkForWeightLoss(allDailyLogs);
+
+  useEffect(() => {
+    if (weightChange) {
+      void sendAlert();
+    }
+  }, [weightChange]);
 
   if (!allDailyLogs || allDailyLogs.length === 0) {
     return (
@@ -38,8 +47,6 @@ export const CatHealthMonitoring = ({ cat }: CatHealthMonitoringProps) => {
     );
   }
 
-  const weightChange = checkForWeightLoss(allDailyLogs);
-
   if (!weightChange) {
     return (
       <div>
@@ -50,11 +57,6 @@ export const CatHealthMonitoring = ({ cat }: CatHealthMonitoringProps) => {
         </p>
       </div>
     );
-  }
-
-  if (weightChange) {
-    // send alert to owner about weight loss
-    sendAlert();
   }
 
   return (

@@ -82,8 +82,8 @@ export const DailyLogsForm = ({ logID }: DailyLogsFormProps) => {
         <div className="my-4 flex w-full flex-col gap-2 rounded-sm border border-[#dfb028] bg-[#dfb028]/40 p-2 py-4 text-xs">
           <FileWarning className="mx-auto" />
           <p>
-            You can only post a daily log once a day. If you try to add more
-            logs, the app will crash and you&apos;ll need to refresh the page!
+            You can add one daily log per day. If today already has a log, open
+            that row and update it.
           </p>
         </div>
       )}

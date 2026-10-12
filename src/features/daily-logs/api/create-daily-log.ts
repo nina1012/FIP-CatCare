@@ -51,9 +51,12 @@ export const createDailyLogFn = async ({
   }
 
   // Proceed with the insertion if no log exists for today
-  const { data, error } = await supabase
-    .from('daily_logs')
-    .insert({ ...newDailyLog, cat_id: catID, day: nextDay });
+  const { data, error } = await supabase.from('daily_logs').insert({
+    ...newDailyLog,
+    cat_id: catID,
+    day: nextDay,
+    log_date: new Date().toISOString(),
+  });
 
   if (error) throw new Error(error.message);
   return data && data[0];

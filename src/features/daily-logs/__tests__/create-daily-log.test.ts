@@ -22,6 +22,10 @@ describe('createDailyLogFn', () => {
 
   it('creates a daily log if no existing log for today', async () => {
     // implementing mocked supabase fetch to db for selecting and inserting data
+    const insert = vi
+      .fn()
+      .mockResolvedValueOnce({ data: [mockDailyLog], error: null });
+
     const mockFrom = vi.fn(() => ({
       select: vi.fn().mockReturnValue({
         eq: vi.fn().mockReturnValue({
@@ -38,9 +42,7 @@ describe('createDailyLogFn', () => {
           }),
         }),
       }),
-      insert: vi
-        .fn()
-        .mockResolvedValueOnce({ data: [mockDailyLog], error: null }),
+      insert,
     }));
 
     (supabase.from as Mock).mockImplementation(mockFrom);
@@ -52,6 +54,12 @@ describe('createDailyLogFn', () => {
 
     expect(result).toEqual(mockDailyLog);
     expect(supabase.from).toHaveBeenCalledWith('daily_logs');
+    expect(insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        cat_id: '123',
+        log_date: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+      }),
+    );
 
     // when successfully creating a daily log, show the toast
 

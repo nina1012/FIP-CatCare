@@ -1,4 +1,4 @@
-import { InvalidateQueryFilters, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { queryClient } from '@/lib/react-query';
 import { supabase } from '@/lib/supabase';
@@ -10,23 +10,30 @@ type updateDailyLogFnProps = {
   updatedDailyLog: Partial<DailyLog>;
 };
 
+type UseUpdateDailyLogOptions = {
+  onSuccess?: () => void;
+  onError?: (error: string) => void;
+};
+
 export const updateDailyLogFn = async ({
   logID,
   updatedDailyLog,
 }: updateDailyLogFnProps): Promise<DailyLog | null> => {
-  if (!updatedDailyLog) return null;
+  const { dose, weight, medication_name, note } = updatedDailyLog;
 
-  //   fetch log from the given date and only then update, because there is a restriction for creating new logs
   const { data, error } = await supabase
     .from('daily_logs')
-    .update({ ...updatedDailyLog })
+    .update({ dose, weight, medication_name, note })
     .eq('log_id', logID);
 
   if (error) throw new Error(error.message);
   return data;
 };
 
-export const useUpdateDailyLog = (logID: string) => {
+export const useUpdateDailyLog = (
+  logID: string,
+  { onSuccess, onError }: UseUpdateDailyLogOptions = {},
+) => {
   const {
     mutate: updateDailyLog,
     isPending,
@@ -34,38 +41,18 @@ export const useUpdateDailyLog = (logID: string) => {
   } = useMutation({
     mutationFn: (updateData: Partial<DailyLog>) =>
       updateDailyLogFn({ updatedDailyLog: updateData, logID }),
-    onSettled: (data) => {
-      console.log(data);
-      queryClient.invalidateQueries([
-        'daily-logs',
-        logID,
-      ] as InvalidateQueryFilters);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['daily-logs'] });
+      queryClient.invalidateQueries({ queryKey: ['all-daily-logs'] });
+      queryClient.invalidateQueries({ queryKey: ['daily-log', logID] });
+      onSuccess?.();
     },
-    onMutate: async (newDailyLog) => {
-      await queryClient.cancelQueries(['daily_logs'] as InvalidateQueryFilters);
-
-      // previous cache
-      const previousLogs = queryClient.getQueryData<DailyLog[]>(['daily_logs']);
-
-      // optimistically update the cache with the most recent dataa
-      queryClient.setQueryData(['daily_logs'], (logs?: DailyLog[]) => {
-        console.log(newDailyLog, logs);
-        return logs
-          ? [
-              ...logs,
-              { ...newDailyLog, updated_at: new Date().toISOString() },
-            ].sort(
-              (a, b) =>
-                new Date(a.updated_at as Date).getTime() -
-                new Date(b.updated_at as Date).getTime(),
-            ) // sort by log_date which wouldn't cause reordering since we update the updated_at
-          : [{ ...newDailyLog, updated_at: new Date().toISOString() }];
-      });
-
-      return { previousLogs };
-    },
-    onError: (error) => {
-      throw new Error(error.message);
+    onError: (mutationError) => {
+      const message =
+        mutationError instanceof Error
+          ? mutationError.message
+          : 'Could not update the daily log.';
+      onError?.(message);
     },
   });
 

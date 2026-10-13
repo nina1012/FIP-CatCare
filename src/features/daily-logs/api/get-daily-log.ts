@@ -19,6 +19,7 @@ export const useDailyLog = (logID: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['daily-log', logID],
     queryFn: () => getDailyLogFn(logID),
+    enabled: Boolean(logID),
   });
 
   return {

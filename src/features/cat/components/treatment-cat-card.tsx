@@ -47,7 +47,7 @@ export const TreatmentProgressCard = ({
                 <p>
                   Today is day{' '}
                   <span className="font-semibold text-primary">
-                    {currentDay}
+                    {currentDay + 1}
                   </span>{' '}
                   of treatment.
                 </p>

@@ -21,16 +21,20 @@ type ChartCardProps = {
 export const ChartCard = ({ dailyLogs, catData }: ChartCardProps) => {
   if (!dailyLogs || !catData) return null;
 
-  const days = Array.from({ length: 18 }, (_, i) => (i + 1) * 5); // get every 5th day - [0, 5, 10, 15, ... 85]
+  const days = Array.from({ length: 17 }, (_, i) => i * 5);
 
   const weightData = days.map((day) => {
-    const log = dailyLogs.find((log) => log.day === day);
+    const log = dailyLogs.find((entry) => entry.day === day);
     return log && log.weight ? log.weight : 0;
   });
 
   const doseData = days.map((day) => {
-    const log = dailyLogs.find((log) => log.day === day);
-    return log && log.dose ? parseFloat(log.dose) : 0;
+    const log = dailyLogs.find((entry) => entry.day === day);
+    if (!log?.dose) {
+      return 0;
+    }
+    const dose = Number(String(log.dose).replace(',', '.'));
+    return Number.isFinite(dose) ? dose : 0;
   });
 
   return (

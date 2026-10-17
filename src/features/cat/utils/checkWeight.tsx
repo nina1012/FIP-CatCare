@@ -12,12 +12,13 @@ export const calculateWeightChange = (
 export const checkForWeightLoss = (
   dailyLogs: DailyLog[] | null | undefined,
 ): boolean => {
-  const logs = dailyLogs;
-  if (!logs) return false;
-  const currentWeight = logs[logs.length - 1].weight;
-  const previousWeight = logs[logs.length - 7].weight; // weight 7 days ago
+  if (!dailyLogs || dailyLogs.length < 7) return false;
 
-  if (logs.length < 7 || !currentWeight || !previousWeight) return false;
+  const logs = [...dailyLogs].sort((a, b) => a.day - b.day);
+  const currentWeight = logs[logs.length - 1]?.weight;
+  const previousWeight = logs[logs.length - 7]?.weight;
+
+  if (!currentWeight || !previousWeight) return false;
 
   const weightChange = calculateWeightChange(previousWeight, currentWeight);
 

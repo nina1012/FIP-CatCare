@@ -61,7 +61,7 @@ export const CustomTable = <T,>({
     );
   }
 
-  if (!data || data.length === 0) {
+  if ((!data || data.length === 0) && totalCount === 0) {
     return (
       <div className="container">
         <div className="flex h-96 items-center justify-center">

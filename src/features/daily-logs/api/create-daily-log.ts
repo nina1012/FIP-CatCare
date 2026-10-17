@@ -1,4 +1,4 @@
-import { InvalidateQueryFilters, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { queryClient } from '@/lib/react-query';
 import { supabase } from '@/lib/supabase';
@@ -7,7 +7,7 @@ import { DailyLog } from '../types';
 
 export type useCreateDailyLog = {
   onSuccess?: () => void;
-  onError?: (error: any) => void;
+  onError?: (error: string) => void;
 };
 
 type createDailyLogProps = {
@@ -51,9 +51,12 @@ export const createDailyLogFn = async ({
   }
 
   // Proceed with the insertion if no log exists for today
-  const { data, error } = await supabase
-    .from('daily_logs')
-    .insert({ ...newDailyLog, cat_id: catID, day: nextDay });
+  const { data, error } = await supabase.from('daily_logs').insert({
+    ...newDailyLog,
+    cat_id: catID,
+    day: nextDay,
+    log_date: new Date().toISOString(),
+  });
 
   if (error) throw new Error(error.message);
   return data && data[0];
@@ -78,36 +81,19 @@ export const useCreateDailyLog = ({
       });
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries([
-        'cat',
-        variables.cat_id,
-      ] as InvalidateQueryFilters);
+      queryClient.invalidateQueries({ queryKey: ['daily-logs'] });
+      queryClient.invalidateQueries({ queryKey: ['all-daily-logs'] });
+      if (variables.cat_id) {
+        queryClient.invalidateQueries({ queryKey: ['cat', variables.cat_id] });
+      }
       onSuccess?.();
     },
-    onMutate: async (newDailyLog) => {
-      await queryClient.cancelQueries(['daily_logs'] as InvalidateQueryFilters);
-
-      // previous cache
-      const previousLogs = queryClient.getQueryData<DailyLog[]>(['daily_logs']);
-
-      // optimistically update the cache with the most recent dataa
-      queryClient.setQueryData(['daily_logs'], (logs?: DailyLog[]) => {
-        return logs
-          ? [
-              ...logs,
-              { ...newDailyLog, log_date: new Date().toISOString() },
-            ].sort(
-              (a, b) =>
-                new Date(a.log_date).getTime() - new Date(b.log_date).getTime(),
-            )
-          : [{ ...newDailyLog, log_date: new Date().toISOString() }];
-      });
-
-      return { previousLogs };
-    },
     onError: (error) => {
-      console.error('Create Daily Log Error:', error);
-      onError?.(error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'You can only create one log per day.';
+      onError?.(message);
     },
   });
 

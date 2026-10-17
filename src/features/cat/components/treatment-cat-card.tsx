@@ -26,7 +26,13 @@ export const TreatmentProgressCard = ({
 }: TreatmentProgressProps) => {
   if (!dailyLogs || !catData) return null;
 
-  const progressPercentage = ((dailyLogs.length / 84) * 100).toFixed(1);
+  const loggedDays = dailyLogs.length;
+  const currentDay = dailyLogs.reduce(
+    (latest, log) => Math.max(latest, log.day ?? 0),
+    0,
+  );
+  const daysLeft = Math.max(84 - loggedDays, 0);
+  const progressPercentage = ((loggedDays / 84) * 100).toFixed(1);
 
   return (
     <Dialog>
@@ -36,20 +42,18 @@ export const TreatmentProgressCard = ({
           className="bg-[#009688]/30"
         >
           <div className="flex flex-col items-start gap-2 !text-left">
-            {dailyLogs?.length ? (
+            {loggedDays ? (
               <>
                 <p>
                   Today is day{' '}
                   <span className="font-semibold text-primary">
-                    {dailyLogs?.length}
+                    {currentDay + 1}
                   </span>{' '}
                   of treatment.
                 </p>
                 <p>
                   Only{' '}
-                  <span className="font-semibold text-primary">
-                    {84 - dailyLogs?.length}
-                  </span>{' '}
+                  <span className="font-semibold text-primary">{daysLeft}</span>{' '}
                   days left 💊
                 </p>
                 <div className="mt-4 w-full">
@@ -80,7 +84,7 @@ export const TreatmentProgressCard = ({
                 {progressPercentage}% completed
               </p>
               <p>
-                {84 - dailyLogs?.length} days left in the treatment for{' '}
+                {daysLeft} days left in the treatment for{` `}
                 {catData.name}.
               </p>
             </div>

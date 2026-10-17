@@ -1,7 +1,6 @@
 import { it, vi, expect, describe, Mock } from 'vitest';
 
 import { supabase } from '@/lib/supabase';
-import { screen, waitFor } from '@/testing/test-utils';
 
 import { createDailyLogFn } from '../api/create-daily-log';
 import { DailyLog } from '../types';
@@ -22,6 +21,10 @@ describe('createDailyLogFn', () => {
 
   it('creates a daily log if no existing log for today', async () => {
     // implementing mocked supabase fetch to db for selecting and inserting data
+    const insert = vi
+      .fn()
+      .mockResolvedValueOnce({ data: [mockDailyLog], error: null });
+
     const mockFrom = vi.fn(() => ({
       select: vi.fn().mockReturnValue({
         eq: vi.fn().mockReturnValue({
@@ -38,9 +41,7 @@ describe('createDailyLogFn', () => {
           }),
         }),
       }),
-      insert: vi
-        .fn()
-        .mockResolvedValueOnce({ data: [mockDailyLog], error: null }),
+      insert,
     }));
 
     (supabase.from as Mock).mockImplementation(mockFrom);
@@ -52,16 +53,47 @@ describe('createDailyLogFn', () => {
 
     expect(result).toEqual(mockDailyLog);
     expect(supabase.from).toHaveBeenCalledWith('daily_logs');
+    expect(insert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        cat_id: '123',
+        log_date: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T/),
+      }),
+    );
+  });
 
-    // when successfully creating a daily log, show the toast
+  it('rejects a second log for the same day', async () => {
+    const insert = vi.fn();
 
-    // eslint-disable-next-line testing-library/await-async-utils
-    waitFor(() => {
-      expect(
-        screen.getByRole('status', {
-          name: /you have successfully added a new daily log 😊/i,
+    const mockFrom = vi.fn(() => ({
+      select: vi.fn().mockReturnValue({
+        eq: vi.fn().mockReturnValue({
+          gte: vi.fn().mockReturnValue({
+            lte: vi.fn().mockResolvedValueOnce({
+              data: [{ log_id: 'existing' }],
+              error: null,
+            }),
+          }),
+          order: vi.fn().mockReturnValue({
+            limit: vi.fn().mockReturnValue({
+              single: vi.fn().mockReturnValue({
+                data: { day: 0 },
+                error: null,
+              }),
+            }),
+          }),
         }),
-      ).toBeInTheDocument();
-    });
+      }),
+      insert,
+    }));
+
+    (supabase.from as Mock).mockImplementation(mockFrom);
+
+    await expect(
+      createDailyLogFn({
+        newDailyLog: mockDailyLog,
+        catID: '123',
+      }),
+    ).rejects.toThrow('A daily log for today already exists.');
+    expect(insert).not.toHaveBeenCalled();
   });
 });

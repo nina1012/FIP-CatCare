@@ -29,7 +29,7 @@ Diagram
 - [x] As a user, I want to create an account and log in
 - [x] As a user, I want to add, view, edit and delete cats
 - [x] As a user, I want to add daily logs for each cat including medication dosage and notes
-- [] As a user, I want to upload and view bloodwork and test results for each cat
+- [x] As a user, I want to upload and view bloodwork and test results for each cat
 - [x] As a user, I want to calculate the medication dosage based on the cat's weight and symptoms
 
 ## Data model : Tables and data relationships 🖇️

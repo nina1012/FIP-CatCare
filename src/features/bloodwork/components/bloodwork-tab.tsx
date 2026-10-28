@@ -14,7 +14,7 @@ type BloodworkTabProps = {
 export const BloodworkTab = ({ catID }: BloodworkTabProps) => {
   return (
     <div className="my-4 flex flex-col gap-6">
-      {/* TODO: add graph here once we have the data */}
+      {/* TODO: add graph here mayeb */}
       <CustomTabContent
         label="bloodwork"
         icon={<TestTube />}

@@ -15,7 +15,15 @@ import { BloodworkInput } from '../types';
 import { todayKey } from '../utils/dates';
 import { labReportTypeError, LAB_REPORT_ACCEPT } from '../utils/lab-values';
 
-const requiredLabNumber = (label: string, min: number, max: number) =>
+const requiredLabNumber = ({
+  label,
+  min,
+  max,
+}: {
+  label: string;
+  min: number;
+  max: number;
+}) =>
   z
     .string()
     .trim()
@@ -33,9 +41,13 @@ const bloodworkSchema = z.object({
       (value) => value <= todayKey(),
       'Collection date cannot be in the future',
     ),
-  albumin_globulin_ratio: requiredLabNumber('the albumin/globulin ratio', 0, 3),
-  hematocrit: requiredLabNumber('hematocrit', 0, 100),
-  bilirubin: requiredLabNumber('bilirubin', 0, 50),
+  albumin_globulin_ratio: requiredLabNumber({
+    label: 'the albumin/globulin ratio',
+    min: 0,
+    max: 3,
+  }),
+  hematocrit: requiredLabNumber({ label: 'hematocrit', min: 0, max: 100 }),
+  bilirubin: requiredLabNumber({ label: 'bilirubin', min: 0, max: 50 }),
   report: z
     .custom<FileList>(
       (value) => value == null || value instanceof FileList,

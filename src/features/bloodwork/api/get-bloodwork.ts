@@ -6,11 +6,17 @@ import { Bloodwork } from '../types';
 
 import { BloodworkRow, normalizeBloodwork } from './normalize-bloodwork';
 
-export const getBloodworkFn = async (
-  catID: string,
-  page: number,
-  rowsPerPage: number,
-): Promise<{ data: Bloodwork[]; totalCount: number }> => {
+type BloodworkPageQuery = {
+  catID: string;
+  page: number;
+  rowsPerPage: number;
+};
+
+export const getBloodworkFn = async ({
+  catID,
+  page,
+  rowsPerPage,
+}: BloodworkPageQuery): Promise<{ data: Bloodwork[]; totalCount: number }> => {
   const from = page * rowsPerPage;
   const to = from + rowsPerPage - 1;
 
@@ -29,14 +35,14 @@ export const getBloodworkFn = async (
   };
 };
 
-export const useBloodwork = (
-  catID: string,
-  page: number,
-  rowsPerPage: number,
-) => {
+export const useBloodwork = ({
+  catID,
+  page,
+  rowsPerPage,
+}: BloodworkPageQuery) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['bloodwork', catID, page, rowsPerPage],
-    queryFn: () => getBloodworkFn(catID, page, rowsPerPage),
+    queryFn: () => getBloodworkFn({ catID, page, rowsPerPage }),
     placeholderData: keepPreviousData,
     enabled: Boolean(catID),
   });

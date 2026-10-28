@@ -34,7 +34,7 @@ export const BloodworkTable = memo(({ catID }: BloodworkTableProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { bloodwork, isLoadingBloodwork, bloodworkError, totalCount } =
-    useBloodwork(catID, page, rowsPerPage);
+    useBloodwork({ catID, page, rowsPerPage });
 
   if (bloodworkError) {
     return (

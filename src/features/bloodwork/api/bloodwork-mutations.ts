@@ -22,6 +22,12 @@ const labValues = (input: BloodworkInput) => ({
   bilirubin: input.bilirubin,
 });
 
+const duplicateBloodworkMessage =
+  'A bloodwork result already exists for that date. Open that row to update it.';
+
+const bloodworkErrorMessage = (error: { code?: string; message: string }) =>
+  error.code === '23505' ? duplicateBloodworkMessage : error.message;
+
 export const createBloodworkFn = async (
   input: BloodworkInput,
 ): Promise<Bloodwork> => {
@@ -38,7 +44,7 @@ export const createBloodworkFn = async (
     .single();
 
   if (error) {
-    throw new Error(error.message);
+    throw new Error(bloodworkErrorMessage(error));
   }
 
   return normalizeBloodwork(data as BloodworkRow);
@@ -62,7 +68,7 @@ export const updateBloodworkFn = async (
     .single();
 
   if (error) {
-    throw new Error(error.message);
+    throw new Error(bloodworkErrorMessage(error));
   }
 
   if (reportUrl && input.previous_report_url) {

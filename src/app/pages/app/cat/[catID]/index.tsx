@@ -12,6 +12,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '@/components/ui/tabs/tabs';
+import { BloodworkTab } from '@/features/bloodwork/components/bloodwork-tab';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
@@ -121,7 +122,7 @@ export const CatDetailsRoute = () => {
             />
           </TabsContent>
           <TabsContent value="bloodwork">
-            <div className="my-8 text-lg font-medium">Under development 🛠️</div>
+            <BloodworkTab catID={catID} dailyLogs={allDailyLogs} />
           </TabsContent>
         </Tabs>
       </div>

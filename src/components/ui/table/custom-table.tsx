@@ -20,6 +20,7 @@ type CustomTableProps<T> = {
   renderRow: (item: T) => React.ReactNode;
   caption?: string;
   numOfCols?: number;
+  gridClassName?: string;
   // for pagination
   page: number;
   rowsPerPage: number;
@@ -35,6 +36,7 @@ export const CustomTable = <T,>({
   renderRow,
   caption = 'A list of records',
   numOfCols = 7,
+  gridClassName,
   page,
   totalCount,
   rowsPerPage,
@@ -78,9 +80,10 @@ export const CustomTable = <T,>({
         <TableRow
           className={clsx(
             'grid',
-            numOfCols === 7
-              ? `grid-cols-[repeat(7,minmax(150px,1fr))]`
-              : 'grid-cols-[repeat(2,minmax(150px,1fr))]',
+            gridClassName ??
+              (numOfCols === 7
+                ? 'grid-cols-[repeat(7,minmax(150px,1fr))]'
+                : 'grid-cols-[repeat(2,minmax(150px,1fr))]'),
           )}
         >
           {headers.map((header) => (

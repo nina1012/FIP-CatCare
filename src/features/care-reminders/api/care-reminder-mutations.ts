@@ -21,7 +21,7 @@ type MutationOptions<T> = {
 };
 
 const duplicateReminderMessage =
-  'An open reminder of that type is already scheduled on that date.';
+  'A reminder of that type is already scheduled on that date.';
 
 const reminderErrorMessage = (error: { code?: string; message: string }) =>
   error.code === '23505' ? duplicateReminderMessage : error.message;

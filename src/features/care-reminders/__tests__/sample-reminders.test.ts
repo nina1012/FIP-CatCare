@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { careReminderStatus } from '../reminders';
-import { sampleCareReminders } from '../sample-reminders';
+import { careReminderStatus } from '../utils/reminders';
+import { sampleCareReminders } from '../utils/sample-reminders';
 
 describe('sampleCareReminders', () => {
   it('shows an overdue, due, upcoming, and finished reminder', () => {

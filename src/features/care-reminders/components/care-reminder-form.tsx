@@ -28,14 +28,15 @@ import {
   isSampleCareReminder,
 } from '../utils/sample-reminders';
 
-const careReminderSchema = z.object({
+export const careReminderSchema = z.object({
   kind: z.enum(CARE_REMINDER_KINDS, {
     errorMap: () => ({ message: 'Choose a reminder type' }),
   }),
   due_on: z
     .string()
     .min(1, 'Choose a date')
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Choose a valid date'),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Choose a valid date')
+    .refine((value) => value >= todayKey(), 'Choose today or a future date'),
   notes: z.string().max(500, 'Keep the note under 500 characters').optional(),
 });
 
@@ -203,6 +204,7 @@ export const CareReminderForm = ({
               <Input
                 type="date"
                 label="Due date"
+                min={today}
                 registration={register('due_on')}
                 error={formState.errors.due_on}
               />
@@ -214,7 +216,7 @@ export const CareReminderForm = ({
               <Textarea
                 className="resize-none"
                 label="Note"
-                placeholder="Clinic, fasting, or anything else to remember"
+                placeholder="Clinic, fasting or anything else to remember"
                 registration={register('notes')}
               />
               {formState.errors.notes && (

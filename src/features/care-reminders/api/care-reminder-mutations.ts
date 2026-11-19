@@ -7,6 +7,7 @@ import {
   CareReminderInput,
   CompleteCareReminderResult,
 } from '../types';
+import { todayKey } from '../utils/dates';
 import { nextDueOn } from '../utils/reminders';
 
 import { invalidateCareReminders } from './invalidate-care-reminders';
@@ -47,9 +48,16 @@ const notesValue = (notes?: string | null) => {
   return trimmed ? trimmed : null;
 };
 
+const assertSchedulableDate = (dueOn: string) => {
+  if (dueOn < todayKey()) {
+    throw new Error('Choose today or a future date.');
+  }
+};
+
 export const createCareReminderFn = async (
   input: CareReminderInput,
 ): Promise<CareReminder> => {
+  assertSchedulableDate(input.due_on);
   const userId = await requireUserId();
 
   const { data, error } = await supabase
@@ -77,6 +85,7 @@ export const updateCareReminderFn = async ({
   reminderID: string;
   input: CareReminderInput;
 }): Promise<CareReminder> => {
+  assertSchedulableDate(input.due_on);
   const { data, error } = await supabase
     .from('care_reminders')
     .update({

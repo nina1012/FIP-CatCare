@@ -90,7 +90,7 @@ export const CareReminderList = ({
   if (reminders.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
-        No reminders yet. Schedule a weigh-in, bloodwork, or vet visit so it is
+        No reminders yet. Schedule a weigh-in, bloodwork or vet visit so it is
         not missed.
       </p>
     );
@@ -123,6 +123,7 @@ export const CareReminderList = ({
           </section>
         );
       })}
+      {/* TODO: make done reminders rendered for a certain amount of time after completion so they are not deleted from the database */}
       {done.length > 0 && (
         <details className="rounded-md border p-4">
           <summary className="cursor-pointer text-sm font-semibold">

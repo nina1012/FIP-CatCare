@@ -131,7 +131,7 @@ export const CareReminderForm = ({
   const initialKind = reminder?.kind ?? 'weigh_in';
 
   return (
-    <div className="max-h-[70vh] overflow-y-auto pr-1">
+    <div className="max-h-[70vh] overflow-y-auto px-1">
       <DialogTitle className="mb-4">
         {isEditing ? 'Update reminder' : 'Schedule a reminder'}
       </DialogTitle>
@@ -219,6 +219,9 @@ export const CareReminderForm = ({
                 placeholder="Clinic, fasting or anything else to remember"
                 registration={register('notes')}
               />
+              <p className="text-xs text-muted-foreground">
+                You can only use up to 500 characters.
+              </p>
               {formState.errors.notes && (
                 <p role="alert" className="text-xs font-semibold text-red-400">
                   {formState.errors.notes.message}

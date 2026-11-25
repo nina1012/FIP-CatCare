@@ -20,12 +20,12 @@ const reminder = (overrides: Partial<CareReminder> = {}): CareReminder => ({
   user_id: 'user-1',
   kind: 'vet_visit',
   due_on: '2026-10-05',
-  notes: 'County clinic',
+  notes: 'Clinic visit notes',
   completed_at: null,
   last_notified_on: null,
   created_at: '2026-10-01T00:00:00.000Z',
   updated_at: '2026-10-01T00:00:00.000Z',
-  cat_name: 'Miso',
+  cat_name: 'Catto',
   ...overrides,
 });
 
@@ -34,7 +34,7 @@ describe('CareReminderList', () => {
     appRender(<CareReminderList reminders={[]} />);
 
     expect(
-      screen.getByText(/schedule a weigh-in, bloodwork, or vet visit/i),
+      screen.getByText(/schedule a weigh-in, bloodwork or vet visit/i),
     ).toBeInTheDocument();
   });
 
@@ -60,7 +60,7 @@ describe('CareReminderList', () => {
       'Vet visit',
     );
     expect(screen.getByRole('region', { name: 'Overdue' })).toHaveTextContent(
-      'County clinic',
+      'Clinic visit notes',
     );
     expect(
       screen.getByRole('button', {

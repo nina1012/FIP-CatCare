@@ -17,6 +17,10 @@ export const UserRoute = () => {
       </div>
       <hr className="my-12" />
       <h2 className="mb-4 text-2xl font-semibold">Set reminder</h2>
+      <p className="mx-auto max-w-xl text-center text-sm text-muted-foreground">
+        This daily dose time stays in this browser. Weigh-ins, bloodwork and vet
+        visits are scheduled on each cat and kept with that cat&apos;s record.
+      </p>
       <Reminder />
     </div>
   );

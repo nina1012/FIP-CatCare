@@ -13,6 +13,7 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs/tabs';
 import { BloodworkTab } from '@/features/bloodwork/components/bloodwork-tab';
+import { CareRemindersTab } from '@/features/care-reminders/components/care-reminders-tab';
 import { useCatData } from '@/features/cat/api/get-cat-data';
 import { Badges } from '@/features/cat/components/badges';
 import { TreatmentProgressCard } from '@/features/cat/components/treatment-cat-card';
@@ -110,6 +111,7 @@ export const CatDetailsRoute = () => {
           <TabsList>
             <TabsTrigger value="daily-logs">daily log</TabsTrigger>
             <TabsTrigger value="bloodwork">bloodwork</TabsTrigger>
+            <TabsTrigger value="reminders">reminders</TabsTrigger>
           </TabsList>
           <TabsContent value="daily-logs">
             <CustomTabContent
@@ -123,6 +125,9 @@ export const CatDetailsRoute = () => {
           </TabsContent>
           <TabsContent value="bloodwork">
             <BloodworkTab catID={catID} dailyLogs={allDailyLogs} />
+          </TabsContent>
+          <TabsContent value="reminders">
+            <CareRemindersTab catID={catID} />
           </TabsContent>
         </Tabs>
       </div>

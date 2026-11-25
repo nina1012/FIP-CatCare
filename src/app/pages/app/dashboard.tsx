@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/common/button';
 import { Loader } from '@/components/ui/common/loader';
 import { CustomTabContent } from '@/components/ui/tabs/custom-tab-content';
 import { useUser } from '@/features/auth/api/get-auth-user';
+import { UpcomingCareReminders } from '@/features/care-reminders/components/upcoming-care-reminders';
 import { useCats } from '@/features/cat/api/get-cats';
 import { RegisterCatForm } from '@/features/cat/components/register-cat-form';
 
@@ -33,6 +34,7 @@ export const DashboardRoute = () => {
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <Badge className="pointer-events-none !text-xs">cat owner</Badge>
       </div>
+      <UpcomingCareReminders userID={user?.id as string} cats={cats ?? []} />
       <div className="mt-8">
         <h4 className="mb-2 font-bold ">Your cats</h4>
         <div className="my-4 flex max-w-lg flex-wrap gap-6 md:max-w-4xl">

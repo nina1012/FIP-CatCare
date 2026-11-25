@@ -34,7 +34,7 @@ Diagram
 
 ## Data model : Tables and data relationships 🖇️
 
-![Supabase schema visualizer](../public/screenshots/FIP-CatCare-DB.png) (from supabase schema visualizer)
+![Supabase schema visualizer](../public/screenshots/FIP-CatCare-supabase-schema.svg) (from supabase schema visualizer)
 
 ## Interface definition (API)
 

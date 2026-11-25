@@ -17,7 +17,7 @@ export const Features = () => {
     {
       heading: 'Reminders and Alerts',
       description:
-        'Set a daily dose time, and schedule weigh-ins, bloodwork, and vet visits for each cat',
+        'Set a daily dose time, and schedule weigh-ins, bloodwork and vet visits for each cat',
       icon: <BellIcon />,
     },
   ];
